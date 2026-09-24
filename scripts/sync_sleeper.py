@@ -107,6 +107,7 @@ def sync_standings(current_league_id):
             "losses": s.get("losses", 0),
             "ties": s.get("ties", 0),
             "pointsFor": round((s.get("fpts", 0) or 0) + (s.get("fpts_decimal", 0) or 0) / 100, 1),
+            "pointsAgainst": round((s.get("fpts_against", 0) or 0) + (s.get("fpts_against_decimal", 0) or 0) / 100, 1),
         }
         by_name[name] = entry
         by_normalized[normalize(name)] = entry
@@ -127,7 +128,7 @@ def sync_standings(current_league_id):
             else:
                 # Still not found — show as unknown rather than silently
                 # dropping it, so it's visible something needs mapping.
-                teams.append({"team": t, "owner": None, "wins": 0, "losses": 0, "ties": 0, "pointsFor": None})
+                teams.append({"team": t, "owner": None, "wins": 0, "losses": 0, "ties": 0, "pointsFor": None, "pointsAgainst": None})
         divisions.append({"name": div_name, "teams": teams})
 
     return {"season": season_label, "divisions": divisions}
