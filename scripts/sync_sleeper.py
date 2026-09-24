@@ -66,15 +66,22 @@ def get_season_chain(start_league_id):
 
 
 def build_owner_map(league_id):
-    """roster_id -> display name, for one season."""
+    """roster_id -> {owner_id, name} for one season.
+
+    owner_id is Sleeper's stable per-manager account ID — use THIS for
+    aggregating across seasons. name is whatever that manager's team was
+    called THAT season, which can and does change year to year (typos,
+    emoji, rebrands) — display-only, never a merge key.
+    """
     users = fetch_json(f"{API_BASE}/league/{league_id}/users") or []
     rosters = fetch_json(f"{API_BASE}/league/{league_id}/rosters") or []
     user_by_id = {u["user_id"]: u for u in users}
     owner_map = {}
     for r in rosters:
-        u = user_by_id.get(r.get("owner_id"), {})
+        owner_id = r.get("owner_id")
+        u = user_by_id.get(owner_id, {})
         name = (u.get("metadata") or {}).get("team_name") or u.get("display_name") or f"Roster {r['roster_id']}"
-        owner_map[r["roster_id"]] = name
+        owner_map[r["roster_id"]] = {"owner_id": owner_id, "name": name}
     return owner_map, rosters
 
 
@@ -82,11 +89,16 @@ def sync_standings(current_league_id):
     """Current season standings, grouped into the known divisions."""
     owner_map, rosters = build_owner_map(current_league_id)
 
+    def normalize(s):
+        return "".join(ch for ch in s.lower().strip() if ch.isalnum())
+
     by_name = {}
+    by_normalized = {}
     for r in rosters:
-        name = owner_map.get(r["roster_id"], "Unknown")
+        info = owner_map.get(r["roster_id"], {"owner_id": None, "name": "Unknown"})
+        name = info["name"]
         s = r.get("settings", {})
-        by_name[name] = {
+        entry = {
             "team": name,
             "owner": name,
             "wins": s.get("wins", 0),
@@ -94,33 +106,60 @@ def sync_standings(current_league_id):
             "ties": s.get("ties", 0),
             "pointsFor": round((s.get("fpts", 0) or 0) + (s.get("fpts_decimal", 0) or 0) / 100, 1),
         }
+        by_name[name] = entry
+        by_normalized[normalize(name)] = entry
 
     divisions = []
     placed = set()
     for div_name, team_names in DIVISIONS.items():
         teams = []
         for t in team_names:
-            match = by_name.get(t)
+            # Exact match first, then a normalized (lowercase/no-punctuation)
+            # fallback — Sleeper team names drift season to season (emoji,
+            # capitalization, stray spaces), so this catches most of that
+            # without needing the hardcoded DIVISIONS list updated every year.
+            match = by_name.get(t) or by_normalized.get(normalize(t))
             if match:
                 teams.append(match)
                 placed.add(t)
             else:
-                # Team not found under expected name this season — show as unknown
-                # rather than silently dropping it, so it's visible something needs mapping.
+                # Still not found — show as unknown rather than silently
+                # dropping it, so it's visible something needs mapping.
                 teams.append({"team": t, "owner": None, "wins": 0, "losses": 0, "ties": 0, "pointsFor": None})
         divisions.append({"name": div_name, "teams": teams})
 
     return {"season": str(current_league_id), "divisions": divisions}
 
 
-def sync_head_to_head(season_chain):
-    """All-time head-to-head record between every pair, across every season."""
-    pair_records = {}  # frozenset({a,b}) -> {a: wins, b: wins, ties}
+def build_display_names(season_chain):
+    """owner_id -> the most recent team name that owner has used.
+
+    season_chain is newest-first, so the first name seen per owner_id is
+    their current one — that's what every part of the site should show,
+    regardless of which season a given stat came from.
+    """
+    display_name = {}
+    for league in season_chain:
+        owner_map, _ = build_owner_map(league["league_id"])
+        for info in owner_map.values():
+            display_name.setdefault(info["owner_id"], info["name"])
+    return display_name
+
+
+def sync_head_to_head(season_chain, display_name):
+    """All-time head-to-head record between every pair, across every season.
+
+    Aggregated by Sleeper's stable owner_id, NOT by team name — team names
+    change season to season (rebrands, typos, emoji), so name-keyed
+    aggregation would fragment one manager's history into several
+    look-alike "teams". Display name shown is each owner's current name.
+    """
+    pair_records = {}  # (owner_a, owner_b) sorted -> {owner_a, owner_b, aWins, bWins, ties}
 
     for league in season_chain:
         league_id = league["league_id"]
         owner_map, _ = build_owner_map(league_id)
-        # Weeks: use league settings if available, else assume up to 17
+
         max_week = (league.get("settings") or {}).get("last_scored_leg") or 17
 
         for week in range(1, max_week + 1):
@@ -138,25 +177,37 @@ def sync_head_to_head(season_chain):
                 if len(pair) != 2:
                     continue
                 a, b = pair
-                name_a = owner_map.get(a["roster_id"])
-                name_b = owner_map.get(b["roster_id"])
-                if not name_a or not name_b:
+                owner_a = owner_map.get(a["roster_id"], {}).get("owner_id")
+                owner_b = owner_map.get(b["roster_id"], {}).get("owner_id")
+                if not owner_a or not owner_b:
                     continue
                 pts_a, pts_b = a.get("points", 0), b.get("points", 0)
-                key = tuple(sorted([name_a, name_b]))
-                rec = pair_records.setdefault(key, {"a": key[0], "b": key[1], "aWins": 0, "bWins": 0, "ties": 0})
+                key = tuple(sorted([owner_a, owner_b]))
+                rec = pair_records.setdefault(key, {"owner_a": key[0], "owner_b": key[1], "aWins": 0, "bWins": 0, "ties": 0})
                 if pts_a > pts_b:
-                    rec["aWins" if name_a == key[0] else "bWins"] += 1
+                    rec["aWins" if owner_a == key[0] else "bWins"] += 1
                 elif pts_b > pts_a:
-                    rec["bWins" if name_a == key[0] else "aWins"] += 1
+                    rec["bWins" if owner_a == key[0] else "aWins"] += 1
                 else:
                     rec["ties"] += 1
 
-    return {"pairs": list(pair_records.values())}
+    pairs = []
+    for rec in pair_records.values():
+        pairs.append({
+            "a": display_name.get(rec["owner_a"], rec["owner_a"]),
+            "b": display_name.get(rec["owner_b"], rec["owner_b"]),
+            "aWins": rec["aWins"],
+            "bWins": rec["bWins"],
+            "ties": rec["ties"],
+        })
+    return {"pairs": pairs}
 
 
-def sync_trades(season_chain, player_lookup):
-    """Every trade transaction across every season."""
+def sync_trades(season_chain, player_lookup, display_name):
+    """Every trade transaction across every season, shown under each
+    manager's CURRENT team name regardless of what it was called when the
+    trade happened — keeps the site's manager-vs-manager filter working
+    across renamed teams."""
     trades = []
     for league in season_chain:
         league_id = league["league_id"]
@@ -171,11 +222,14 @@ def sync_trades(season_chain, player_lookup):
             for t in txns:
                 if t.get("type") != "trade" or t.get("status") != "complete":
                     continue
-                teams = [owner_map.get(rid, f"Roster {rid}") for rid in t.get("roster_ids", [])]
+                roster_ids = t.get("roster_ids", [])
+                owner_ids = [owner_map.get(rid, {}).get("owner_id") for rid in roster_ids]
+                teams = [display_name.get(oid, f"Unknown ({oid})") for oid in owner_ids if oid]
                 adds = t.get("adds") or {}
                 parts = []
-                for roster_id in t.get("roster_ids", []):
-                    name = owner_map.get(roster_id, f"Roster {roster_id}")
+                for roster_id in roster_ids:
+                    owner_id = owner_map.get(roster_id, {}).get("owner_id")
+                    name = display_name.get(owner_id, f"Roster {roster_id}")
                     received = [pid for pid, rid in adds.items() if rid == roster_id]
                     received_names = [player_lookup.get(pid, pid) for pid in received]
                     if received_names:
@@ -214,8 +268,11 @@ def main():
     with open(os.path.join(DATA_DIR, "standings.json"), "w", encoding="utf-8") as f:
         json.dump(standings, f, ensure_ascii=False, indent=2)
 
+    print("Building current display names for each manager...")
+    display_name = build_display_names(season_chain)
+
     print("Syncing head-to-head (this walks every week of every season, slowest step)...")
-    h2h = sync_head_to_head(season_chain)
+    h2h = sync_head_to_head(season_chain, display_name)
     with open(os.path.join(DATA_DIR, "headtohead.json"), "w", encoding="utf-8") as f:
         json.dump(h2h, f, ensure_ascii=False, indent=2)
 
@@ -223,7 +280,7 @@ def main():
     player_lookup = fetch_player_lookup()
 
     print("Syncing trade history...")
-    trades = sync_trades(season_chain, player_lookup)
+    trades = sync_trades(season_chain, player_lookup, display_name)
     with open(os.path.join(DATA_DIR, "trades.json"), "w", encoding="utf-8") as f:
         json.dump(trades, f, ensure_ascii=False, indent=2)
 
