@@ -29,12 +29,12 @@
           "pointsFor": 215.6
         },
         {
-          "team": "Tebows Before Hoes",
-          "owner": null,
+          "team": "Tebows before Hoes",
+          "owner": "Tebows before Hoes",
           "wins": 0,
-          "losses": 0,
+          "losses": 2,
           "ties": 0,
-          "pointsFor": null
+          "pointsFor": 117.1
         }
       ]
     },
@@ -79,20 +79,20 @@
       "name": "South",
       "teams": [
         {
-          "team": "SGB Nation",
-          "owner": null,
-          "wins": 0,
-          "losses": 0,
+          "team": "SGB Nation ⚖️",
+          "owner": "SGB Nation ⚖️",
+          "wins": 1,
+          "losses": 1,
           "ties": 0,
-          "pointsFor": null
+          "pointsFor": 264.0
         },
         {
-          "team": "Les Pingouins",
-          "owner": null,
-          "wins": 0,
-          "losses": 0,
+          "team": "Les Pingouins 🐧",
+          "owner": "Les Pingouins 🐧",
+          "wins": 1,
+          "losses": 1,
           "ties": 0,
-          "pointsFor": null
+          "pointsFor": 223.6
         },
         {
           "team": "Lavaltrée's Piggy",

@@ -1,1697 +1,612 @@
 {
   "pairs": [
     {
-      "a": "Mean Machine",
-      "b": "Scuderia Malo",
-      "aWins": 5,
-      "bWins": 7,
+      "a": "Scuderia Malo",
+      "b": "Mean Machine",
+      "aWins": 8,
+      "bWins": 8,
       "ties": 0
     },
     {
       "a": "La Quiche",
       "b": "Tebows before Hoes",
-      "aWins": 1,
-      "bWins": 0,
+      "aWins": 4,
+      "bWins": 5,
       "ties": 0
     },
     {
-      "a": "Lavaltree's Piggy ",
-      "b": "SGB Nation ⚖️",
-      "aWins": 3,
-      "bWins": 6,
+      "a": "SGB Nation ⚖️",
+      "b": "Lavaltree's Piggy ",
+      "aWins": 7,
+      "bWins": 7,
       "ties": 0
     },
     {
-      "a": "MAGRAUDERS ",
-      "b": "Montreal Weapon X",
-      "aWins": 1,
-      "bWins": 2,
+      "a": "Montreal Weapon X",
+      "b": "MAGRAUDERS ",
+      "aWins": 9,
+      "bWins": 5,
       "ties": 0
     },
     {
-      "a": "T-Bone Ray's",
-      "b": "The Gridiron Sheriffs",
-      "aWins": 2,
-      "bWins": 3,
+      "a": "The Gridiron Sheriffs",
+      "b": "T-Bone Ray's",
+      "aWins": 8,
+      "bWins": 5,
       "ties": 0
     },
     {
       "a": "Les Pingouins 🐧",
       "b": "MTL New Empire",
-      "aWins": 2,
-      "bWins": 4,
+      "aWins": 7,
+      "bWins": 8,
       "ties": 0
     },
     {
-      "a": "La Quiche",
-      "b": "Scuderia Malo",
-      "aWins": 0,
+      "a": "Scuderia Malo",
+      "b": "La Quiche",
+      "aWins": 10,
       "bWins": 1,
       "ties": 0
     },
     {
-      "a": "Mean Machine",
-      "b": "Tebows before Hoes",
-      "aWins": 8,
-      "bWins": 2,
+      "a": "Tebows before Hoes",
+      "b": "Mean Machine",
+      "aWins": 4,
+      "bWins": 11,
       "ties": 0
     },
     {
       "a": "Lavaltree's Piggy ",
       "b": "Les Pingouins 🐧",
-      "aWins": 7,
-      "bWins": 4,
+      "aWins": 10,
+      "bWins": 5,
       "ties": 0
     },
     {
       "a": "Montreal Weapon X",
       "b": "The Gridiron Sheriffs",
-      "aWins": 5,
-      "bWins": 0,
+      "aWins": 9,
+      "bWins": 5,
       "ties": 0
     },
     {
       "a": "MAGRAUDERS ",
       "b": "T-Bone Ray's",
-      "aWins": 0,
-      "bWins": 3,
+      "aWins": 4,
+      "bWins": 9,
       "ties": 0
     },
     {
-      "a": "MTL New Empire",
-      "b": "SGB Nation ⚖️",
-      "aWins": 0,
-      "bWins": 5,
+      "a": "SGB Nation ⚖️",
+      "b": "MTL New Empire",
+      "aWins": 12,
+      "bWins": 2,
       "ties": 0
     },
     {
       "a": "Scuderia Malo",
       "b": "Tebows before Hoes",
-      "aWins": 3,
-      "bWins": 5,
+      "aWins": 4,
+      "bWins": 8,
       "ties": 0
     },
     {
       "a": "Lavaltree's Piggy ",
       "b": "MTL New Empire",
-      "aWins": 0,
-      "bWins": 4,
+      "aWins": 2,
+      "bWins": 11,
       "ties": 0
     },
     {
-      "a": "Les Pingouins 🐧",
-      "b": "SGB Nation ⚖️",
-      "aWins": 6,
-      "bWins": 6,
+      "a": "SGB Nation ⚖️",
+      "b": "Les Pingouins 🐧",
+      "aWins": 7,
+      "bWins": 7,
       "ties": 0
     },
     {
-      "a": "LaQuiche",
+      "a": "La Quiche",
       "b": "Mean Machine",
       "aWins": 1,
       "bWins": 8,
       "ties": 0
     },
     {
-      "a": "LaQuiche",
-      "b": "Scuderia Malo",
-      "aWins": 1,
-      "bWins": 9,
-      "ties": 0
-    },
-    {
-      "a": "LaQuiche",
-      "b": "Tebows before Hoes",
-      "aWins": 3,
-      "bWins": 5,
-      "ties": 0
-    },
-    {
       "a": "Montreal Weapon X",
       "b": "T-Bone Ray's",
-      "aWins": 2,
-      "bWins": 4,
+      "aWins": 6,
+      "bWins": 6,
       "ties": 0
     },
     {
-      "a": "MAGRAUDERS ",
-      "b": "The Gridiron Sheriffs",
-      "aWins": 2,
-      "bWins": 0,
+      "a": "The Gridiron Sheriffs",
+      "b": "MAGRAUDERS ",
+      "aWins": 8,
+      "bWins": 8,
       "ties": 0
     },
     {
       "a": "Montreal Weapon X",
       "b": "Scuderia Malo",
-      "aWins": 2,
+      "aWins": 4,
       "bWins": 4,
       "ties": 0
     },
     {
-      "a": "MAGRAUDERS ",
-      "b": "Tebows before Hoes",
-      "aWins": 1,
-      "bWins": 0,
+      "a": "Tebows before Hoes",
+      "b": "MAGRAUDERS ",
+      "aWins": 2,
+      "bWins": 4,
       "ties": 0
     },
     {
       "a": "Lavaltree's Piggy ",
       "b": "T-Bone Ray's",
-      "aWins": 2,
-      "bWins": 3,
+      "aWins": 4,
+      "bWins": 4,
       "ties": 0
     },
     {
-      "a": "LaQuiche",
-      "b": "SGB Nation ⚖️",
-      "aWins": 1,
-      "bWins": 3,
-      "ties": 0
-    },
-    {
-      "a": "MTL New Empire",
-      "b": "The Gridiron Sheriffs",
-      "aWins": 1,
+      "a": "SGB Nation ⚖️",
+      "b": "La Quiche",
+      "aWins": 3,
       "bWins": 1,
       "ties": 0
     },
     {
-      "a": "Les Pingouins 🐧",
-      "b": "Mean Machine",
-      "aWins": 2,
+      "a": "The Gridiron Sheriffs",
+      "b": "MTL New Empire",
+      "aWins": 4,
       "bWins": 2,
       "ties": 0
     },
     {
-      "a": "MAGRAUDERS ",
-      "b": "Scuderia Malo",
-      "aWins": 0,
-      "bWins": 1,
+      "a": "Mean Machine",
+      "b": "Les Pingouins 🐧",
+      "aWins": 3,
+      "bWins": 4,
+      "ties": 0
+    },
+    {
+      "a": "Scuderia Malo",
+      "b": "MAGRAUDERS ",
+      "aWins": 5,
+      "bWins": 2,
       "ties": 0
     },
     {
       "a": "Montreal Weapon X",
       "b": "Tebows before Hoes",
       "aWins": 2,
-      "bWins": 4,
+      "bWins": 5,
       "ties": 0
     },
     {
-      "a": "Lavaltree's Piggy ",
-      "b": "The Gridiron Sheriffs",
+      "a": "The Gridiron Sheriffs",
+      "b": "Lavaltree's Piggy ",
+      "aWins": 2,
+      "bWins": 6,
+      "ties": 0
+    },
+    {
+      "a": "SGB Nation ⚖️",
+      "b": "Mean Machine",
       "aWins": 4,
-      "bWins": 0,
+      "bWins": 2,
       "ties": 0
     },
     {
-      "a": "Mean Machine",
-      "b": "SGB Nation ⚖️",
-      "aWins": 1,
-      "bWins": 3,
-      "ties": 0
-    },
-    {
-      "a": "LaQuiche",
+      "a": "La Quiche",
       "b": "Les Pingouins 🐧",
       "aWins": 1,
       "bWins": 4,
       "ties": 0
     },
     {
-      "a": "MTL New Empire",
-      "b": "T-Bone Ray's",
-      "aWins": 1,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Scuderia Malo",
-      "b": "The Gridiron Sheriffs",
-      "aWins": 1,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
       "a": "T-Bone Ray's",
-      "b": "Tebows before Hoes",
-      "aWins": 2,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Lavaltree's Piggy ",
-      "b": "Mean Machine",
-      "aWins": 1,
+      "b": "MTL New Empire",
+      "aWins": 5,
       "bWins": 3,
       "ties": 0
     },
     {
-      "a": "Montreal Weapon X",
-      "b": "SGB Nation ⚖️",
-      "aWins": 3,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
-      "a": "Les Pingouins 🐧",
-      "b": "MAGRAUDERS ",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "LaQuiche",
-      "b": "MTL New Empire",
-      "aWins": 1,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Scuderia Malo",
-      "b": "T-Bone Ray's",
-      "aWins": 1,
+      "a": "The Gridiron Sheriffs",
+      "b": "Scuderia Malo",
+      "aWins": 4,
       "bWins": 2,
       "ties": 0
     },
     {
       "a": "Tebows before Hoes",
-      "b": "The Gridiron Sheriffs",
-      "aWins": 1,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
-      "a": "LaQuiche",
-      "b": "Lavaltree's Piggy ",
-      "aWins": 1,
+      "b": "T-Bone Ray's",
+      "aWins": 4,
       "bWins": 4,
       "ties": 0
     },
     {
-      "a": "Les Pingouins 🐧",
-      "b": "Montreal Weapon X",
+      "a": "Lavaltree's Piggy ",
+      "b": "Mean Machine",
       "aWins": 2,
-      "bWins": 2,
+      "bWins": 4,
       "ties": 0
     },
     {
-      "a": "MAGRAUDERS ",
+      "a": "Montreal Weapon X",
       "b": "SGB Nation ⚖️",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "MTL New Empire",
-      "b": "Mean Machine",
-      "aWins": 0,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
-      "a": "MTL New Empire",
-      "b": "Scuderia Malo",
-      "aWins": 2,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Lavaltree's Piggy ",
-      "b": "Tebows before Hoes",
-      "aWins": 3,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
-      "a": "LaQuiche",
-      "b": "Montreal Weapon X",
-      "aWins": 0,
-      "bWins": 5,
-      "ties": 0
-    },
-    {
-      "a": "MAGRAUDERS ",
-      "b": "Mean Machine",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "SGB Nation ⚖️",
-      "b": "The Gridiron Sheriffs",
-      "aWins": 2,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "Les Pingouins 🐧",
-      "b": "T-Bone Ray's",
-      "aWins": 2,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Lavaltree's Piggy ",
-      "b": "Scuderia Malo",
-      "aWins": 2,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
-      "a": "MTL New Empire",
-      "b": "Tebows before Hoes",
-      "aWins": 2,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Mean Machine",
-      "b": "Montreal Weapon X",
-      "aWins": 1,
+      "aWins": 4,
       "bWins": 4,
       "ties": 0
     },
     {
-      "a": "LaQuiche",
-      "b": "MAGRAUDERS ",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "SGB Nation ⚖️",
-      "b": "T-Bone Ray's",
-      "aWins": 1,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
       "a": "Les Pingouins 🐧",
-      "b": "The Gridiron Sheriffs",
-      "aWins": 0,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
-      "a": "SGB Nation ⚖️",
-      "b": "Scuderia Malo",
+      "b": "MAGRAUDERS ",
       "aWins": 4,
       "bWins": 2,
       "ties": 0
     },
     {
-      "a": "Les Pingouins 🐧",
+      "a": "La Quiche",
+      "b": "MTL New Empire",
+      "aWins": 1,
+      "bWins": 3,
+      "ties": 0
+    },
+    {
+      "a": "Scuderia Malo",
+      "b": "T-Bone Ray's",
+      "aWins": 1,
+      "bWins": 5,
+      "ties": 0
+    },
+    {
+      "a": "The Gridiron Sheriffs",
       "b": "Tebows before Hoes",
-      "aWins": 2,
+      "aWins": 4,
       "bWins": 3,
       "ties": 0
     },
     {
       "a": "Lavaltree's Piggy ",
-      "b": "MAGRAUDERS ",
-      "aWins": 1,
+      "b": "La Quiche",
+      "aWins": 4,
       "bWins": 1,
       "ties": 0
     },
     {
-      "a": "MTL New Empire",
-      "b": "Montreal Weapon X",
-      "aWins": 1,
+      "a": "Montreal Weapon X",
+      "b": "Les Pingouins 🐧",
+      "aWins": 4,
       "bWins": 2,
       "ties": 0
     },
     {
-      "a": "LaQuiche",
-      "b": "The Gridiron Sheriffs",
-      "aWins": 2,
-      "bWins": 0,
+      "a": "SGB Nation ⚖️",
+      "b": "MAGRAUDERS ",
+      "aWins": 5,
+      "bWins": 2,
       "ties": 0
     },
     {
       "a": "Mean Machine",
-      "b": "T-Bone Ray's",
+      "b": "MTL New Empire",
       "aWins": 3,
-      "bWins": 1,
+      "bWins": 4,
       "ties": 0
     },
     {
-      "a": "Les Pingouins 🐧",
-      "b": "Scuderia Malo",
-      "aWins": 4,
-      "bWins": 0,
+      "a": "Scuderia Malo",
+      "b": "MTL New Empire",
+      "aWins": 2,
+      "bWins": 6,
       "ties": 0
     },
     {
-      "a": "SGB Nation ⚖️",
+      "a": "Lavaltree's Piggy ",
       "b": "Tebows before Hoes",
       "aWins": 5,
       "bWins": 2,
       "ties": 0
     },
     {
-      "a": "Lavaltree's Piggy ",
-      "b": "Montreal Weapon X",
-      "aWins": 2,
-      "bWins": 3,
-      "ties": 0
-    },
-    {
-      "a": "MAGRAUDERS ",
-      "b": "MTL New Empire",
-      "aWins": 2,
+      "a": "Montreal Weapon X",
+      "b": "La Quiche",
+      "aWins": 5,
       "bWins": 0,
       "ties": 0
     },
     {
       "a": "Mean Machine",
-      "b": "The Gridiron Sheriffs",
-      "aWins": 2,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "LaQuiche",
-      "b": "T-Bone Ray's",
-      "aWins": 1,
+      "b": "MAGRAUDERS ",
+      "aWins": 4,
       "bWins": 4,
       "ties": 0
     },
     {
-      "a": "MAGORAMA",
-      "b": "Montreal Weapon X",
-      "aWins": 0,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
-      "a": "MAGORAMA",
-      "b": "T-Bone Ray's",
-      "aWins": 0,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
-      "a": "MAGORAMA",
-      "b": "The Gridiron Sheriffs",
-      "aWins": 2,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "LaQuiche",
-      "b": "MAGORAMA",
-      "aWins": 1,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "MAGORAMA",
-      "b": "Mean Machine",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "MAGORAMA",
-      "b": "Tebows before Hoes",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "MAGORAMA",
-      "b": "Scuderia Malo",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "MAGORAMA",
+      "a": "The Gridiron Sheriffs",
       "b": "SGB Nation ⚖️",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "MAGORAMA",
-      "b": "MTL New Empire",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Lavaltree's Piggy ",
-      "b": "MAGORAMA",
       "aWins": 1,
-      "bWins": 0,
+      "bWins": 5,
       "ties": 0
     },
     {
       "a": "Les Pingouins 🐧",
-      "b": "MAGORAMA",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "Lavaltree's Piggy ",
-      "b": "Young Guns",
-      "aWins": 1,
+      "b": "T-Bone Ray's",
+      "aWins": 4,
       "bWins": 3,
       "ties": 0
     },
     {
-      "a": "GOAT🏆🏆🏆",
-      "b": "MAGrauders",
-      "aWins": 1,
+      "a": "Scuderia Malo",
+      "b": "Lavaltree's Piggy ",
+      "aWins": 4,
       "bWins": 2,
       "ties": 0
     },
     {
-      "a": "MAGrauders",
-      "b": "Montreal Weapon X",
-      "aWins": 1,
-      "bWins": 4,
+      "a": "Tebows before Hoes",
+      "b": "MTL New Empire",
+      "aWins": 4,
+      "bWins": 6,
       "ties": 0
     },
     {
-      "a": "SGB Nation ⚖️",
-      "b": "Young Guns",
-      "aWins": 7,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "GOAT🏆🏆🏆",
-      "b": "T-Bone Ray's",
-      "aWins": 0,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
-      "a": "GOAT🏆🏆🏆",
-      "b": "Montreal Weapon X",
-      "aWins": 0,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
-      "a": "MAGrauders",
-      "b": "T-Bone Ray's",
-      "aWins": 1,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Les Pingouins 🐧",
-      "b": "Young Guns",
+      "a": "Montreal Weapon X",
+      "b": "Mean Machine",
       "aWins": 5,
       "bWins": 2,
       "ties": 0
     },
     {
-      "a": "Scuderia Malo",
-      "b": "Young Guns",
-      "aWins": 0,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
-      "a": "GOAT🏆🏆🏆",
-      "b": "Tebows before Hoes",
-      "aWins": 0,
+      "a": "La Quiche",
+      "b": "MAGRAUDERS ",
+      "aWins": 4,
       "bWins": 1,
       "ties": 0
     },
     {
-      "a": "MAGrauders",
-      "b": "Mean Machine",
-      "aWins": 1,
+      "a": "SGB Nation ⚖️",
+      "b": "T-Bone Ray's",
+      "aWins": 3,
       "bWins": 3,
       "ties": 0
     },
     {
-      "a": "MAGrauders",
-      "b": "Tebows before Hoes",
-      "aWins": 2,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "GOAT🏆🏆🏆",
-      "b": "Mean Machine",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "LaQuiche",
-      "b": "Young Guns",
-      "aWins": 0,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
-      "a": "GOAT🏆🏆🏆",
-      "b": "Scuderia Malo",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "LaQuiche",
-      "b": "MAGrauders",
-      "aWins": 2,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "T-Bone Ray's",
-      "b": "Young Guns",
-      "aWins": 1,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "MAGrauders",
-      "b": "Scuderia Malo",
-      "aWins": 0,
+      "a": "The Gridiron Sheriffs",
+      "b": "Les Pingouins 🐧",
+      "aWins": 4,
       "bWins": 3,
       "ties": 0
     },
     {
-      "a": "Montreal Weapon X",
-      "b": "Young Guns",
-      "aWins": 0,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
-      "a": "GOAT🏆🏆🏆",
-      "b": "LaQuiche",
-      "aWins": 2,
-      "bWins": 0,
+      "a": "SGB Nation ⚖️",
+      "b": "Scuderia Malo",
+      "aWins": 6,
+      "bWins": 3,
       "ties": 0
     },
     {
       "a": "Tebows before Hoes",
-      "b": "Young Guns",
-      "aWins": 2,
-      "bWins": 4,
-      "ties": 0
-    },
-    {
-      "a": "Les Pingouins 🐧",
-      "b": "MAGrauders",
-      "aWins": 2,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "GOAT🏆🏆🏆",
-      "b": "SGB Nation ⚖️",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "MAGrauders",
-      "b": "SGB Nation ⚖️",
-      "aWins": 1,
-      "bWins": 3,
-      "ties": 0
-    },
-    {
-      "a": "GOAT🏆🏆🏆",
       "b": "Les Pingouins 🐧",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Mean Machine",
-      "b": "Young Guns",
-      "aWins": 0,
-      "bWins": 2,
+      "aWins": 3,
+      "bWins": 3,
       "ties": 0
     },
     {
       "a": "Lavaltree's Piggy ",
-      "b": "MAGrauders",
-      "aWins": 2,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "GOAT🏆🏆🏆",
-      "b": "Young Guns",
-      "aWins": 0,
+      "b": "MAGRAUDERS ",
+      "aWins": 5,
       "bWins": 1,
       "ties": 0
     },
     {
-      "a": "GOAT🏆🏆🏆",
-      "b": "Lavaltree's Piggy ",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "MAGrauders",
-      "b": "Young Guns",
-      "aWins": 1,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
-      "a": "CoachRay44",
-      "b": "Montreal Weapon X",
-      "aWins": 1,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Former/future Champ",
-      "b": "MAGrauders",
-      "aWins": 2,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "Former/future Champ",
-      "b": "Montreal Weapon X",
-      "aWins": 2,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "CoachRay44",
-      "b": "MAGrauders",
-      "aWins": 2,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
-      "a": "CoachRay44",
-      "b": "Former/future Champ",
-      "aWins": 1,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "CoachRay44",
-      "b": "Scuderia Malo",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "Former/future Champ",
-      "b": "Les Pingouins 🐧",
-      "aWins": 1,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Former/future Champ",
-      "b": "Young Guns",
-      "aWins": 2,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "CoachRay44",
-      "b": "LaQuiche",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "Former/future Champ",
-      "b": "Lavaltree's Piggy ",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "CoachRay44",
-      "b": "Mean Machine",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "CoachRay44",
-      "b": "Tebows before Hoes",
-      "aWins": 1,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
-      "a": "Former/future Champ",
-      "b": "SGB Nation ⚖️",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "CoachRay44",
-      "b": "SGB Nation ⚖️",
-      "aWins": 0,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
-      "a": "Former/future Champ",
-      "b": "LaQuiche",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "Former/future Champ",
-      "b": "Scuderia Malo",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "CoachRay44",
-      "b": "Lavaltree's Piggy ",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Former/future Champ",
-      "b": "Tebows before Hoes",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "CoachRay44",
-      "b": "Young Guns",
+      "a": "Montreal Weapon X",
+      "b": "MTL New Empire",
       "aWins": 3,
-      "bWins": 0,
+      "bWins": 4,
       "ties": 0
     },
     {
-      "a": "Former/future Champ",
-      "b": "Mean Machine",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "CoachRay44",
-      "b": "Les Pingouins 🐧",
-      "aWins": 1,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
-      "a": "Sainte-Anne Justice",
-      "b": "Tonka26",
-      "aWins": 0,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
-      "a": "Duts-Stud",
-      "b": "Tebows before Hoes",
-      "aWins": 1,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
-      "a": "Team Griddy ",
-      "b": "Young Guns",
-      "aWins": 1,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "CoachRay44",
-      "b": "Weapon X",
-      "aWins": 0,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
-      "a": "MAGrauders",
-      "b": "The Reigning Champ",
-      "aWins": 2,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Sainte-Anne Justice",
-      "b": "Tebows before Hoes",
-      "aWins": 1,
-      "bWins": 3,
-      "ties": 0
-    },
-    {
-      "a": "SGB Nation ⚖️",
-      "b": "Team Griddy ",
-      "aWins": 0,
-      "bWins": 3,
-      "ties": 0
-    },
-    {
-      "a": "The Reigning Champ",
-      "b": "Weapon X",
-      "aWins": 2,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Duts-Stud",
-      "b": "Tonka26",
-      "aWins": 1,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Duts-Stud",
-      "b": "Sainte-Anne Justice",
-      "aWins": 1,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Tebows before Hoes",
-      "b": "Tonka26",
-      "aWins": 0,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
-      "a": "Les Pingouins 🐧",
-      "b": "Team Griddy ",
-      "aWins": 0,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
-      "a": "MAGrauders",
-      "b": "Weapon X",
-      "aWins": 1,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "CoachRay44",
-      "b": "The Reigning Champ",
-      "aWins": 0,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
-      "a": "SGB Nation ⚖️",
-      "b": "Sainte-Anne Justice",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "MAGrauders",
-      "b": "Team Griddy ",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Duts-Stud",
-      "b": "Weapon X",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "The Reigning Champ",
-      "b": "Young Guns",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "Les Pingouins 🐧",
-      "b": "Tonka26",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Les Pingouins 🐧",
-      "b": "Sainte-Anne Justice",
-      "aWins": 1,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Tebows before Hoes",
-      "b": "Weapon X",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "Team Griddy ",
-      "b": "The Reigning Champ",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "SGB Nation ⚖️",
-      "b": "Tonka26",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "CoachRay44",
-      "b": "Duts-Stud",
-      "aWins": 2,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "MAGrauders",
-      "b": "Sainte-Anne Justice",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "CoachRay44",
-      "b": "Team Griddy ",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "Weapon X",
-      "b": "Young Guns",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "The Reigning Champ",
-      "b": "Tonka26",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Duts-Stud",
-      "b": "Les Pingouins 🐧",
-      "aWins": 1,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Sainte-Anne Justice",
-      "b": "The Reigning Champ",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Team Griddy ",
-      "b": "Weapon X",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "MAGrauders",
-      "b": "Tonka26",
-      "aWins": 0,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
-      "a": "Duts-Stud",
-      "b": "SGB Nation ⚖️",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Sainte-Anne Justice",
-      "b": "Team Griddy ",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "Les Pingouins 🐧",
-      "b": "Weapon X",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Duts-Stud",
-      "b": "The Reigning Champ",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Tonka26",
-      "b": "Young Guns",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Sainte-Anne Justice",
-      "b": "Young Guns",
-      "aWins": 1,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Tebows before Hoes",
-      "b": "The Reigning Champ",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "Team Griddy ",
-      "b": "Tonka26",
-      "aWins": 1,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "SGB Nation ⚖️",
-      "b": "Weapon X",
-      "aWins": 2,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "Duts-Stud",
-      "b": "MAGrauders",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "CoachRay44",
-      "b": "Sainte-Anne Justice",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "Team Griddy ",
-      "b": "Tebows before Hoes",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "Tonka26",
-      "b": "Weapon X",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "Les Pingouins 🐧",
-      "b": "The Reigning Champ",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Duts-Stud",
-      "b": "Young Guns",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Sainte-Anne Justice",
-      "b": "Weapon X",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Duts-Stud",
-      "b": "Team Griddy ",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "SGB Nation ⚖️",
-      "b": "The Reigning Champ",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "CoachRay44",
-      "b": "Tonka26",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "Sainte-Anne Justice",
-      "b": "The Inglorious Basterds",
-      "aWins": 0,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
-      "a": "SebWaterMALOn",
-      "b": "Tebows before Hoes",
-      "aWins": 0,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
-      "a": "Lulu15",
-      "b": "TheGriddy",
+      "a": "The Gridiron Sheriffs",
+      "b": "La Quiche",
       "aWins": 3,
-      "bWins": 0,
+      "bWins": 2,
       "ties": 0
     },
     {
-      "a": "Beats By Ray",
-      "b": "Montreal Weapon X",
-      "aWins": 1,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Alvin et les Chipmunks",
-      "b": "TheTwin",
-      "aWins": 0,
+      "a": "Mean Machine",
+      "b": "T-Bone Ray's",
+      "aWins": 5,
       "bWins": 3,
       "ties": 0
     },
     {
-      "a": "Hail Murray 🏈👐",
-      "b": "SGB Nation",
+      "a": "Scuderia Malo",
+      "b": "Les Pingouins 🐧",
       "aWins": 1,
-      "bWins": 1,
+      "bWins": 6,
       "ties": 0
     },
     {
-      "a": "SGB Nation",
-      "b": "TheGriddy",
-      "aWins": 1,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Montreal Weapon X",
-      "b": "TheTwin",
-      "aWins": 1,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Alvin et les Chipmunks",
-      "b": "Beats By Ray",
-      "aWins": 1,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Hail Murray 🏈👐",
-      "b": "Lulu15",
-      "aWins": 0,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
-      "a": "SebWaterMALOn",
-      "b": "The Inglorious Basterds",
-      "aWins": 2,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "Sainte-Anne Justice",
-      "b": "SebWaterMALOn",
-      "aWins": 0,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
-      "a": "Tebows before Hoes",
-      "b": "The Inglorious Basterds",
-      "aWins": 0,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
-      "a": "Hail Murray 🏈👐",
-      "b": "TheGriddy",
-      "aWins": 1,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Alvin et les Chipmunks",
-      "b": "Montreal Weapon X",
-      "aWins": 2,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "Lulu15",
-      "b": "SGB Nation",
-      "aWins": 2,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "Beats By Ray",
-      "b": "TheTwin",
-      "aWins": 0,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
-      "a": "Sainte-Anne Justice",
-      "b": "TheGriddy",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "Alvin et les Chipmunks",
-      "b": "Hail Murray 🏈👐",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "SGB Nation",
-      "b": "TheTwin",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Lulu15",
-      "b": "The Inglorious Basterds",
-      "aWins": 1,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Beats By Ray",
-      "b": "SebWaterMALOn",
-      "aWins": 1,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Lulu15",
-      "b": "Sainte-Anne Justice",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "Beats By Ray",
+      "a": "SGB Nation ⚖️",
       "b": "Tebows before Hoes",
-      "aWins": 1,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "The Inglorious Basterds",
-      "b": "TheGriddy",
-      "aWins": 1,
-      "bWins": 0,
+      "aWins": 6,
+      "bWins": 3,
       "ties": 0
     },
     {
       "a": "Montreal Weapon X",
-      "b": "SebWaterMALOn",
-      "aWins": 1,
-      "bWins": 0,
+      "b": "Lavaltree's Piggy ",
+      "aWins": 4,
+      "bWins": 4,
       "ties": 0
     },
     {
-      "a": "Alvin et les Chipmunks",
-      "b": "SGB Nation",
-      "aWins": 1,
-      "bWins": 0,
+      "a": "MAGRAUDERS ",
+      "b": "MTL New Empire",
+      "aWins": 5,
+      "bWins": 3,
       "ties": 0
     },
     {
-      "a": "Hail Murray 🏈👐",
-      "b": "TheTwin",
-      "aWins": 1,
-      "bWins": 0,
+      "a": "The Gridiron Sheriffs",
+      "b": "Mean Machine",
+      "aWins": 4,
+      "bWins": 3,
       "ties": 0
     },
     {
-      "a": "SGB Nation",
-      "b": "Sainte-Anne Justice",
+      "a": "La Quiche",
+      "b": "T-Bone Ray's",
+      "aWins": 1,
+      "bWins": 5,
+      "ties": 0
+    },
+    {
+      "a": "Scuderia Malo",
+      "b": "Tonka26",
+      "aWins": 0,
+      "bWins": 2,
+      "ties": 0
+    },
+    {
+      "a": "Mean Machine",
+      "b": "Tonka26",
       "aWins": 1,
       "bWins": 1,
       "ties": 0
     },
     {
       "a": "Tebows before Hoes",
-      "b": "TheTwin",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Montreal Weapon X",
-      "b": "TheGriddy",
-      "aWins": 1,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Alvin et les Chipmunks",
-      "b": "SebWaterMALOn",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "Hail Murray 🏈👐",
-      "b": "The Inglorious Basterds",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "Beats By Ray",
-      "b": "Lulu15",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Hail Murray 🏈👐",
-      "b": "Sainte-Anne Justice",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "Alvin et les Chipmunks",
-      "b": "Tebows before Hoes",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "Beats By Ray",
-      "b": "TheGriddy",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Lulu15",
-      "b": "Montreal Weapon X",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "SGB Nation",
-      "b": "The Inglorious Basterds",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "SebWaterMALOn",
-      "b": "TheTwin",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Sainte-Anne Justice",
-      "b": "TheTwin",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Tebows before Hoes",
-      "b": "TheGriddy",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Montreal Weapon X",
-      "b": "SGB Nation",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "Alvin et les Chipmunks",
-      "b": "The Inglorious Basterds",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "Beats By Ray",
-      "b": "Hail Murray 🏈👐",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "Lulu15",
-      "b": "SebWaterMALOn",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Alvin et les Chipmunks",
-      "b": "Sainte-Anne Justice",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "Lulu15",
-      "b": "Tebows before Hoes",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "SebWaterMALOn",
-      "b": "TheGriddy",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Hail Murray 🏈👐",
-      "b": "Montreal Weapon X",
-      "aWins": 0,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Beats By Ray",
-      "b": "SGB Nation",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "The Inglorious Basterds",
-      "b": "TheTwin",
+      "b": "Tonka26",
       "aWins": 0,
       "bWins": 2,
       "ties": 0
     },
     {
-      "a": "Montreal Weapon X",
-      "b": "Sainte-Anne Justice",
-      "aWins": 1,
-      "bWins": 0,
-      "ties": 0
-    },
-    {
-      "a": "SGB Nation",
-      "b": "Tebows before Hoes",
-      "aWins": 1,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "TheGriddy",
-      "b": "TheTwin",
+      "a": "Les Pingouins 🐧",
+      "b": "Tonka26",
       "aWins": 0,
       "bWins": 1,
       "ties": 0
     },
     {
-      "a": "Alvin et les Chipmunks",
-      "b": "Lulu15",
+      "a": "SGB Nation ⚖️",
+      "b": "Tonka26",
+      "aWins": 0,
+      "bWins": 1,
+      "ties": 0
+    },
+    {
+      "a": "The Gridiron Sheriffs",
+      "b": "Tonka26",
+      "aWins": 0,
+      "bWins": 1,
+      "ties": 0
+    },
+    {
+      "a": "MAGRAUDERS ",
+      "b": "Tonka26",
+      "aWins": 0,
+      "bWins": 2,
+      "ties": 0
+    },
+    {
+      "a": "MTL New Empire",
+      "b": "Tonka26",
+      "aWins": 1,
+      "bWins": 0,
+      "ties": 0
+    },
+    {
+      "a": "Lavaltree's Piggy ",
+      "b": "Tonka26",
+      "aWins": 1,
+      "bWins": 1,
+      "ties": 0
+    },
+    {
+      "a": "Montreal Weapon X",
+      "b": "Tonka26",
+      "aWins": 0,
+      "bWins": 1,
+      "ties": 0
+    },
+    {
+      "a": "T-Bone Ray's",
+      "b": "Tonka26",
+      "aWins": 1,
+      "bWins": 0,
+      "ties": 0
+    },
+    {
+      "a": "Tebows before Hoes",
+      "b": "SebWaterMALOn",
       "aWins": 2,
       "bWins": 0,
       "ties": 0
     },
     {
-      "a": "Hail Murray 🏈👐",
+      "a": "Mean Machine",
       "b": "SebWaterMALOn",
-      "aWins": 1,
-      "bWins": 1,
-      "ties": 0
-    },
-    {
-      "a": "Beats By Ray",
-      "b": "The Inglorious Basterds",
       "aWins": 0,
-      "bWins": 1,
+      "bWins": 2,
       "ties": 0
     },
     {
-      "a": "Beats By Ray",
-      "b": "Sainte-Anne Justice",
+      "a": "Scuderia Malo",
+      "b": "SebWaterMALOn",
+      "aWins": 0,
+      "bWins": 2,
+      "ties": 0
+    },
+    {
+      "a": "SebWaterMALOn",
+      "b": "T-Bone Ray's",
       "aWins": 1,
-      "bWins": 0,
+      "bWins": 1,
       "ties": 0
     },
     {
       "a": "Montreal Weapon X",
-      "b": "The Inglorious Basterds",
-      "aWins": 0,
-      "bWins": 1,
+      "b": "SebWaterMALOn",
+      "aWins": 1,
+      "bWins": 0,
       "ties": 0
     },
     {
-      "a": "Hail Murray 🏈👐",
-      "b": "Tebows before Hoes",
+      "a": "MAGRAUDERS ",
+      "b": "SebWaterMALOn",
       "aWins": 1,
       "bWins": 0,
+      "ties": 0
+    },
+    {
+      "a": "The Gridiron Sheriffs",
+      "b": "SebWaterMALOn",
+      "aWins": 1,
+      "bWins": 0,
+      "ties": 0
+    },
+    {
+      "a": "SebWaterMALOn",
+      "b": "MTL New Empire",
+      "aWins": 1,
+      "bWins": 0,
+      "ties": 0
+    },
+    {
+      "a": "Lavaltree's Piggy ",
+      "b": "SebWaterMALOn",
+      "aWins": 1,
+      "bWins": 0,
+      "ties": 0
+    },
+    {
+      "a": "Les Pingouins 🐧",
+      "b": "SebWaterMALOn",
+      "aWins": 1,
+      "bWins": 1,
       "ties": 0
     }
   ]
