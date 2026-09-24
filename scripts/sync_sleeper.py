@@ -24,9 +24,9 @@ DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
 # via API for this league's config, so this is maintained by hand).
 # Backlog: automate this once/if the league configures divisions in Sleeper settings.
 DIVISIONS = {
-    "North": ["Scuderia Malo", "Mean Machine", "La Quiche", "Tebows Before Hoes"],
-    "Central": ["Weapon X", "T-Boy Rays", "Gridiron Sheriffs", "Magorama"],
-    "South": ["SGB Nation", "Les Pingouins", "Lavaltrée's Piggy", "MTL New Empire"],
+    "North": ["Scuderia Malo", "Mean Machine", "La Quiche", "Tebows before Hoes"],
+    "Central": ["Montreal Weapon X", "T-Bone Ray's", "The Gridiron Sheriffs", "MAGRAUDERS"],
+    "South": ["SGB Nation ⚖️", "Les Pingouins 🐧", "Lavaltree's Piggy", "MTL New Empire"],
 }
 
 # BACKLOG: at least one franchise has changed real-world owners across
@@ -88,6 +88,8 @@ def build_owner_map(league_id):
 def sync_standings(current_league_id):
     """Current season standings, grouped into the known divisions."""
     owner_map, rosters = build_owner_map(current_league_id)
+    league_info = fetch_json(f"{API_BASE}/league/{current_league_id}") or {}
+    season_label = league_info.get("season", str(current_league_id))
 
     def normalize(s):
         return "".join(ch for ch in s.lower().strip() if ch.isalnum())
@@ -128,7 +130,7 @@ def sync_standings(current_league_id):
                 teams.append({"team": t, "owner": None, "wins": 0, "losses": 0, "ties": 0, "pointsFor": None})
         divisions.append({"name": div_name, "teams": teams})
 
-    return {"season": str(current_league_id), "divisions": divisions}
+    return {"season": season_label, "divisions": divisions}
 
 
 def build_display_names(season_chain):
