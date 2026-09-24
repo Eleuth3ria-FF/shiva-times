@@ -1,5 +1,5 @@
 {
-  "season": "1312396775717371904",
+  "season": "2026",
   "divisions": [
     {
       "name": "North",
@@ -42,36 +42,36 @@
       "name": "Central",
       "teams": [
         {
-          "team": "Weapon X",
-          "owner": null,
-          "wins": 0,
+          "team": "Montreal Weapon X",
+          "owner": "Montreal Weapon X",
+          "wins": 2,
           "losses": 0,
           "ties": 0,
-          "pointsFor": null
+          "pointsFor": 336.9
         },
         {
-          "team": "T-Boy Rays",
-          "owner": null,
-          "wins": 0,
-          "losses": 0,
+          "team": "T-Bone Ray's",
+          "owner": "T-Bone Ray's",
+          "wins": 1,
+          "losses": 1,
           "ties": 0,
-          "pointsFor": null
+          "pointsFor": 221.7
         },
         {
-          "team": "Gridiron Sheriffs",
-          "owner": null,
-          "wins": 0,
-          "losses": 0,
+          "team": "The Gridiron Sheriffs",
+          "owner": "The Gridiron Sheriffs",
+          "wins": 1,
+          "losses": 1,
           "ties": 0,
-          "pointsFor": null
+          "pointsFor": 240.3
         },
         {
-          "team": "Magorama",
-          "owner": null,
+          "team": "MAGRAUDERS ",
+          "owner": "MAGRAUDERS ",
           "wins": 0,
-          "losses": 0,
+          "losses": 2,
           "ties": 0,
-          "pointsFor": null
+          "pointsFor": 223.1
         }
       ]
     },
@@ -95,12 +95,12 @@
           "pointsFor": 223.6
         },
         {
-          "team": "Lavaltrée's Piggy",
-          "owner": null,
-          "wins": 0,
+          "team": "Lavaltree's Piggy ",
+          "owner": "Lavaltree's Piggy ",
+          "wins": 2,
           "losses": 0,
           "ties": 0,
-          "pointsFor": null
+          "pointsFor": 285.0
         },
         {
           "team": "MTL New Empire",
