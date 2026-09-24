@@ -1,0 +1,53 @@
+{
+  "managers": [
+    {
+      "name": "Xavier Bernet",
+      "total": 20.0
+    },
+    {
+      "name": "Sébastien Malo",
+      "total": 0.0
+    },
+    {
+      "name": "Sébastien Gélinas",
+      "total": 0.0
+    },
+    {
+      "name": "Rémi Giguère",
+      "total": 0.0
+    },
+    {
+      "name": "Olivier Dutrisac",
+      "total": 0.0
+    },
+    {
+      "name": "Marc-André Giguère",
+      "total": 0.0
+    },
+    {
+      "name": "Ludovic Harris-Gauthier",
+      "total": 0.0
+    },
+    {
+      "name": "Samuel Tassé",
+      "total": 0.0
+    },
+    {
+      "name": "Guillaume Doucet",
+      "total": 0.0
+    },
+    {
+      "name": "David Légaré",
+      "total": 0.0
+    },
+    {
+      "name": "Alexandre Raymond",
+      "total": 0.0
+    },
+    {
+      "name": "Alexandre Doucet",
+      "total": 0.0
+    }
+  ],
+  "updated": "2026-09-24"
+}
