@@ -118,7 +118,7 @@ def sync_head_to_head(season_chain):
     pair_records = {}  # frozenset({a,b}) -> {a: wins, b: wins, ties}
 
     for league in season_chain:
-        league_id = league["id"]
+        league_id = league["league_id"]
         owner_map, _ = build_owner_map(league_id)
         # Weeks: use league settings if available, else assume up to 17
         max_week = (league.get("settings") or {}).get("last_scored_leg") or 17
@@ -159,7 +159,7 @@ def sync_trades(season_chain, player_lookup):
     """Every trade transaction across every season."""
     trades = []
     for league in season_chain:
-        league_id = league["id"]
+        league_id = league["league_id"]
         season_label = league.get("season", league_id)
         owner_map, _ = build_owner_map(league_id)
         max_week = (league.get("settings") or {}).get("last_scored_leg") or 17
