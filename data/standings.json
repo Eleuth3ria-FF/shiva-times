@@ -1,0 +1,116 @@
+{
+  "season": "1312396775717371904",
+  "divisions": [
+    {
+      "name": "North",
+      "teams": [
+        {
+          "team": "Scuderia Malo",
+          "owner": "Scuderia Malo",
+          "wins": 2,
+          "losses": 0,
+          "ties": 0,
+          "pointsFor": 242.0
+        },
+        {
+          "team": "Mean Machine",
+          "owner": "Mean Machine",
+          "wins": 1,
+          "losses": 1,
+          "ties": 0,
+          "pointsFor": 225.9
+        },
+        {
+          "team": "La Quiche",
+          "owner": "La Quiche",
+          "wins": 1,
+          "losses": 1,
+          "ties": 0,
+          "pointsFor": 215.6
+        },
+        {
+          "team": "Tebows Before Hoes",
+          "owner": null,
+          "wins": 0,
+          "losses": 0,
+          "ties": 0,
+          "pointsFor": null
+        }
+      ]
+    },
+    {
+      "name": "Central",
+      "teams": [
+        {
+          "team": "Weapon X",
+          "owner": null,
+          "wins": 0,
+          "losses": 0,
+          "ties": 0,
+          "pointsFor": null
+        },
+        {
+          "team": "T-Boy Rays",
+          "owner": null,
+          "wins": 0,
+          "losses": 0,
+          "ties": 0,
+          "pointsFor": null
+        },
+        {
+          "team": "Gridiron Sheriffs",
+          "owner": null,
+          "wins": 0,
+          "losses": 0,
+          "ties": 0,
+          "pointsFor": null
+        },
+        {
+          "team": "Magorama",
+          "owner": null,
+          "wins": 0,
+          "losses": 0,
+          "ties": 0,
+          "pointsFor": null
+        }
+      ]
+    },
+    {
+      "name": "South",
+      "teams": [
+        {
+          "team": "SGB Nation",
+          "owner": null,
+          "wins": 0,
+          "losses": 0,
+          "ties": 0,
+          "pointsFor": null
+        },
+        {
+          "team": "Les Pingouins",
+          "owner": null,
+          "wins": 0,
+          "losses": 0,
+          "ties": 0,
+          "pointsFor": null
+        },
+        {
+          "team": "Lavaltrée's Piggy",
+          "owner": null,
+          "wins": 0,
+          "losses": 0,
+          "ties": 0,
+          "pointsFor": null
+        },
+        {
+          "team": "MTL New Empire",
+          "owner": "MTL New Empire",
+          "wins": 0,
+          "losses": 2,
+          "ties": 0,
+          "pointsFor": 183.4
+        }
+      ]
+    }
+  ]
+}
