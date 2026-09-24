@@ -257,6 +257,52 @@ def fetch_player_lookup():
     return lookup
 
 
+def fetch_prizepool():
+    """Pull the Prize Pool Google Sheet (published as CSV) and convert to JSON.
+
+    Done server-side here rather than fetched client-side by the site,
+    because Google's "publish to web" CSV endpoint doesn't reliably send
+    CORS headers a browser fetch() would need — a plain HTTP request from
+    the Action has no such restriction.
+    """
+    import csv
+    import io
+
+    csv_url = (
+        "https://docs.google.com/spreadsheets/d/e/"
+        "2PACX-1vRuvZYP99HrxQc5DE_4nI6Gv-bm_J8rCCGymyQaALbnTDwgiDv-Vywq8RzbrFBvOw6ZnmgPfrzgYx4X/"
+        "pub?gid=1107810375&single=true&output=csv"
+    )
+    req = urllib.request.Request(csv_url, headers={"User-Agent": "shiva-times-sync/1.0"})
+    with urllib.request.urlopen(req, timeout=20) as resp:
+        raw = resp.read().decode("utf-8")
+
+    reader = csv.reader(io.StringIO(raw))
+    rows = list(reader)
+
+    # This sheet's real header row (Rank, Manager, Total ($), W1...) is not
+    # row 0 — there are title/subtitle rows above it. Find it by looking
+    # for the row that starts with "Rank".
+    header_idx = next((i for i, r in enumerate(rows) if r and r[0].strip() == "Rank"), None)
+    if header_idx is None:
+        return {"managers": [], "updated": None}
+
+    managers = []
+    for row in rows[header_idx + 1:]:
+        if len(row) < 3 or not row[1].strip():
+            continue
+        name = row[1].strip()
+        total_str = row[2].replace("$", "").replace(",", "").strip()
+        try:
+            total = float(total_str) if total_str else 0
+        except ValueError:
+            total = 0
+        managers.append({"name": name, "total": total})
+
+    import datetime
+    return {"managers": managers, "updated": datetime.date.today().isoformat()}
+
+
 def main():
     os.makedirs(DATA_DIR, exist_ok=True)
 
@@ -285,6 +331,11 @@ def main():
     trades = sync_trades(season_chain, player_lookup, display_name)
     with open(os.path.join(DATA_DIR, "trades.json"), "w", encoding="utf-8") as f:
         json.dump(trades, f, ensure_ascii=False, indent=2)
+
+    print("Syncing prize pool from Google Sheet...")
+    prizepool = fetch_prizepool()
+    with open(os.path.join(DATA_DIR, "prizepool.json"), "w", encoding="utf-8") as f:
+        json.dump(prizepool, f, ensure_ascii=False, indent=2)
 
     print("Done.")
 
