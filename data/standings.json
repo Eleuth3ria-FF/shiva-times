@@ -10,7 +10,8 @@
           "wins": 2,
           "losses": 0,
           "ties": 0,
-          "pointsFor": 242.0
+          "pointsFor": 242.0,
+          "pointsAgainst": 236.3
         },
         {
           "team": "Mean Machine",
@@ -18,7 +19,8 @@
           "wins": 1,
           "losses": 1,
           "ties": 0,
-          "pointsFor": 225.9
+          "pointsFor": 225.9,
+          "pointsAgainst": 155.3
         },
         {
           "team": "La Quiche",
@@ -26,7 +28,8 @@
           "wins": 1,
           "losses": 1,
           "ties": 0,
-          "pointsFor": 215.6
+          "pointsFor": 215.6,
+          "pointsAgainst": 203.8
         },
         {
           "team": "Tebows before Hoes",
@@ -34,7 +37,8 @@
           "wins": 0,
           "losses": 2,
           "ties": 0,
-          "pointsFor": 117.1
+          "pointsFor": 117.1,
+          "pointsAgainst": 205.2
         }
       ]
     },
@@ -47,7 +51,8 @@
           "wins": 2,
           "losses": 0,
           "ties": 0,
-          "pointsFor": 336.9
+          "pointsFor": 336.9,
+          "pointsAgainst": 233.8
         },
         {
           "team": "T-Bone Ray's",
@@ -55,7 +60,8 @@
           "wins": 1,
           "losses": 1,
           "ties": 0,
-          "pointsFor": 221.7
+          "pointsFor": 221.7,
+          "pointsAgainst": 229.6
         },
         {
           "team": "The Gridiron Sheriffs",
@@ -63,7 +69,8 @@
           "wins": 1,
           "losses": 1,
           "ties": 0,
-          "pointsFor": 240.3
+          "pointsFor": 240.3,
+          "pointsAgainst": 270.6
         },
         {
           "team": "MAGRAUDERS ",
@@ -71,7 +78,8 @@
           "wins": 0,
           "losses": 2,
           "ties": 0,
-          "pointsFor": 223.1
+          "pointsFor": 223.1,
+          "pointsAgainst": 287.9
         }
       ]
     },
@@ -84,7 +92,8 @@
           "wins": 1,
           "losses": 1,
           "ties": 0,
-          "pointsFor": 264.0
+          "pointsFor": 264.0,
+          "pointsAgainst": 245.1
         },
         {
           "team": "Les Pingouins 🐧",
@@ -92,7 +101,8 @@
           "wins": 1,
           "losses": 1,
           "ties": 0,
-          "pointsFor": 223.6
+          "pointsFor": 223.6,
+          "pointsAgainst": 223.3
         },
         {
           "team": "Lavaltree's Piggy ",
@@ -100,7 +110,8 @@
           "wins": 2,
           "losses": 0,
           "ties": 0,
-          "pointsFor": 285.0
+          "pointsFor": 285.0,
+          "pointsAgainst": 225.4
         },
         {
           "team": "MTL New Empire",
@@ -108,7 +119,8 @@
           "wins": 0,
           "losses": 2,
           "ties": 0,
-          "pointsFor": 183.4
+          "pointsFor": 183.4,
+          "pointsAgainst": 262.2
         }
       ]
     }
