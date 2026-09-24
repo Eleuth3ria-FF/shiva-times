@@ -1,22 +1,10 @@
 {
   "seasons": [
     {
-      "season": "2021-22",
-      "champion": "David Légaré",
-      "runnerUp": "Julien Valiquette",
-      "third": "Marc-André Giguère"
-    },
-    {
-      "season": "2022-23",
-      "champion": "Guillaume Doucet",
-      "runnerUp": "Rémi Giguère",
-      "third": "Sébastien Gélinas"
-    },
-    {
-      "season": "2023-24",
-      "champion": "Alexandre Raymond",
-      "runnerUp": "David Légaré",
-      "third": "Alexandre Doucet"
+      "season": "2025",
+      "champion": "Sébastien Gélinas",
+      "runnerUp": "Xavier Bernet",
+      "third": "Olivier Dutrisac"
     },
     {
       "season": "2024-25",
@@ -25,11 +13,22 @@
       "third": "Olivier Dutrisac"
     },
     {
-      "season": "2025 (unconfirmed — see note)",
-      "champion": "Sébastien Gélinas",
-      "runnerUp": "Xavier Bernet",
-      "third": "Olivier Dutrisac"
+      "season": "2023-24",
+      "champion": "Alexandre Raymond",
+      "runnerUp": "David Légaré",
+      "third": "Alexandre Doucet"
+    },
+    {
+      "season": "2022-23",
+      "champion": "Guillaume Doucet",
+      "runnerUp": "Rémi Giguère",
+      "third": "Sébastien Gélinas"
+    },
+    {
+      "season": "2021-22",
+      "champion": "David Légaré",
+      "runnerUp": "Julien Valiquette",
+      "third": "Marc-André Giguère"
     }
-  ],
-  "note": "The 2025 and 2024-25 entries both list Sébastien Gélinas as champion but with different runners-up — this needs the commissioner to confirm whether these are two distinct seasons or a data-entry duplicate."
+  ]
 }
