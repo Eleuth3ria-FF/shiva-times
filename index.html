@@ -75,6 +75,16 @@
   table.stat-table td.num, table.stat-table th.num { text-align: right; }
   table.stat-table tbody tr.rank-1 td:first-child { color: var(--gold); font-weight: 700; }
   .division-block { border-bottom: 1px solid var(--border); }
+  .standings-layout { display: flex; gap: 16px; align-items: flex-start; }
+  .standings-layout .card:first-child { flex: 1 1 auto; min-width: 0; }
+  .standings-sidebar { flex: 0 0 220px; }
+  .rank-row { display: flex; align-items: baseline; gap: 10px; padding: 9px 16px; border-bottom: 1px solid var(--border); font-size: 13.5px; }
+  .rank-row:last-child { border-bottom: none; }
+  .rank-num { font-family: 'Oswald', sans-serif; font-weight: 600; color: var(--text-muted); flex: 0 0 18px; }
+  .rank-row.rank-top .rank-num { color: var(--gold); }
+  .rank-team { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .rank-record { color: var(--text-muted); font-variant-numeric: tabular-nums; flex: 0 0 auto; }
+  @media (max-width: 700px) { .standings-layout { flex-direction: column; } .standings-sidebar { flex-basis: auto; width: 100%; } }
   .division-block:last-child { border-bottom: none; }
   .division-label { font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); padding: 14px 16px 4px; }
   .bar-row { display: flex; align-items: center; gap: 12px; padding: 10px 16px; }
@@ -146,10 +156,17 @@
     <div class="headline-block">
       <p class="eyebrow">Season Standings</p>
       <h2 class="panel-title">Three Divisions, Twelve Egos</h2>
-      <p class="panel-sub">North, Central, South.</p>
+      <p class="panel-sub">North, Central, South — plus the overall pecking order, all twelve ranked together.</p>
     </div>
-    <div class="card" id="standings-body"></div>
+    <div class="standings-layout">
+      <div class="card" id="standings-body"></div>
+      <div class="card standings-sidebar">
+        <div class="division-label" style="padding-top:16px">Overall Ranking</div>
+        <div id="overall-ranking-body"></div>
+      </div>
+    </div>
   </section>
+
 
   <section class="panel" id="panel-h2h">
     <div class="headline-block">
@@ -297,11 +314,32 @@
           '<td>' + t.team + '</td>' +
           '<td class="num">' + (t.wins||0) + '-' + (t.losses||0) + (t.ties ? '-'+t.ties : '') + '</td>' +
           '<td class="num">' + (t.pointsFor != null ? t.pointsFor : '—') + '</td>' +
+          '<td class="num">' + (t.pointsAgainst != null ? t.pointsAgainst : '—') + '</td>' +
         '</tr>'
       )).join('');
       return '<div class="division-block"><div class="division-label">' + div.name + '</div>' +
-        '<table class="stat-table"><thead><tr><th>Team</th><th class="num">Record</th><th class="num">PF</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
+        '<table class="stat-table"><thead><tr><th>Team</th><th class="num">Record</th><th class="num">PF</th><th class="num">PA</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
     }).join('');
+  }
+
+  function renderOverallRanking(data) {
+    const el = document.getElementById('overall-ranking-body');
+    if (!data || !Array.isArray(data.divisions) || data.divisions.length === 0) {
+      emptyState(el, 'Not synced yet', 'Ranking fills in once standings sync.');
+      return;
+    }
+    const allTeams = [];
+    data.divisions.forEach(div => div.teams.forEach(t => allTeams.push(t)));
+    const ranked = allTeams
+      .filter(t => t.owner) // skip unresolved placeholder entries
+      .sort((a, b) => (b.wins - a.wins) || ((b.pointsFor||0) - (a.pointsFor||0)));
+    el.innerHTML = ranked.map((t, i) =>
+      '<div class="rank-row' + (i === 0 ? ' rank-top' : '') + '">' +
+        '<span class="rank-num">' + (i+1) + '</span>' +
+        '<span class="rank-team">' + t.team + '</span>' +
+        '<span class="rank-record">' + (t.wins||0) + '-' + (t.losses||0) + (t.ties ? '-'+t.ties : '') + '</span>' +
+      '</div>'
+    ).join('');
   }
 
   // ---------- Head-to-Head ----------
@@ -471,6 +509,7 @@
 
     renderHome(home);
     renderStandings(standings);
+    renderOverallRanking(standings);
     renderH2H(h2h);
     renderRivalries(rivalries);
     renderPrizePool(prizepool);
