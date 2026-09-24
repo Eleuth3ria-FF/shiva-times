@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Shiva Times — League Gazette</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A0B0D; --surface: #131518; --surface-2: #1B1E22;
+    --text: #EDEAE1; --text-muted: #8B8F93;
+    --border: rgba(237,234,225,0.14); --rule: rgba(237,234,225,0.28);
+    --gold: #C9A24A; --crimson: #A6362F; --olive: #5C6B4F;
+    --shadow: 0 1px 3px rgba(0,0,0,0.4);
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #F1EEE4; --surface: #FFFFFF; --surface-2: #E9E4D6;
+      --text: #17181A; --text-muted: #5B5F55;
+      --border: rgba(20,20,16,0.16); --rule: rgba(20,20,16,0.35);
+      --gold: #96731F; --crimson: #8C2C26; --olive: #46512F;
+      --shadow: 0 1px 2px rgba(20,20,16,0.08);
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif; font-size: 15px; line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px 90px; }
+  .masthead { border-bottom: 4px double var(--rule); padding: 22px 20px 16px; text-align: center; }
+  .masthead-inner { max-width: 980px; margin: 0 auto; }
+  .masthead-kicker {
+    font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 0.18em; color: var(--crimson);
+    display: flex; justify-content: space-between; padding-bottom: 10px; margin-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .masthead-title { font-family: 'Playfair Display', serif; font-weight: 900; font-size: clamp(38px,8vw,76px); letter-spacing: -0.01em; margin: 0; line-height: 0.95; }
+  .masthead-sub { font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 0.06em; color: var(--text-muted); margin: 10px 0 0; text-transform: uppercase; }
+  .masthead-sub em { color: var(--gold); font-style: normal; }
+  nav.tabs {
+    position: sticky; top: 0; z-index: 10; display: flex; background: var(--bg);
+    border-bottom: 3px solid var(--text); overflow-x: auto; scrollbar-width: none;
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  nav.tabs::-webkit-scrollbar { display: none; }
+  nav.tabs button {
+    font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 12.5px; letter-spacing: 0.07em;
+    text-transform: uppercase; background: none; border: none; border-right: 1px solid var(--border);
+    color: var(--text-muted); padding: 14px 15px 11px; cursor: pointer; white-space: nowrap;
+    transition: color .15s ease, background .15s ease;
+  }
+  nav.tabs button:hover { color: var(--text); }
+  nav.tabs button[aria-selected="true"] { color: var(--bg); background: var(--gold); }
+  main { padding-top: 30px; }
+  section.panel { display: none; }
+  section.panel.active { display: block; animation: fade .25s ease; }
+  @keyframes fade { from { opacity:0; transform:translateY(4px);} to { opacity:1; transform:translateY(0);} }
+  .headline-block { margin-bottom: 22px; border-bottom: 1px solid var(--rule); padding-bottom: 16px; }
+  .eyebrow { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 0.16em; color: var(--crimson); text-transform: uppercase; margin: 0 0 6px; }
+  h2.panel-title { font-family: 'Playfair Display', serif; font-weight: 700; font-size: clamp(24px,4vw,34px); margin: 0 0 8px; line-height: 1.1; }
+  p.panel-sub { color: var(--text-muted); margin: 0; font-size: 14.5px; max-width: 62ch; }
+  .card { background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow); }
+  table.stat-table { width: 100%; border-collapse: collapse; }
+  table.stat-table th, table.stat-table td { text-align: left; padding: 11px 16px; font-variant-numeric: tabular-nums; }
+  table.stat-table thead th { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); font-weight: 500; border-bottom: 2px solid var(--rule); }
+  table.stat-table tbody tr { border-bottom: 1px solid var(--border); }
+  table.stat-table tbody tr:last-child { border-bottom: none; }
+  table.stat-table td.num, table.stat-table th.num { text-align: right; }
+  table.stat-table tbody tr.rank-1 td:first-child { color: var(--gold); font-weight: 700; }
+  .division-block { border-bottom: 1px solid var(--border); }
+  .division-block:last-child { border-bottom: none; }
+  .division-label { font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); padding: 14px 16px 4px; }
+  .bar-row { display: flex; align-items: center; gap: 12px; padding: 10px 16px; }
+  .bar-row .name { flex: 0 0 160px; font-size: 14px; }
+  .bar-track { flex: 1; height: 8px; background: var(--surface-2); overflow: hidden; }
+  .bar-fill { height: 100%; background: linear-gradient(90deg, var(--olive), var(--gold)); }
+  .bar-value { flex: 0 0 60px; text-align: right; font-variant-numeric: tabular-nums; font-size: 14px; color: var(--text-muted); }
+  .rivalry-row, .trade-row, .champ-row, .article-row { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+  .rivalry-row:last-child, .trade-row:last-child, .champ-row:last-child, .article-row:last-child { border-bottom: none; }
+  .rivalry-note, .champ-season { font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 0.06em; color: var(--crimson); text-transform: uppercase; margin-bottom: 3px; }
+  .rivalry-names, .champ-name, .article-title { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 17px; }
+  .team-card { display: flex; align-items: center; gap: 14px; padding: 16px 20px; border-bottom: 1px solid var(--border); }
+  .team-card:last-child { border-bottom: none; }
+  .team-logo { width: 48px; height: 48px; border-radius: 4px; background: var(--surface-2); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 700; font-size: 18px; color: var(--gold); flex-shrink: 0; overflow: hidden; }
+  .team-logo img { width: 100%; height: 100%; object-fit: cover; }
+  .team-name { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 16px; }
+  .team-meta { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+  .empty-state { padding: 44px 32px; text-align: center; }
+  .empty-state .glyph { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--crimson); margin-bottom: 10px; }
+  .empty-state h3 { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 19px; margin: 0 0 8px; }
+  .empty-state p { color: var(--text-muted); font-size: 14px; max-width: 44ch; margin: 0 auto; }
+  .updated-tag { font-size: 12px; color: var(--text-muted); margin-top: 14px; }
+  select.trade-select { font-family: 'Inter', sans-serif; font-size: 14px; background: var(--bg); color: var(--text); border: 1px solid var(--border); padding: 8px 10px; border-radius: 3px; }
+  .vote-btn { font-family: 'Oswald', sans-serif; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; font-size: 13px; padding: 10px 18px; border: 1px solid var(--gold); background: transparent; color: var(--gold); cursor: pointer; border-radius: 3px; }
+  .vote-btn:hover { background: var(--gold); color: var(--bg); }
+  footer { margin-top: 56px; padding-top: 18px; border-top: 3px double var(--rule); color: var(--text-muted); font-size: 12px; letter-spacing: 0.02em; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-family: 'Oswald', sans-serif; text-transform: uppercase; }
+  @media (max-width: 560px) { .bar-row .name { flex-basis: 108px; font-size: 13px; } .masthead-kicker { flex-direction: column; gap: 2px; text-align: left; } }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-inner">
+    <div class="masthead-kicker">
+      <span>HOME OF THE SHIVA</span>
+      <span>EST. 2019 · TWELVE MANAGERS, ZERO MERCY</span>
+    </div>
+    <h1 class="masthead-title">The Shiva Times</h1>
+    <p class="masthead-sub">The paper of record for a league that <em>remembers everything.</em></p>
+  </div>
+</div>
+
+<nav class="tabs" role="tablist">
+  <button role="tab" aria-selected="true" data-panel="home">Home</button>
+  <button role="tab" aria-selected="false" data-panel="standings">Standings</button>
+  <button role="tab" aria-selected="false" data-panel="h2h">Head-to-Head</button>
+  <button role="tab" aria-selected="false" data-panel="rivalries">Rivalries</button>
+  <button role="tab" aria-selected="false" data-panel="prizepool">Prize Pool</button>
+  <button role="tab" aria-selected="false" data-panel="trades">Trade Ledger</button>
+  <button role="tab" aria-selected="false" data-panel="champions">Championships</button>
+  <button role="tab" aria-selected="false" data-panel="teams">Teams</button>
+  <button role="tab" aria-selected="false" data-panel="rules">Rules</button>
+  <button role="tab" aria-selected="false" data-panel="predictions">Predictions</button>
+</nav>
+
+<div class="wrap">
+<main>
+
+  <section class="panel active" id="panel-home">
+    <div class="headline-block">
+      <p class="eyebrow">This Week</p>
+      <h2 class="panel-title">The Front Page</h2>
+      <p class="panel-sub">Auto-written recaps and commissioner announcements, newest first.</p>
+    </div>
+    <div class="card" id="home-body"></div>
+  </section>
+
+  <section class="panel" id="panel-standings">
+    <div class="headline-block">
+      <p class="eyebrow">Season Standings</p>
+      <h2 class="panel-title">Three Divisions, Twelve Egos</h2>
+      <p class="panel-sub">North, Central, South.</p>
+    </div>
+    <div class="card" id="standings-body"></div>
+  </section>
+
+  <section class="panel" id="panel-h2h">
+    <div class="headline-block">
+      <p class="eyebrow">Head-to-Head</p>
+      <h2 class="panel-title">Every Grudge, All-Time</h2>
+      <p class="panel-sub">Every manager pair, aggregated across every season on record.</p>
+    </div>
+    <div class="card" id="h2h-body"></div>
+  </section>
+
+  <section class="panel" id="panel-rivalries">
+    <div class="headline-block">
+      <p class="eyebrow">Rivalry Week — Week 9</p>
+      <h2 class="panel-title">Six Grudges, One Sunday</h2>
+      <p class="panel-sub">The matchups nobody circled by accident.</p>
+    </div>
+    <div class="card" id="rivalries-body"></div>
+  </section>
+
+  <section class="panel" id="panel-prizepool">
+    <div class="headline-block">
+      <p class="eyebrow">Follow the Money</p>
+      <h2 class="panel-title">The Ledger Doesn't Lie</h2>
+      <p class="panel-sub" id="prizepool-sub">Weekly high-score wins plus year-end awards, tallied live.</p>
+    </div>
+    <div class="card" id="prizepool-body"></div>
+    <div class="updated-tag" id="prizepool-updated"></div>
+  </section>
+
+  <section class="panel" id="panel-trades">
+    <div class="headline-block">
+      <p class="eyebrow">The Wire</p>
+      <h2 class="panel-title">Deals, Fleeces &amp; Regrets</h2>
+      <p class="panel-sub">Pick two managers to see every trade between them. Leave both on "Everyone" for the full ledger.</p>
+    </div>
+    <div class="card" style="padding:16px 20px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;border-bottom:1px solid var(--border)">
+      <select id="trade-select-a" class="trade-select"></select>
+      <span style="font-family:'Playfair Display',serif;font-weight:700;color:var(--text-muted)">vs</span>
+      <select id="trade-select-b" class="trade-select"></select>
+    </div>
+    <div class="card" id="trades-body" style="border-top:none"></div>
+  </section>
+
+  <section class="panel" id="panel-champions">
+    <div class="headline-block">
+      <p class="eyebrow">The Shiva</p>
+      <h2 class="panel-title">Champions, Runners-Up &amp; the Rest</h2>
+      <p class="panel-sub">Every season on record, oldest first.</p>
+    </div>
+    <div class="card" id="champions-body"></div>
+  </section>
+
+  <section class="panel" id="panel-teams">
+    <div class="headline-block">
+      <p class="eyebrow">The Franchises</p>
+      <h2 class="panel-title">Every Team, By Division</h2>
+      <p class="panel-sub">All-time record and Shiva count for each manager.</p>
+    </div>
+    <div class="card" id="teams-body"></div>
+  </section>
+
+  <section class="panel" id="panel-rules">
+    <div class="headline-block">
+      <p class="eyebrow">The Fine Print</p>
+      <h2 class="panel-title">League Rules &amp; Constitution</h2>
+      <p class="panel-sub">The governing document, for when memory conflicts with the record.</p>
+    </div>
+    <div class="card" id="rules-body"></div>
+  </section>
+
+  <section class="panel" id="panel-predictions">
+    <div class="headline-block">
+      <p class="eyebrow">Put Your Name On It</p>
+      <h2 class="panel-title">Weekly Matchup Predictions</h2>
+      <p class="panel-sub">Public votes. Results stay hidden until you cast yours. Locks Thursday 8pm ET.</p>
+    </div>
+    <div class="card" id="predictions-body"></div>
+  </section>
+
+</main>
+
+<footer>
+  <span>The Shiva Times — league gazette, self-published, unedited</span>
+  <span id="sync-status">Loading…</span>
+</footer>
+</div>
+
+<script>
+(function () {
+  const panels = document.querySelectorAll('.panel');
+  const tabs = document.querySelectorAll('nav.tabs button');
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabs.forEach(b => b.setAttribute('aria-selected', 'false'));
+      panels.forEach(p => p.classList.remove('active'));
+      btn.setAttribute('aria-selected', 'true');
+      document.getElementById('panel-' + btn.dataset.panel).classList.add('active');
+    });
+  });
+
+  function fmtMoney(n) { return '$' + (Number(n) || 0).toLocaleString('en-US'); }
+
+  function emptyState(container, title, body) {
+    container.innerHTML =
+      '<div class="empty-state"><div class="glyph">§</div><h3>' + title + '</h3><p>' + body + '</p></div>';
+  }
+
+  async function getJSON(path) {
+    try {
+      const res = await fetch(path, { cache: 'no-store' });
+      if (!res.ok) return null;
+      return await res.json();
+    } catch (e) { return null; }
+  }
+
+  function initials(name) {
+    return name.split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0]).join('').toUpperCase();
+  }
+
+  // ---------- Home ----------
+  function renderHome(articles) {
+    const el = document.getElementById('home-body');
+    if (!articles || !Array.isArray(articles.posts) || articles.posts.length === 0) {
+      emptyState(el, 'The presses are cold',
+        'No articles yet — this fills in once weekly recaps start auto-generating, or the commissioner posts an announcement.');
+      return;
+    }
+    el.innerHTML = articles.posts.map(p =>
+      '<div class="article-row"><div class="rivalry-note">' + (p.date || '') + (p.type ? ' · ' + p.type : '') + '</div>' +
+      '<div class="article-title">' + p.title + '</div>' +
+      '<p style="color:var(--text-muted);margin:6px 0 0">' + (p.body || '') + '</p></div>'
+    ).join('');
+  }
+
+  // ---------- Standings ----------
+  function renderStandings(data) {
+    const el = document.getElementById('standings-body');
+    if (!data || !Array.isArray(data.divisions) || data.divisions.length === 0) {
+      emptyState(el, 'Standings not synced yet', 'This fills in once the Sleeper sync runs.');
+      return;
+    }
+    el.innerHTML = data.divisions.map(div => {
+      const rows = div.teams.map((t, i) => (
+        '<tr class="' + (i === 0 && t.wins > 0 ? 'rank-1' : '') + '">' +
+          '<td>' + t.team + '</td>' +
+          '<td class="num">' + (t.wins||0) + '-' + (t.losses||0) + (t.ties ? '-'+t.ties : '') + '</td>' +
+          '<td class="num">' + (t.pointsFor != null ? t.pointsFor : '—') + '</td>' +
+        '</tr>'
+      )).join('');
+      return '<div class="division-block"><div class="division-label">' + div.name + '</div>' +
+        '<table class="stat-table"><thead><tr><th>Team</th><th class="num">Record</th><th class="num">PF</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
+    }).join('');
+  }
+
+  // ---------- Head-to-Head ----------
+  function renderH2H(data) {
+    const el = document.getElementById('h2h-body');
+    if (!data || !Array.isArray(data.pairs) || data.pairs.length === 0) {
+      emptyState(el, 'The archive is empty', 'Fills in once the Sleeper sync runs.');
+      return;
+    }
+    const rows = data.pairs
+      .slice()
+      .sort((a,b) => (b.aWins+b.bWins+b.ties) - (a.aWins+a.bWins+a.ties))
+      .map(p => '<tr><td>' + p.a + ' vs ' + p.b + '</td><td class="num">' + p.aWins + '-' + p.bWins + (p.ties?'-'+p.ties:'') + '</td></tr>')
+      .join('');
+    el.innerHTML = '<table class="stat-table"><thead><tr><th>Matchup</th><th class="num">Record</th></tr></thead><tbody>' + rows + '</tbody></table>';
+  }
+
+  // ---------- Rivalries ----------
+  function renderRivalries(data) {
+    const el = document.getElementById('rivalries-body');
+    if (!data || !Array.isArray(data.rivalries) || data.rivalries.length === 0) {
+      emptyState(el, 'No grudges on file', 'Rivalries get earned, not scheduled.');
+      return;
+    }
+    el.innerHTML = data.rivalries.map(r =>
+      '<div class="rivalry-row"><div class="rivalry-note">' + (r.note||'') + '</div>' +
+      '<div class="rivalry-names">' + r.a + ' <span style="color:var(--text-muted);font-weight:400">vs</span> ' + r.b + '</div></div>'
+    ).join('');
+  }
+
+  // ---------- Prize Pool ----------
+  function renderPrizePool(data) {
+    const el = document.getElementById('prizepool-body');
+    const tag = document.getElementById('prizepool-updated');
+    const sub = document.getElementById('prizepool-sub');
+    if (!data || !Array.isArray(data.managers) || data.managers.length === 0) {
+      emptyState(el, 'Ledger not loaded yet', 'Pulls from the league\u2019s Google Sheet — check the sync.');
+      return;
+    }
+    const sorted = data.managers.slice().sort((a,b) => b.total - a.total);
+    const max = Math.max(1, ...sorted.map(m => m.total));
+    const zeros = sorted.filter(m => m.total === 0).length;
+    if (sub && sorted[0]) {
+      sub.textContent = sorted[0].total > 0
+        ? sorted[0].name + ' is up ' + fmtMoney(sorted[0].total) + '. The other ' + zeros + ' are still sitting at zero.'
+        : 'Nobody has earned a dollar yet.';
+    }
+    el.innerHTML = sorted.map(m =>
+      '<div class="bar-row"><div class="name">' + m.name + '</div>' +
+      '<div class="bar-track"><div class="bar-fill" style="width:' + Math.max(2,(m.total/max)*100) + '%"></div></div>' +
+      '<div class="bar-value">' + fmtMoney(m.total) + '</div></div>'
+    ).join('');
+    if (data.updated) tag.textContent = 'Last synced ' + data.updated;
+  }
+
+  // ---------- Trades ----------
+  let TRADES_CACHE = null;
+  function populateTradeSelects(managerNames) {
+    const selA = document.getElementById('trade-select-a');
+    const selB = document.getElementById('trade-select-b');
+    const opts = '<option value="">Everyone</option>' + managerNames.map(m => '<option value="'+m+'">'+m+'</option>').join('');
+    selA.innerHTML = opts; selB.innerHTML = opts;
+    [selA, selB].forEach(sel => sel.addEventListener('change', () => renderTrades(TRADES_CACHE)));
+  }
+  function renderTrades(data) {
+    TRADES_CACHE = data;
+    const el = document.getElementById('trades-body');
+    const a = document.getElementById('trade-select-a')?.value || '';
+    const b = document.getElementById('trade-select-b')?.value || '';
+    if (!data || !Array.isArray(data.trades) || data.trades.length === 0) {
+      emptyState(el, 'The wire is quiet', 'No trades on record yet.');
+      return;
+    }
+    let filtered = data.trades;
+    if (a && b) filtered = data.trades.filter(t => (t.teams||[]).includes(a) && (t.teams||[]).includes(b));
+    else if (a || b) { const only = a||b; filtered = data.trades.filter(t => (t.teams||[]).includes(only)); }
+    if (filtered.length === 0) {
+      emptyState(el, 'Nothing between these two', (a&&b) ? a+' and '+b+' have never made a deal.' : 'No trades match that filter.');
+      return;
+    }
+    el.innerHTML = filtered.map(t =>
+      '<div class="trade-row"><div class="rivalry-note" style="color:var(--text-muted)">' + (t.date||'') + '</div><div>' + (t.note||'') + '</div></div>'
+    ).join('');
+  }
+
+  // ---------- Championships ----------
+  function renderChampions(data) {
+    const el = document.getElementById('champions-body');
+    if (!data || !Array.isArray(data.seasons) || data.seasons.length === 0) {
+      emptyState(el, 'No champions on file yet', 'Championship history goes here.');
+      return;
+    }
+    el.innerHTML = data.seasons.map(s =>
+      '<div class="champ-row"><div class="champ-season">' + s.season + '</div>' +
+      '<div class="champ-name" style="color:var(--gold)">' + (s.champion||'—') + '</div>' +
+      '<div style="font-size:13px;color:var(--text-muted);margin-top:3px">' +
+      (s.runnerUp ? 'Runner-up: '+s.runnerUp : '') + (s.third ? ' · Third: '+s.third : '') + '</div></div>'
+    ).join('') + (data.note ? '<div style="padding:14px 20px;font-size:12.5px;color:var(--text-muted);border-top:1px solid var(--border)">Note: '+data.note+'</div>' : '');
+  }
+
+  // ---------- Teams ----------
+  function renderTeams(standings, h2h) {
+    const el = document.getElementById('teams-body');
+    if (!standings || !Array.isArray(standings.divisions)) {
+      emptyState(el, 'Teams not synced yet', 'This fills in once standings sync.');
+      return;
+    }
+    // All-time record per team, aggregated from head-to-head pairs
+    const allTime = {};
+    if (h2h && Array.isArray(h2h.pairs)) {
+      h2h.pairs.forEach(p => {
+        allTime[p.a] = allTime[p.a] || { wins: 0, losses: 0, ties: 0 };
+        allTime[p.b] = allTime[p.b] || { wins: 0, losses: 0, ties: 0 };
+        allTime[p.a].wins += p.aWins; allTime[p.a].losses += p.bWins; allTime[p.a].ties += p.ties;
+        allTime[p.b].wins += p.bWins; allTime[p.b].losses += p.aWins; allTime[p.b].ties += p.ties;
+      });
+    }
+    el.innerHTML = standings.divisions.map(div => {
+      const cards = div.teams.map(t => {
+        const rec = allTime[t.team];
+        const recordStr = rec ? (rec.wins+'-'+rec.losses+(rec.ties?'-'+rec.ties:'')) : '—';
+        return '<div class="team-card">' +
+          '<div class="team-logo">' + initials(t.team) + '</div>' +
+          '<div><div class="team-name">' + t.team + '</div>' +
+          '<div class="team-meta">All-time: ' + recordStr + '</div></div></div>';
+      }).join('');
+      return '<div class="division-block"><div class="division-label">' + div.name + '</div>' + cards + '</div>';
+    }).join('') +
+    '<div style="padding:14px 20px;font-size:12.5px;color:var(--text-muted);border-top:1px solid var(--border)">Logos pending — showing initials until the commissioner supplies team logo files.</div>';
+  }
+
+  // ---------- Rules ----------
+  function renderRules(text) {
+    const el = document.getElementById('rules-body');
+    if (!text) {
+      emptyState(el, 'Not written up yet', 'The league constitution goes here once the commissioner adds it.');
+      return;
+    }
+    el.innerHTML = '<div style="padding:24px;white-space:pre-wrap;line-height:1.7">' + text + '</div>';
+  }
+
+  // ---------- Predictions ----------
+  function renderPredictions() {
+    const el = document.getElementById('predictions-body');
+    emptyState(el, 'Voting isn\u2019t connected yet',
+      'This needs a small backend (Google Apps Script) to record public votes — not set up yet. Once it is, you\u2019ll pick a winner for each matchup here, with results hidden until you vote.');
+  }
+
+  async function init() {
+    const statusEl = document.getElementById('sync-status');
+
+    const [standings, h2h, rivalries, trades, champions, prizepool] = await Promise.all([
+      getJSON('./data/standings.json'),
+      getJSON('./data/headtohead.json'),
+      getJSON('./data/rivalries.json'),
+      getJSON('./data/trades.json'),
+      getJSON('./data/champions.json'),
+      getJSON('./data/prizepool.json'),
+    ]);
+    const home = await getJSON('./data/articles.json');
+    const rules = await (async () => {
+      try {
+        const res = await fetch('./data/rules.txt', { cache: 'no-store' });
+        return res.ok ? await res.text() : null;
+      } catch (e) { return null; }
+    })();
+
+    renderHome(home);
+    renderStandings(standings);
+    renderH2H(h2h);
+    renderRivalries(rivalries);
+    renderPrizePool(prizepool);
+    renderChampions(champions);
+    renderTeams(standings, h2h);
+    renderRules(rules);
+    renderPredictions();
+
+    const managerNames = [];
+    if (standings && Array.isArray(standings.divisions)) {
+      standings.divisions.forEach(d => d.teams.forEach(t => managerNames.push(t.team)));
+    }
+    populateTradeSelects(managerNames);
+    renderTrades(trades);
+
+    statusEl.textContent = standings ? 'Synced via GitHub Action' : 'Data not found — check /data/ folder';
+  }
+
+  init();
+})();
+</script>
+
+</body>
+</html>
