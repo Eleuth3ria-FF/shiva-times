@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Constitution — The League of Extraordinary Gentlemen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A0B0D; --surface: #131518; --surface-2: #1B1E22;
+    --text: #EDEAE1; --text-muted: #8B8F93;
+    --border: rgba(237,234,225,0.14); --rule: rgba(237,234,225,0.28);
+    --gold: #C9A24A; --crimson: #A6362F; --olive: #5C6B4F;
+    --shadow: 0 1px 3px rgba(0,0,0,0.4);
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #F1EEE4; --surface: #FFFFFF; --surface-2: #E9E4D6;
+      --text: #17181A; --text-muted: #5B5F55;
+      --border: rgba(20,20,16,0.16); --rule: rgba(20,20,16,0.35);
+      --gold: #96731F; --crimson: #8C2C26; --olive: #46512F;
+      --shadow: 0 1px 2px rgba(20,20,16,0.08);
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif; font-size: 15.5px; line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 90px; }
+  .back-link {
+    display: block; padding: 16px 20px; font-family: 'Oswald', sans-serif; font-size: 12.5px;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold); text-decoration: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .const-header { text-align: center; padding: 32px 20px 10px; }
+  .const-hero-logo { max-width: 200px; height: auto; margin-bottom: 16px; }
+  .const-title { font-family: 'Playfair Display', serif; font-weight: 900; font-size: clamp(28px, 6vw, 44px); margin: 0 0 6px; }
+  .const-subtitle { font-family: 'Oswald', sans-serif; font-size: 12.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+  nav.toc {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
+    margin: 28px 0; padding: 18px 22px;
+  }
+  nav.toc h3 { font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin: 0 0 10px; }
+  nav.toc ul { list-style: none; margin: 0; padding: 0; columns: 2; column-gap: 20px; }
+  nav.toc li { margin-bottom: 7px; break-inside: avoid; }
+  nav.toc a { color: var(--text); text-decoration: none; font-size: 13.5px; }
+  nav.toc a:hover { color: var(--gold); }
+  h2 {
+    font-family: 'Playfair Display', serif; font-weight: 700; font-size: 21px;
+    margin: 40px 0 14px; padding-top: 16px; border-top: 2px solid var(--rule);
+    scroll-margin-top: 16px;
+  }
+  p { margin: 0 0 14px; }
+  ul, ol { padding-left: 22px; margin: 0 0 14px; }
+  li { margin-bottom: 6px; }
+  li blockquote { margin: 0; }
+  a { color: var(--gold); }
+  table { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 14px; }
+  table th { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--border); font-weight: 400; }
+  table tr th:first-child { font-family: 'Oswald', sans-serif; font-weight: 700; color: var(--gold); white-space: nowrap; width: 1%; }
+  .roster-slots { font-size: 13px; color: var(--text-muted); line-height: 1.8; background: var(--surface); padding: 14px 16px; border-radius: 4px; border: 1px solid var(--border); }
+  .roster-note { font-size: 12px; color: var(--text-muted); font-style: italic; }
+  .const-sacko-img { max-width: 220px; display: block; margin: 12px auto; border-radius: 6px; }
+  u { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<a class="back-link" href="index.html">&larr; Back to The Shiva Times</a>
+
+<div class="wrap">
+  <div class="const-header">
+    <p class="const-subtitle">The Governing Document</p>
+    <h1 class="const-title">La Constitution</h1>
+  </div>
+
+  <nav class="toc">
+    <h3>Table des matières</h3>
+    <ul>
+    <li><a href="#article-1">Article I — Les divisions</a></li>
+    <li><a href="#article-2">Article II — Le calendrier et les playoffs</a></li>
+    <li><a href="#article-3">Article III — Les administrateurs</a></li>
+    <li><a href="#article-4">Article IV — Frais de ligue et de pool</a></li>
+    <li><a href="#article-5">Article V — Structure de paiement</a></li>
+    <li><a href="#article-6">Article VI — Waivers</a></li>
+    <li><a href="#article-7">Article VII — Rookie Draft</a></li>
+    <li><a href="#article-8">Article VII b) — Taxi Squad</a></li>
+    <li><a href="#article-9">Article VIII — Trade Guidelines</a></li>
+    <li><a href="#article-10">Article IX — Alignements de départ incomplets</a></li>
+    <li><a href="#article-11">Article X — Pénalités et châtiments</a></li>
+    <li><a href="#article-12">Article XI — Transition en mode superflex en 2026</a></li>
+    <li><a href="#article-13">Article XII — Devy draft</a></li>
+    <li><a href="#article-14">Article XIII — Châtiment de dernière position</a></li>
+    </ul>
+  </nav>
+
+
+<p><img class="const-hero-logo" src="league-logo.jpg"/></p>
+<p><em>The League of Extraordinary Gentlemen</em> est une ligue de
+Fantasy Football composée de la façon suivante :</p>
+<p>12 équipes (3 divisions) - Half PPR - Dynasty - 5pts/ TD pass -
+3pts/Return TD.</p>
+<p>La composition maximale de l’alignement de chaque équipe est le
+suivant </p>
+<p>(maximum de 30 entrées) :</p>
+<p class="roster-slots">QB 1 · RB 1 · RB 2 · WR 1 · WR 2 · WR 3 · TE 1 · FLEX 1 (QB/RB/WR/TE) · FLEX 2 (RB/WR/TE) · BENCH 1 · BENCH 2 · BENCH 3 · BENCH 4 · BENCH 5 · BENCH 6 · BENCH 7 · BENCH 8 · BENCH 9 · BENCH 10 · BENCH 11 · BENCH 12 · BENCH 13 · BENCH 14 · *BENCH 15* · *BENCH 16* · *BENCH 17* · *BENCH 18* · IR SPOT 1 · IR SPOT 2 · IR SPOT 3 · TAXI 1 · TAXI 2 · TAXI 3 · TAXI 4</p><p class="roster-note">* Spots présents uniquement durant le off-season</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 id="article-1">Article I – Les divisions</h2>
+<p>Les divisions sont construites afin d’être le plus égales possible
+entre elles. Leur compositions pourront être révisées au moment
+opportun, si nécessaire.</p>
+<p>Les divisions sont les suivantes :</p>
+<p>Division Nord:</p>
+<ol type="1">
+<li><blockquote>
+<p>Sébastien Malo</p>
+</blockquote></li>
+<li><blockquote>
+<p>Olivier Dutrisac</p>
+</blockquote></li>
+<li><blockquote>
+<p>Alexandre Doucet</p>
+</blockquote></li>
+<li><blockquote>
+<p>Samuel Tassé</p>
+</blockquote></li>
+</ol>
+<p>Division Centrale :</p>
+<ol type="1">
+<li><blockquote>
+<p>Xavier Bernet</p>
+</blockquote></li>
+<li><blockquote>
+<p>Guillaume Doucet</p>
+</blockquote></li>
+<li><blockquote>
+<p>Alexandre Raymond</p>
+</blockquote></li>
+<li><blockquote>
+<p>Marc-André Giguère</p>
+</blockquote></li>
+</ol>
+<p>Division Sud:</p>
+<ol type="1">
+<li><blockquote>
+<p>Sébastien Gélinas</p>
+</blockquote></li>
+<li><blockquote>
+<p>David Légaré</p>
+</blockquote></li>
+<li><blockquote>
+<p>Rémi Giguère</p>
+</blockquote></li>
+<li><blockquote>
+<p>Ludovic Harris Gauthier</p>
+</blockquote></li>
+</ol>
+<h2 id="article-2">Article II – Le calendrier et les playoffs</h2>
+<p>1. Le calendrier régulier sera composé de la manière suivante :</p>
+<ul>
+<li><blockquote>
+<p>Deux parties contre chacune des trois équipes adverses
+intra-division, en début et fin de saison.</p>
+</blockquote></li>
+<li><blockquote>
+<p>Huit parties restantes contre les huit autres équipes.</p>
+</blockquote></li>
+<li><blockquote>
+<p>Donc, un total de 14 parties.</p>
+</blockquote></li>
+</ul>
+<p>2. Le calendrier des séries sera composé de la manière suivante :</p>
+<p>Les trois gagnants de leur division respective feront les séries. Les
+2 meilleurs gagnants de divisions auront un 《bye》 pour la première
+semaine des séries.</p>
+<p>Les 4 autres places seront déterminées selon la formule «Wild
+Cards》. Le 3e gagnant de division est assuré de participer aux séries.
+Toutefois, il n’est pas assuré du 3e seed.</p>
+<p>En cas d’égalité des victoires au classement, le nombre de
+points-pour constitue le bris d’égalité.</p>
+<p>3. Le tournoi des séries éliminatoires s’effectuera ainsi :</p>
+<p>Semaine 15 : Les deux meilleurs gagnants de division auront droit à
+un bye-week. Les positions 3 et 4 affronteront respectivement les
+positions 6 et 5.</p>
+<p>En cas d’égalité des victoires au classement, le nombre de
+points-pour constitue le bris d’égalité.</p>
+<p>Semaine 16 : La première place affrontera l’équipe restante avec la
+moins bonne fiche en saison régulière. La deuxième place affrontera
+l’équipe restante.</p>
+<p>Semaine 17 : Finale du Shiva.</p>
+<h2 id="article-3">Article III - Les administrateurs</h2>
+<p>Vos administrateurs sont disponibles pour toute question ou toute
+assistance.</p>
+<p>Si vous ne pouvez contacter l’un ou l’autre, et que votre problème
+est une urgence (par exemple, si vous avez besoin d’un changement dans
+votre alignement et que vous ne pouvez l’effectuer en temps opportun),
+utilisez le groupe Messenger de The League pour faire votre demande.
+Cela nous permettra de vérifier l’heure de votre demande et de faire les
+changements de façon rétroactive, si nécessaire.</p>
+<p>League Commissioners</p>
+<p>Xavier Bernet</p>
+<p>438-883-5711</p>
+<p><u>xavier.bernet.cnmtl@ssss.gouv.qc.ca</u></p>
+<p>David Légaré</p>
+<p>514-622-6765</p>
+<p><a href="mailto:Dave_leg@hotmail.com"><u>Dave_leg@hotmail.com</u></a></p>
+<p>Trésorier</p>
+<p>Nous vous demandons de remettre vos frais d’entrée pour le pool au
+Trésorier. Si jamais vous remportez un prix, il est de votre
+responsabilité de contacter le trésorier pour qu’il puisse vous remettre
+votre prix, selon vos coordonnées et votre méthode de paiement
+désirée.</p>
+<p>Sébastien Malo</p>
+<p>438-869-8567‬‬‬</p>
+<p><a href="mailto:malo.sebastien44@gmail.com"><u>malo.sebastien44@gmail.com</u></a></p>
+<h2 id="article-4">Article IV – Frais de ligue et de pool</h2>
+<p>Les frais d’entrée pour participer au pool de The League sont les
+suivants :</p>
+<p>Participation au pool : 130$ par équipe.</p>
+<p>Un montant de 30$ est remboursé à la fin de la saison si vous avez eu
+moins de 2 infractions concernant votre alignement (voir règlement
+alignement plus bas).</p>
+<h2 id="article-5">Article V– Structure de paiement</h2>
+<p>La structure de paiement sera la suivante :</p>
+<table>
+<colgroup>
+<col style="width: 11%"/>
+<col style="width: 88%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th>$400.00</th>
+<th>Gagnant du Shiva</th>
+</tr>
+<tr class="odd">
+<th>$150.00</th>
+<th>Finaliste du Shiva</th>
+</tr>
+<tr class="header">
+<th>$50.00</th>
+<th>Gagnant du match de 3ième place</th>
+</tr>
+<tr class="odd">
+<th>$60.00</th>
+<th>Chaque Gagnant de division remporte 20$</th>
+</tr>
+<tr class="header">
+<th>$140.00</th>
+<th>En saison régulière, chaque semaine le highest scorer remporte
+10$.</th>
+</tr>
+<tr class="odd">
+<th>$240.00</th>
+<th>Chaque participant aux séries recevra 40$.</th>
+</tr>
+<tr class="header">
+<th>$50.00</th>
+<th>Champion de la saison régulière déterminé par Fiche, PTS pour,
+Tie-Breaker</th>
+</tr>
+<tr class="odd">
+<th>$50.00</th>
+<th>Celui avec le plus de points pour au terme de la saison
+régulière.</th>
+</tr>
+<tr class="header">
+<th>$20.00</th>
+<th>Toilet Bowl Winner : Gagnant du Tournoi de consolation.</th>
+</tr>
+<tr class="odd">
+<th>$40.00</th>
+<th>Meilleur QB,RB, WR et TE après la finale du shiva (10$ chacun)</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<p>Toutefois, le gagnant du Shiva aura la responsabilité d’aller faire
+graver le trophée au nom du gagnant de l’année suivante avant de le lui
+remettre, et devra en assumer les frais. Il remettra ensuite le Shiva au
+nouveau champion lors du draft.</p>
+<h2 id="article-6">Article VI - Waivers</h2>
+<p>Notre système de waivers sera un Free Agent Acquisition Budget
+(FAAB) :</p>
+<ul>
+<li><blockquote>
+<p>In-season (Week 1 au Superbowl) : Budget de 1000$. Ouvre les mardis.
+Joueur demeure deux jours minimum sur le waiver après avoir été
+«drop».</p>
+</blockquote></li>
+<li><blockquote>
+<p>Entre le Shiva et le Superbowl : Waivers fermés.</p>
+</blockquote></li>
+<li><blockquote>
+<p>Off-season (Superbowl jusqu’à week 1) : Budget de 1000$. Ouvre une
+fois/semaine, le dimanche matin.</p>
+</blockquote></li>
+<li><blockquote>
+<p>Ouverture du FAAB de «In-season» (1000$) week 1.</p>
+</blockquote></li>
+<li><blockquote>
+<p>Maximum de 1000$ de FAAB. Il n’est pas possible de collecter plus de
+1000$ de FAAB via une transaction, et ce même si l’application sleeper
+le permet.</p>
+</blockquote></li>
+</ul>
+<h2 id="article-7">Article VII – Rookie Draft</h2>
+<p>Les choix disponibles pour chaque équipe sont les choix suivants
+:</p>
+<ul>
+<li><blockquote>
+<p>Année en cours (2026) : Ronde 1-2-3-4-5;</p>
+</blockquote></li>
+<li><blockquote>
+<p>Année subséquente (2027) : Ronde 1-2-3-4</p>
+</blockquote></li>
+<li><blockquote>
+<p>Année suivante (2028) : Ronde 1-2-3-4</p>
+</blockquote></li>
+</ul>
+<p>Le repêchage sera sous la forme linéaire (et non en serpentin), afin
+de favoriser les équipes plus faibles.</p>
+<p>L’ordre des 6 premiers choix (1.01 à 1.06) sera déterminé ainsi:</p>
+<ul>
+<li><blockquote>
+<p>La pire équipe au chapitre des MAX PF (Points-Pour Maximum) aura
+automatiquement droit au 1er choix (1.01), et ainsi de suite dans
+l’ordre jusqu’au 6e choix. Le MAX PF est déterminé en fonction du
+meilleur alignement possible, pour l’ensemble de la saison régulière
+seulement, et calculé automatiquement par Sleeper.</p>
+</blockquote></li>
+<li><blockquote>
+<p>Les 6 dernières équipes s’affrontent toujours dans le cadre du
+Consolidation Bracket (semaine 15 à 17, selon la même formule que les
+séries éliminatoires), afin de déterminer l’identité du Sacko et du
+gagnant du Toilet Bowl.</p>
+</blockquote></li>
+</ul>
+<p>Les choix 7 à 12 (1.07 à 1.12) seront déterminés selon la méthode
+suivante :</p>
+<ul>
+<li><blockquote>
+<p>Le gagnant du tournoi pour la 5e place obtiendra la position 1.07. Le
+perdant obtiendra la position 1.08.</p>
+</blockquote></li>
+<li><blockquote>
+<p>Le gagnant du tournoi pour la 3e place obtiendra la position 1.09. Le
+perdant obtiendra la position 1.10.</p>
+</blockquote></li>
+<li><blockquote>
+<p>Le gagnant du Shiva obtiendra la position 1.12. Le perdant obtiendra
+la position 1.11.</p>
+</blockquote></li>
+</ul>
+<p>Le repêchage des recrues sera composé de 4 rondes de 12 équipes, pour
+un total de 48 joueurs.</p>
+<p>Ordre de repêchage - Rookie draft 2026 :</p>
+<ol type="1">
+<li><blockquote>
+<p>Alexandre Doucet</p>
+</blockquote></li>
+<li><blockquote>
+<p>Guillaume Doucet</p>
+</blockquote></li>
+<li><blockquote>
+<p>David Légaré</p>
+</blockquote></li>
+<li><blockquote>
+<p>Rémi Giguère</p>
+</blockquote></li>
+<li><blockquote>
+<p>Marc-André-Giguère</p>
+</blockquote></li>
+<li><blockquote>
+<p>Ludovic Harris-Gauthier</p>
+</blockquote></li>
+<li><blockquote>
+<p>Alexandre Raymond</p>
+</blockquote></li>
+<li><blockquote>
+<p>Samuel Tassé</p>
+</blockquote></li>
+<li><blockquote>
+<p>Olivier Dutrisac</p>
+</blockquote></li>
+<li><blockquote>
+<p>Sebastien Malo</p>
+</blockquote></li>
+<li><blockquote>
+<p>Xavier Bernet</p>
+</blockquote></li>
+<li><blockquote>
+<p>Sébastien Gélinas</p>
+</blockquote></li>
+</ol>
+<h2 id="article-8">Article VII b) - Taxi Squad</h2>
+<p>1. Il y a 4 Taxi spots</p>
+<p>2. Les joueurs acceptés sur les taxis spots seront les joueurs
+recrues ou de 2e année seulement.</p>
+<p>3. Un joueur qui sort du taxi squad pour être promu sur le bench ou
+le starting lineup ne pourra plus retourner sur le taxi squad avant le
+prochain off-season (s’il est toujours éligible à y figurer).</p>
+<p>4. Un joueur pourra rester sur le taxi squad au maximum jusqu'à la
+fin de sa 2e saison dans la NFL avant de devoir être mis sur le bench,
+tradé ou encore relâché sur les waivers.</p>
+<h2 id="article-9">Article VIII - Trade Guidelines</h2>
+<p>The League fait confiance à ses joueurs et évitera le plus possible
+de s’immiscer dans les échanges. Si deux propriétaires s’entendent sur
+un échange, il sera présumé que les deux sont de bonne foi et que
+l’échange est juste.</p>
+<p>Toutefois, le Commissionner ou le Co-Commissionner pourront utiliser
+leur droit de véto pour annuler un échange, si celui-ci est à sa face
+même empreint d’abus ou de collusion.</p>
+<p>La date limite des transactions est à la fin de la 13e semaine.</p>
+<p>Les transactions pourront recommencer dès le lendemain du Shiva.</p>
+<h2 id="article-10">Article IX– Alignements de départ incomplets</h2>
+<p>Si une équipe laisse un espace vide sur son alignement de départ,
+pour cause de bye-week, oublie, bug informatique, blessure subite (OUT),
+etc., le Commissionner devra combler cet espace avec un joueur sur le
+banc de l’équipe, en prenant en compte le joueur disponible (n’ayant pas
+joué encore) ayant la meilleure projection de points pour cette semaine
+selon Sleeper. Le joueur de remplacement devra pouvoir être placé au
+même endroit (ou «spot») que le joueur inactif, sans autre modification
+d’alignement. Si nécessaire, il sera possible de combler ce vide avec un
+joueur disponible sur le waiver, toujours selon la règle de la meilleure
+projection disponible.</p>
+<p>La seule exception est la suivante : si jamais une équipe décide
+volontairement de laisser un ou plusieurs espace(s) vide(s) sur son
+alignement de départ, elle doit le déclarer en temps opportun au
+Commissioner ou au Co-Commissioner.</p>
+<p>À noter que l’alignement modifié emporte ensuite les mêmes effets que
+si l’équipe avait initialement «start» le joueur de remplacement. Ainsi,
+le résultat du match, les points pour, et autres effets sur les bourses,
+seront appliqués sans égard à l’alignement initial de l’équipe. Aucun
+recalcul ne sera nécessaire en aucun temps.</p>
+<p>En playoffs, ce règlement n’est pas applicable. L’équipe ayant un
+alignement incomplet en playoffs en subira les conséquences. Aucune
+modification ne sera effectuée.</p>
+<h2 id="article-11">Article X – Pénalités et châtiments</h2>
+<p>Chaque alignement de départ laissé incomplet, sauf si le tout est
+fait volontairement, entraînera la pénalité suivante :</p>
+<p>1<sup>ère</sup> infraction : Aucune pénalité</p>
+<p>2e infraction : 30$ de dépôt est perdu.</p>
+<p>3e infraction : 4th round pick</p>
+<p>4e infraction : 3rd round pick</p>
+<p>5e infraction : 2nd round pick</p>
+<p>6e infraction : 1st round pick</p>
+<h2 id="article-12">Article XI - Transition en mode superflex en 2026</h2>
+<p>Puisque 10 GMs ont voté pour la transition vers le Superflex en 2026,
+nous aurons besoin de faire une transition.</p>
+<p>Comment la transition se fera-t-elle?</p>
+<p>À partir de 2026, notre alignement sera composé de la manière
+suivante :</p>
+<p>QB</p>
+<p>RB</p>
+<p>RB</p>
+<p>WR</p>
+<p>WR</p>
+<p>WR</p>
+<p>TE</p>
+<p>Superflex (QB/RB/WR/TE)</p>
+<p>Flex (RB/WR/TE)</p>
+<p>Il sera donc avantageux de ''starter'' 2 QBs par semaine.</p>
+<p>Par souci de parité tous les QBs de la ligue deviendront
+disponibles.</p>
+<p>1. Chaque équipe protège un QB gratuitement.</p>
+<p>2. Possibilité de protéger un 2e QB. Si tel est le cas, tu dois payer
+la compensation d'un 1st rounder au draft 2026 pour le QB en
+question.</p>
+<p>Si ton choix n'est pas un choix top 6, tu dois aussi payé un 2nd
+rounder afin de pouvoir protéger un second QB.</p>
+<p>3. 2 QB protégés maximum (même si t'as 8 1st rounders)</p>
+<p>4. Tout le reste des QB sont annexés au rookie draft 2026 et
+deviennent donc disponibles dans le draft.</p>
+<p>5. Une ronde de plus au draft 2026 sera accordée (5 rondes au
+total).</p>
+<p>6. La liste des QBs protégés devra être dévoilée 10 jours après le
+NFL Draft.</p>
+<p>7. Vous pouvez quand même échanger vos choix 2026, mais faites
+attention, ceux-ci ont beaucoup plus de valeur qu'un autre rookie draft
+standard.</p>
+<p>8. Pas de picks, pas de protection, aussi simple que ça.</p>
+<h2 id="article-13">Article XII - Devy draft</h2>
+<p>*Nouveauté 2025*</p>
+<p>Chaque année, il y aura une ronde de Devy draft la même journée que
+notre rookie draft.</p>
+<p>Les paramètres sont les suivants :</p>
+<ul>
+<li><blockquote>
+<p>1 joueur chaque seulement</p>
+</blockquote></li>
+<li><blockquote>
+<p>Doit être considéré comme QB, RB, WR ou TE (ATH ne sont pas
+éligibles)</p>
+</blockquote></li>
+<li><blockquote>
+<p>Le joueur appartient au DG à partir de sa sélection.</p>
+</blockquote></li>
+<li><blockquote>
+<p>La liste utilisée est celle d’ESPN 300.</p>
+</blockquote></li>
+<li><blockquote>
+<p>Le top 24 de chaque année est protégé.</p>
+</blockquote></li>
+<li><blockquote>
+<p>Les joueurs ne sont pas échangeables avant d’apparaître sur le roster
+(ils apparaîtront sur le roster uniquement après notre rookie draft
+l’année de repêchage du joueur en question)</p>
+</blockquote></li>
+<li><blockquote>
+<p>Les choix au repêchage ne sont pas échangeables. Il n’est donc pas
+possible de “trade up" ou “trade down”.</p>
+</blockquote></li>
+<li><blockquote>
+<p>Le rang de sélection est le même que pour notre rookie draft.</p>
+</blockquote></li>
+</ul>
+<h2 id="article-14">Article XIII - Châtiment de dernière position</h2>
+<p>Enfin, l’équipe qui finira dernière au classement final (semaine 17)
+verra son propriétaire subir un châtiment proportionnel à sa
+médiocrité.</p>
+<p>Lors de la journée de repêchage de l’année suivante et tout au long
+de celle-ci, il devra signer ET porter le Sacko T-Shirt :</p>
+<p><img class="const-sacko-img" src="sacko-shirt.png"/></p>
+<p>Mais ce n’est pas tout : À tour de rôle, chacun des 11 autres
+propriétaires auront l’occasion de faire tourner la Wheel of Water et de
+lancer un verre d’eau sur le Sacko pendant qu’il porte son T-Shirt.</p>
+<p>Le Sacko devra ensuite faire son repêchage en entier avec le
+chandail, trempé dans la honte.</p>
+<p><em>Shiva kamini Soma kandarkram</em></p>
+<p><em>Shiva kamini Soma kandarkram HEY !</em></p>
+
+
+</div>
+
+</body>
+</html>
