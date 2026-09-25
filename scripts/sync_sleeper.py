@@ -15,6 +15,7 @@ import os
 import time
 import urllib.request
 import urllib.error
+from datetime import datetime, timezone
 
 CURRENT_LEAGUE_ID = "1312396775717371904"
 API_BASE = "https://api.sleeper.app/v1"
@@ -66,12 +67,14 @@ def get_season_chain(start_league_id):
 
 
 def build_owner_map(league_id):
-    """roster_id -> {owner_id, name} for one season.
+    """roster_id -> {owner_id, name, manager_name} for one season.
 
     owner_id is Sleeper's stable per-manager account ID — use THIS for
-    aggregating across seasons. name is whatever that manager's team was
-    called THAT season, which can and does change year to year (typos,
-    emoji, rebrands) — display-only, never a merge key.
+    aggregating across seasons. name is whatever that manager's TEAM was
+    called THAT season (typos, emoji, rebrands happen) — display-only,
+    never a merge key. manager_name is the Sleeper account's own display
+    name (the actual person), kept separate so the site can show "Team X
+    — run by Person Y" instead of guessing who owns what.
     """
     users = fetch_json(f"{API_BASE}/league/{league_id}/users") or []
     rosters = fetch_json(f"{API_BASE}/league/{league_id}/rosters") or []
@@ -80,8 +83,9 @@ def build_owner_map(league_id):
     for r in rosters:
         owner_id = r.get("owner_id")
         u = user_by_id.get(owner_id, {})
-        name = (u.get("metadata") or {}).get("team_name") or u.get("display_name") or f"Roster {r['roster_id']}"
-        owner_map[r["roster_id"]] = {"owner_id": owner_id, "name": name}
+        team_name = (u.get("metadata") or {}).get("team_name") or u.get("display_name") or f"Roster {r['roster_id']}"
+        manager_name = u.get("display_name") or team_name
+        owner_map[r["roster_id"]] = {"owner_id": owner_id, "name": team_name, "manager_name": manager_name}
     return owner_map, rosters
 
 
@@ -97,12 +101,12 @@ def sync_standings(current_league_id):
     by_name = {}
     by_normalized = {}
     for r in rosters:
-        info = owner_map.get(r["roster_id"], {"owner_id": None, "name": "Unknown"})
+        info = owner_map.get(r["roster_id"], {"owner_id": None, "name": "Unknown", "manager_name": "Unknown"})
         name = info["name"]
         s = r.get("settings", {})
         entry = {
             "team": name,
-            "owner": name,
+            "owner": info.get("manager_name", name),
             "wins": s.get("wins", 0),
             "losses": s.get("losses", 0),
             "ties": s.get("ties", 0),
@@ -210,7 +214,8 @@ def sync_trades(season_chain, player_lookup, display_name):
     """Every trade transaction across every season, shown under each
     manager's CURRENT team name regardless of what it was called when the
     trade happened — keeps the site's manager-vs-manager filter working
-    across renamed teams."""
+    across renamed teams. Includes both players and draft picks moved,
+    dated by the trade's actual processed timestamp (not just the season)."""
     trades = []
     for league in season_chain:
         league_id = league["league_id"]
@@ -229,21 +234,50 @@ def sync_trades(season_chain, player_lookup, display_name):
                 owner_ids = [owner_map.get(rid, {}).get("owner_id") for rid in roster_ids]
                 teams = [display_name.get(oid, f"Unknown ({oid})") for oid in owner_ids if oid]
                 adds = t.get("adds") or {}
+                draft_picks = t.get("draft_picks") or []
+
                 parts = []
                 for roster_id in roster_ids:
                     owner_id = owner_map.get(roster_id, {}).get("owner_id")
                     name = display_name.get(owner_id, f"Roster {roster_id}")
-                    received = [pid for pid, rid in adds.items() if rid == roster_id]
-                    received_names = [player_lookup.get(pid, pid) for pid in received]
-                    if received_names:
-                        parts.append(f"{name} gets {', '.join(received_names)}")
+                    received_items = []
+
+                    received_players = [pid for pid, rid in adds.items() if rid == roster_id]
+                    received_items += [player_lookup.get(pid, pid) for pid in received_players]
+
+                    for pick in draft_picks:
+                        if pick.get("owner_id") != roster_id:
+                            continue
+                        pick_season = pick.get("season", "?")
+                        pick_round = pick.get("round", "?")
+                        orig_roster = pick.get("roster_id")
+                        orig_owner_id = owner_map.get(orig_roster, {}).get("owner_id") if orig_roster else None
+                        orig_name = display_name.get(orig_owner_id) if orig_owner_id else None
+                        pick_desc = f"{pick_season} Round {pick_round} pick"
+                        if orig_name and orig_roster != roster_id:
+                            pick_desc += f" (via {orig_name})"
+                        received_items.append(pick_desc)
+
+                    if received_items:
+                        parts.append(f"{name} gets {', '.join(received_items)}")
+
                 note = " · ".join(parts) if parts else " / ".join(teams) + " swap picks/players"
+
+                created_ms = t.get("created")
+                if created_ms:
+                    date_str = datetime.fromtimestamp(created_ms / 1000, tz=timezone.utc).strftime("%b %d, %Y")
+                else:
+                    date_str = season_label  # fallback if Sleeper didn't give a timestamp
+
                 trades.append({
-                    "date": season_label,
+                    "date": date_str,
                     "teams": teams,
                     "note": note,
+                    "_sort_key": created_ms or 0,  # raw epoch ms, stripped before output — formatted date strings don't sort chronologically as text
                 })
-    trades.sort(key=lambda t: t["date"], reverse=True)
+    trades.sort(key=lambda t: t["_sort_key"], reverse=True)
+    for t in trades:
+        del t["_sort_key"]
     return {"trades": trades}
 
 
