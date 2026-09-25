@@ -171,10 +171,13 @@
   <section class="panel" id="panel-h2h">
     <div class="headline-block">
       <p class="eyebrow">Head-to-Head</p>
-      <h2 class="panel-title">Every Grudge, All-Time</h2>
-      <p class="panel-sub">Every manager pair, aggregated across every season on record.</p>
+      <h2 class="panel-title">Pick a Fighter</h2>
+      <p class="panel-sub">Select a manager to see their all-time record against everyone else, best matchup first.</p>
     </div>
-    <div class="card" id="h2h-body"></div>
+    <div class="card" style="padding:16px 20px;border-bottom:1px solid var(--border)">
+      <select id="h2h-select" class="trade-select" style="width:100%;max-width:320px"></select>
+    </div>
+    <div class="card" id="h2h-body" style="border-top:none"></div>
   </section>
 
   <section class="panel" id="panel-rivalries">
@@ -343,18 +346,55 @@
   }
 
   // ---------- Head-to-Head ----------
+  let H2H_CACHE = null;
+  function populateH2HSelect(managerNames) {
+    const sel = document.getElementById('h2h-select');
+    sel.innerHTML = managerNames.map(m => '<option value="'+m+'">'+m+'</option>').join('');
+    sel.addEventListener('change', () => renderH2H(H2H_CACHE));
+  }
   function renderH2H(data) {
+    H2H_CACHE = data;
     const el = document.getElementById('h2h-body');
+    const sel = document.getElementById('h2h-select');
+    const selected = sel ? sel.value : '';
+
     if (!data || !Array.isArray(data.pairs) || data.pairs.length === 0) {
       emptyState(el, 'The archive is empty', 'Fills in once the Sleeper sync runs.');
       return;
     }
-    const rows = data.pairs
-      .slice()
-      .sort((a,b) => (b.aWins+b.bWins+b.ties) - (a.aWins+a.bWins+a.ties))
-      .map(p => '<tr><td>' + p.a + ' vs ' + p.b + '</td><td class="num">' + p.aWins + '-' + p.bWins + (p.ties?'-'+p.ties:'') + '</td></tr>')
-      .join('');
-    el.innerHTML = '<table class="stat-table"><thead><tr><th>Matchup</th><th class="num">Record</th></tr></thead><tbody>' + rows + '</tbody></table>';
+    if (!selected) {
+      emptyState(el, 'Pick someone', 'Choose a manager above to see their all-time record against the rest of the league.');
+      return;
+    }
+
+    // Pull every pair involving the selected manager, normalized to
+    // "me vs opponent" regardless of which side of the pair they were on.
+    const rows = [];
+    data.pairs.forEach(p => {
+      let opponent, myWins, oppWins, ties = p.ties || 0;
+      if (p.a === selected) { opponent = p.b; myWins = p.aWins; oppWins = p.bWins; }
+      else if (p.b === selected) { opponent = p.a; myWins = p.bWins; oppWins = p.aWins; }
+      else return;
+      const total = myWins + oppWins + ties;
+      const winPct = total > 0 ? myWins / total : 0;
+      rows.push({ opponent, myWins, oppWins, ties, total, winPct });
+    });
+
+    if (rows.length === 0) {
+      emptyState(el, 'No games yet', selected + ' hasn\u2019t played anyone yet on record.');
+      return;
+    }
+
+    rows.sort((a, b) => (b.winPct - a.winPct) || ((b.myWins - b.oppWins) - (a.myWins - a.oppWins)));
+
+    el.innerHTML = rows.map((r, i) => {
+      const pct = Math.round(r.winPct * 100);
+      return '<div class="bar-row">' +
+        '<div class="name">' + r.opponent + '</div>' +
+        '<div class="bar-track"><div class="bar-fill" style="width:' + Math.max(2, pct) + '%"></div></div>' +
+        '<div class="bar-value">' + r.myWins + '-' + r.oppWins + (r.ties ? '-' + r.ties : '') + '</div>' +
+      '</div>';
+    }).join('');
   }
 
   // ---------- Rivalries ----------
@@ -510,7 +550,6 @@
     renderHome(home);
     renderStandings(standings);
     renderOverallRanking(standings);
-    renderH2H(h2h);
     renderRivalries(rivalries);
     renderPrizePool(prizepool);
     renderChampions(champions);
@@ -523,6 +562,8 @@
       standings.divisions.forEach(d => d.teams.forEach(t => managerNames.push(t.team)));
     }
     populateTradeSelects(managerNames);
+    populateH2HSelect(managerNames);
+    renderH2H(h2h); // after the select is populated, so it has a default manager to show
     renderTrades(trades);
 
     statusEl.textContent = standings ? 'Synced via GitHub Action' : 'Data not found — check /data/ folder';
