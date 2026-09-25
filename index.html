@@ -100,6 +100,33 @@
   .team-card:last-child { border-bottom: none; }
   .team-logo { width: 48px; height: 48px; border-radius: 4px; background: var(--surface-2); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 700; font-size: 18px; color: var(--gold); flex-shrink: 0; overflow: hidden; }
   .team-logo img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* ---- Teams: card-grid revamp ---- */
+  .division-section { margin-bottom: 28px; }
+  .division-banner {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: #fff; padding: 12px 16px; border-radius: 4px 4px 0 0;
+  }
+  .division-banner .shield { font-size: 14px; opacity: 0.85; }
+  .division-banner--0 { background: linear-gradient(90deg, var(--crimson), #7a2620); }
+  .division-banner--1 { background: linear-gradient(90deg, var(--gold), #96731f); color: #1a1500; }
+  .division-banner--2 { background: linear-gradient(90deg, var(--olive), #33402a); }
+  .team-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+    background: var(--border); border: 1px solid var(--border); border-top: none;
+  }
+  @media (max-width: 560px) { .team-grid { grid-template-columns: 1fr; } }
+  .team-card-v2 { background: var(--surface); padding: 16px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .team-card-logo { width: 84px; height: 84px; border-radius: 6px; overflow: hidden; background: var(--surface-2); display: flex; align-items: center; justify-content: center; margin-bottom: 10px; border: 1px solid var(--border); }
+  .team-card-logo img { width: 100%; height: 100%; object-fit: cover; }
+  .team-card-logo .initials-fallback { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 24px; color: var(--gold); }
+  .team-card-name { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 16px; line-height: 1.2; }
+  .team-card-manager { font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--bg); background: var(--gold); padding: 3px 10px; border-radius: 3px; margin-top: 6px; }
+  .team-card-stats { display: flex; gap: 18px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); width: 100%; justify-content: center; }
+  .team-card-stat-value { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 17px; }
+  .team-card-stat-label { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-muted); margin-top: 2px; }
+  .team-card-meta { font-size: 10.5px; color: var(--text-muted); margin-top: 10px; letter-spacing: 0.03em; }
   .team-name { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 16px; }
   .team-meta { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
   .empty-state { padding: 44px 32px; text-align: center; }
@@ -228,7 +255,7 @@
       <h2 class="panel-title">Every Team, By Division</h2>
       <p class="panel-sub">All-time record and Shiva count for each manager.</p>
     </div>
-    <div class="card" id="teams-body"></div>
+    <div id="teams-body"></div>
   </section>
 
   <section class="panel" id="panel-rules">
@@ -481,6 +508,21 @@
   }
 
   // ---------- Teams ----------
+  const LOGO_MAP = {
+    "Scuderia Malo": "assets/logos/scuderia-malo.png",
+    "Mean Machine": "assets/logos/mean-machine.jpeg",
+    "La Quiche": "assets/logos/la-quiche.jpeg",
+    "Tebows before Hoes": "assets/logos/tebows-before-hoes.jpeg",
+    "Montreal Weapon X": "assets/logos/montreal-weapon-x.jpeg",
+    "T-Bone Ray's": "assets/logos/t-bone-rays.jpeg",
+    "The Gridiron Sheriffs": "assets/logos/gridiron-sheriffs.jpeg",
+    "MAGRAUDERS": "assets/logos/magrauders.jpeg",
+    "SGB Nation ⚖️": "assets/logos/sgb-nation.jpeg",
+    "Les Pingouins 🐧": "assets/logos/les-pingouins.jpeg",
+    "Lavaltree's Piggy": "assets/logos/lavaltree-piggy.jpeg",
+    "MTL New Empire": "assets/logos/mtl-new-empire.jpeg",
+  };
+
   function renderTeams(standings, h2h) {
     const el = document.getElementById('teams-body');
     if (!standings || !Array.isArray(standings.divisions)) {
@@ -497,18 +539,31 @@
         allTime[p.b].wins += p.bWins; allTime[p.b].losses += p.aWins; allTime[p.b].ties += p.ties;
       });
     }
-    el.innerHTML = standings.divisions.map(div => {
+    el.innerHTML = standings.divisions.map((div, divIdx) => {
       const cards = div.teams.map(t => {
-        const rec = allTime[t.team];
-        const recordStr = rec ? (rec.wins+'-'+rec.losses+(rec.ties?'-'+rec.ties:'')) : '—';
-        return '<div class="team-card">' +
-          '<div class="team-logo">' + initials(t.team) + '</div>' +
-          '<div><div class="team-name">' + t.team + '</div>' +
-          '<div class="team-meta">All-time: ' + recordStr + '</div></div></div>';
+        const allTimeRec = allTime[t.team];
+        const allTimeStr = allTimeRec ? (allTimeRec.wins + '-' + allTimeRec.losses + (allTimeRec.ties ? '-' + allTimeRec.ties : '')) : '—';
+        const seasonStr = (t.wins != null) ? (t.wins + '-' + t.losses + (t.ties ? '-' + t.ties : '')) : '—';
+        const logoSrc = LOGO_MAP[t.team];
+        const logoHtml = logoSrc
+          ? '<img src="' + logoSrc + '" alt="' + t.team + ' logo" onerror="this.parentElement.innerHTML=\'<span class=&quot;initials-fallback&quot;>' + initials(t.team) + '</span>\'">'
+          : '<span class="initials-fallback">' + initials(t.team) + '</span>';
+        return '<div class="team-card-v2">' +
+          '<div class="team-card-logo">' + logoHtml + '</div>' +
+          '<div class="team-card-name">' + t.team + '</div>' +
+          (t.owner ? '<div class="team-card-manager">' + t.owner + '</div>' : '') +
+          '<div class="team-card-stats">' +
+            '<div><div class="team-card-stat-value">' + seasonStr + '</div><div class="team-card-stat-label">This Season</div></div>' +
+            '<div><div class="team-card-stat-value">' + allTimeStr + '</div><div class="team-card-stat-label">All-Time</div></div>' +
+          '</div>' +
+          '<div class="team-card-meta">2026 Season</div>' +
+        '</div>';
       }).join('');
-      return '<div class="division-block"><div class="division-label">' + div.name + '</div>' + cards + '</div>';
-    }).join('') +
-    '<div style="padding:14px 20px;font-size:12.5px;color:var(--text-muted);border-top:1px solid var(--border)">Logos pending — showing initials until the commissioner supplies team logo files.</div>';
+      return '<div class="division-section">' +
+        '<div class="division-banner division-banner--' + (divIdx % 3) + '"><span class="shield">\u25C8</span> ' + div.name + ' Division <span class="shield">\u25C8</span></div>' +
+        '<div class="team-grid">' + cards + '</div>' +
+      '</div>';
+    }).join('');
   }
 
   // ---------- Rules ----------
