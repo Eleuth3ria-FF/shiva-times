@@ -127,6 +127,14 @@
   .team-card-stat-value { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 17px; }
   .team-card-stat-label { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-muted); margin-top: 2px; }
   .team-card-meta { font-size: 10.5px; color: var(--text-muted); margin-top: 10px; letter-spacing: 0.03em; }
+
+  .admin-link { display: block; padding: 18px 20px; border-bottom: 1px solid var(--border); text-decoration: none; color: var(--text); transition: background .15s ease; }
+  .admin-link:last-child { border-bottom: none; }
+  .admin-link:not(.admin-link--pending):hover { background: var(--surface-2); }
+  .admin-link-title { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 17px; }
+  .admin-link:not(.admin-link--pending) .admin-link-title { color: var(--gold); }
+  .admin-link-sub { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+  .admin-link--pending { opacity: 0.6; cursor: default; }
   .team-name { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 16px; }
   .team-meta { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
   .empty-state { padding: 44px 32px; text-align: center; }
@@ -163,7 +171,7 @@
   <button role="tab" aria-selected="false" data-panel="trades">Trade Ledger</button>
   <button role="tab" aria-selected="false" data-panel="champions">Championships</button>
   <button role="tab" aria-selected="false" data-panel="teams">Teams</button>
-  <button role="tab" aria-selected="false" data-panel="rules">Rules</button>
+  <button role="tab" aria-selected="false" data-panel="rules">Admin</button>
   <button role="tab" aria-selected="false" data-panel="predictions">Predictions</button>
 </nav>
 
@@ -261,10 +269,23 @@
   <section class="panel" id="panel-rules">
     <div class="headline-block">
       <p class="eyebrow">The Fine Print</p>
-      <h2 class="panel-title">League Rules &amp; Constitution</h2>
-      <p class="panel-sub">The governing document, for when memory conflicts with the record.</p>
+      <h2 class="panel-title">Admin</h2>
+      <p class="panel-sub">League management, the governing document, and the amendment process.</p>
     </div>
-    <div class="card" id="rules-body"></div>
+    <div class="card">
+      <a href="https://sleeper.com/leagues/1312396775717371904" target="_blank" rel="noopener" class="admin-link">
+        <div class="admin-link-title">The League on Sleeper</div>
+        <div class="admin-link-sub">Rosters, matchups, and transactions — the live source of truth.</div>
+      </a>
+      <a href="constitution.html" class="admin-link">
+        <div class="admin-link-title">Read the Constitution</div>
+        <div class="admin-link-sub">The full governing document — divisions, playoffs, payouts, waivers, and the Sacko's fate.</div>
+      </a>
+      <div class="admin-link admin-link--pending">
+        <div class="admin-link-title">Propose an Amendment</div>
+        <div class="admin-link-sub">Voting mechanism not built yet — rules for what counts as a passed amendment still TBD.</div>
+      </div>
+    </div>
   </section>
 
   <section class="panel" id="panel-predictions">
@@ -566,16 +587,6 @@
     }).join('');
   }
 
-  // ---------- Rules ----------
-  function renderRules(text) {
-    const el = document.getElementById('rules-body');
-    if (!text) {
-      emptyState(el, 'Not written up yet', 'The league constitution goes here once the commissioner adds it.');
-      return;
-    }
-    el.innerHTML = '<div style="padding:24px;white-space:pre-wrap;line-height:1.7">' + text + '</div>';
-  }
-
   // ---------- Predictions ----------
   function renderPredictions() {
     const el = document.getElementById('predictions-body');
@@ -595,12 +606,6 @@
       getJSON('./data/prizepool.json'),
     ]);
     const home = await getJSON('./data/articles.json');
-    const rules = await (async () => {
-      try {
-        const res = await fetch('./data/rules.txt', { cache: 'no-store' });
-        return res.ok ? await res.text() : null;
-      } catch (e) { return null; }
-    })();
 
     renderHome(home);
     renderStandings(standings);
@@ -609,7 +614,6 @@
     renderPrizePool(prizepool);
     renderChampions(champions);
     renderTeams(standings, h2h);
-    renderRules(rules);
     renderPredictions();
 
     const managerNames = [];
