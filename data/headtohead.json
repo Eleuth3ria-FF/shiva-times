@@ -87,35 +87,21 @@
     {
       "a": "Scuderia Malo",
       "b": "Tebows before Hoes",
-      "aWins": 4,
+      "aWins": 5,
       "bWins": 8,
       "ties": 0
     },
     {
       "a": "Lavaltree's Piggy ",
       "b": "MTL New Empire",
-      "aWins": 2,
+      "aWins": 3,
       "bWins": 11,
-      "ties": 0
-    },
-    {
-      "a": "SGB Nation ⚖️",
-      "b": "Les Pingouins 🐧",
-      "aWins": 7,
-      "bWins": 7,
-      "ties": 0
-    },
-    {
-      "a": "La Quiche",
-      "b": "Mean Machine",
-      "aWins": 1,
-      "bWins": 8,
       "ties": 0
     },
     {
       "a": "Montreal Weapon X",
       "b": "T-Bone Ray's",
-      "aWins": 6,
+      "aWins": 7,
       "bWins": 6,
       "ties": 0
     },
@@ -123,6 +109,20 @@
       "a": "The Gridiron Sheriffs",
       "b": "MAGRAUDERS ",
       "aWins": 8,
+      "bWins": 9,
+      "ties": 0
+    },
+    {
+      "a": "SGB Nation ⚖️",
+      "b": "Les Pingouins 🐧",
+      "aWins": 8,
+      "bWins": 7,
+      "ties": 0
+    },
+    {
+      "a": "La Quiche",
+      "b": "Mean Machine",
+      "aWins": 2,
       "bWins": 8,
       "ties": 0
     },
