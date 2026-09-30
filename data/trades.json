@@ -1,6 +1,22 @@
 {
   "trades": [
     {
+      "date": "Sep 30, 2026",
+      "teams": [
+        "MTL New Empire",
+        "La Quiche"
+      ],
+      "note": "MTL New Empire gets Blake Corum, 2029 Round 1 pick (via Scuderia Malo), 2027 Round 2 pick, 2029 Round 1 pick (via Lavaltree's Piggy ) · La Quiche gets Omarion Hampton, 2029 Round 2 pick (via Lavaltree's Piggy )"
+    },
+    {
+      "date": "Sep 29, 2026",
+      "teams": [
+        "Lavaltree's Piggy ",
+        "MTL New Empire"
+      ],
+      "note": "Lavaltree's Piggy  gets Rashee Rice, Omar Cooper, Jadarian Price · MTL New Empire gets Josh Downs, 2029 Round 2 pick (via Lavaltree's Piggy ), 2027 Round 1 pick (via MAGRAUDERS )"
+    },
+    {
       "date": "Sep 27, 2026",
       "teams": [
         "Scuderia Malo",
