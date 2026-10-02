@@ -15,7 +15,12 @@ import os
 import time
 import urllib.request
 import urllib.error
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
+try:
+    from zoneinfo import ZoneInfo
+    _ET = ZoneInfo("America/New_York")
+except Exception:
+    _ET = None  # fallback handled where used — rare, but don't crash the whole sync over it
 
 CURRENT_LEAGUE_ID = "1312396775717371904"
 API_BASE = "https://api.sleeper.app/v1"
@@ -434,6 +439,60 @@ def sync_trophies(season_chain, display_name):
     return {"trophies": trophies}
 
 
+def compute_prediction_lock_at():
+    """The next Thursday 8pm ET from right now — this week's lock time if
+    we haven't hit it yet, otherwise next week's. Used to gate the
+    Predictions voting feature (locks before Thursday Night Football)."""
+    if _ET is not None:
+        now = datetime.now(_ET)
+    else:
+        # Fallback if zoneinfo/tzdata isn't available on the runner: fixed
+        # UTC-5 approximation. Good enough as a safety net, not exact
+        # during daylight saving — the zoneinfo path above is the real one.
+        now = datetime.now(timezone.utc) - timedelta(hours=5)
+
+    days_until_thursday = (3 - now.weekday()) % 7  # Mon=0 ... Thu=3 ... Sun=6
+    candidate = (now + timedelta(days=days_until_thursday)).replace(
+        hour=20, minute=0, second=0, microsecond=0
+    )
+    if candidate <= now:
+        candidate += timedelta(days=7)  # already past this week's Thursday 8pm
+
+    return candidate.astimezone(timezone.utc).isoformat()
+
+
+def sync_current_week_predictions(current_league_id):
+    """This week's matchups for the Predictions voting feature, with the
+    Thursday-8pm-ET lock time. Empty/None week means Sleeper doesn't
+    consider the season live right now (offseason)."""
+    state = fetch_json(f"{API_BASE}/state/nfl") or {}
+    week = state.get("week")
+    if not week:
+        return {"week": None, "lockAt": None, "matchups": []}
+
+    owner_map, _ = build_owner_map(current_league_id)
+    matchups = fetch_json(f"{API_BASE}/league/{current_league_id}/matchups/{week}") or []
+
+    by_matchup_id = {}
+    for m in matchups:
+        mid = m.get("matchup_id")
+        if mid is None:
+            continue
+        by_matchup_id.setdefault(mid, []).append(m)
+
+    pairs = []
+    for pair in by_matchup_id.values():
+        if len(pair) != 2:
+            continue
+        a, b = pair
+        name_a = owner_map.get(a["roster_id"], {}).get("name")
+        name_b = owner_map.get(b["roster_id"], {}).get("name")
+        if name_a and name_b:
+            pairs.append({"id": name_a + "__" + name_b, "teamA": name_a, "teamB": name_b})
+
+    return {"week": week, "lockAt": compute_prediction_lock_at(), "matchups": pairs}
+
+
 def fetch_player_lookup():
     """id -> 'First Last' for all NFL players. One big cached call."""
     players = fetch_json(f"{API_BASE}/players/nfl") or {}
@@ -562,6 +621,11 @@ def main():
     trophies = sync_trophies(season_chain, display_name)
     with open(os.path.join(DATA_DIR, "trophies.json"), "w", encoding="utf-8") as f:
         json.dump(trophies, f, ensure_ascii=False, indent=2)
+
+    print("Syncing this week's matchups for Predictions voting...")
+    predictions = sync_current_week_predictions(CURRENT_LEAGUE_ID)
+    with open(os.path.join(DATA_DIR, "predictions_matchups.json"), "w", encoding="utf-8") as f:
+        json.dump(predictions, f, ensure_ascii=False, indent=2)
 
     print("Done.")
 
