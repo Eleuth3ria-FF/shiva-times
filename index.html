@@ -188,7 +188,7 @@
   <button role="tab" aria-selected="false" data-panel="rivalries">Rivalries</button>
   <button role="tab" aria-selected="false" data-panel="prizepool">Prize Pool</button>
   <button role="tab" aria-selected="false" data-panel="trades">Trade Ledger</button>
-  <button role="tab" aria-selected="false" data-panel="champions">Championships</button>
+  <button role="tab" aria-selected="false" data-panel="champions">Trophies</button>
   <button role="tab" aria-selected="false" data-panel="teams">Teams</button>
   <button role="tab" aria-selected="false" data-panel="rules">Admin</button>
   <button role="tab" aria-selected="false" data-panel="predictions">Predictions</button>
@@ -269,11 +269,14 @@
 
   <section class="panel" id="panel-champions">
     <div class="headline-block">
-      <p class="eyebrow">The Shiva</p>
-      <h2 class="panel-title">Champions, Runners-Up &amp; the Rest</h2>
-      <p class="panel-sub">Every season on record, oldest first.</p>
+      <p class="eyebrow">The Trophy Case</p>
+      <h2 class="panel-title">Every Trophy, Every Season</h2>
+      <p class="panel-sub">Pick a trophy to see who's won it, most recent first.</p>
     </div>
-    <div class="card" id="champions-body"></div>
+    <div class="card" style="padding:16px 20px;border-bottom:1px solid var(--border)">
+      <select id="trophy-select" class="trade-select" style="width:100%;max-width:320px"></select>
+    </div>
+    <div class="card" id="champions-body" style="border-top:none"></div>
   </section>
 
   <section class="panel" id="panel-teams">
@@ -560,19 +563,42 @@
     }).join('');
   }
 
-  // ---------- Championships ----------
-  function renderChampions(data) {
-    const el = document.getElementById('champions-body');
-    if (!data || !Array.isArray(data.seasons) || data.seasons.length === 0) {
-      emptyState(el, 'No champions on file yet', 'Championship history goes here.');
+  // ---------- Trophies ----------
+  let TROPHIES_CACHE = null;
+  function populateTrophySelect(data) {
+    const sel = document.getElementById('trophy-select');
+    if (!data || !Array.isArray(data.trophies) || data.trophies.length === 0) {
+      sel.innerHTML = '<option value="">No trophies synced yet</option>';
       return;
     }
-    el.innerHTML = data.seasons.map(s =>
-      '<div class="champ-row"><div class="champ-season">' + s.season + '</div>' +
-      '<div class="champ-name" style="color:var(--gold)">' + (s.champion||'—') + '</div>' +
-      '<div style="font-size:13px;color:var(--text-muted);margin-top:3px">' +
-      (s.runnerUp ? 'Runner-up: '+s.runnerUp : '') + (s.third ? ' · Third: '+s.third : '') + '</div></div>'
-    ).join('') + (data.note ? '<div style="padding:14px 20px;font-size:12.5px;color:var(--text-muted);border-top:1px solid var(--border)">Note: '+data.note+'</div>' : '');
+    sel.innerHTML = data.trophies.map(t => '<option value="' + t.key + '">' + t.name + '</option>').join('');
+    sel.addEventListener('change', () => renderChampions(TROPHIES_CACHE));
+  }
+  function renderChampions(data) {
+    TROPHIES_CACHE = data;
+    const el = document.getElementById('champions-body');
+    if (!data || !Array.isArray(data.trophies) || data.trophies.length === 0) {
+      emptyState(el, 'No trophies on file yet', 'This fills in once the Sleeper sync computes a full season of playoff results.');
+      return;
+    }
+    const sel = document.getElementById('trophy-select');
+    const selectedKey = sel ? sel.value : data.trophies[0].key;
+    const trophy = data.trophies.find(t => t.key === selectedKey) || data.trophies[0];
+
+    if (!Array.isArray(trophy.history) || trophy.history.length === 0) {
+      emptyState(el, 'No history yet', trophy.name + ' hasn\u2019t been decided in any completed season on record.');
+      return;
+    }
+
+    const rows = trophy.history.slice().reverse(); // most recent season first
+    el.innerHTML =
+      '<div style="padding:16px 20px 4px;color:var(--text-muted);font-size:13px">' + trophy.description + '</div>' +
+      rows.map((h, i) =>
+        '<div class="champ-row' + (i === 0 ? '' : '') + '">' +
+          '<div class="champ-season">' + h.season + '</div>' +
+          '<div class="champ-name" style="color:var(--gold)">' + (h.winner || '—') + '</div>' +
+        '</div>'
+      ).join('');
   }
 
   // ---------- Teams ----------
@@ -644,12 +670,12 @@
   async function init() {
     const statusEl = document.getElementById('sync-status');
 
-    const [standings, h2h, rivalries, trades, champions, prizepool] = await Promise.all([
+    const [standings, h2h, rivalries, trades, trophies, prizepool] = await Promise.all([
       getJSON('./data/standings.json'),
       getJSON('./data/headtohead.json'),
       getJSON('./data/rivalries.json'),
       getJSON('./data/trades.json'),
-      getJSON('./data/champions.json'),
+      getJSON('./data/trophies.json'),
       getJSON('./data/prizepool.json'),
     ]);
     const home = await getJSON('./data/articles.json');
@@ -659,7 +685,8 @@
     renderOverallRanking(standings);
     renderRivalries(rivalries);
     renderPrizePool(prizepool);
-    renderChampions(champions);
+    populateTrophySelect(trophies);
+    renderChampions(trophies); // after the select is populated, so it has a default trophy to show
     renderTeams(standings, h2h);
     renderPredictions();
 
