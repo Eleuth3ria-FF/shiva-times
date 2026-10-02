@@ -154,6 +154,26 @@
   .admin-link:not(.admin-link--pending) .admin-link-title { color: var(--gold); }
   .admin-link-sub { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
   .admin-link--pending { opacity: 0.6; cursor: default; }
+
+  .pred-voter-select { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .pred-voter-select label { font-family: 'Oswald', sans-serif; font-size: 12.5px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-muted); }
+  .pred-matchup { padding: 18px 20px; border-bottom: 1px solid var(--border); }
+  .pred-matchup:last-child { border-bottom: none; }
+  .pred-matchup-pick-row { display: flex; gap: 10px; margin-top: 8px; }
+  .pred-pick-btn { flex: 1; padding: 12px 10px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-family: 'Oswald', sans-serif; font-size: 13.5px; font-weight: 500; letter-spacing: 0.02em; cursor: pointer; border-radius: 4px; text-align: center; transition: border-color .15s ease, background .15s ease; }
+  .pred-pick-btn:hover { border-color: var(--gold); }
+  .pred-pick-btn.selected { border-color: var(--gold); background: var(--gold); color: var(--bg); font-weight: 600; }
+  .pred-submit-row { padding: 18px 20px; }
+  .pred-submit-btn { width: 100%; padding: 13px; background: var(--gold); color: var(--bg); border: none; border-radius: 4px; font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; }
+  .pred-submit-btn:disabled { opacity: 0.5; cursor: default; }
+  .pred-status { padding: 0 20px 16px; font-size: 13px; color: var(--text-muted); }
+  .pred-result-matchup { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+  .pred-result-matchup:last-child { border-bottom: none; }
+  .pred-result-sides { display: flex; gap: 20px; margin-top: 8px; }
+  .pred-result-side { flex: 1; }
+  .pred-result-team { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 13px; color: var(--gold); margin-bottom: 4px; }
+  .pred-result-voters { font-size: 13px; color: var(--text-muted); }
+  .pred-lock-note { padding: 14px 20px; font-size: 12.5px; color: var(--text-muted); border-bottom: 1px solid var(--border); font-style: italic; }
   .team-name { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 16px; }
   .team-meta { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
   .empty-state { padding: 44px 32px; text-align: center; }
@@ -661,24 +681,164 @@
   }
 
   // ---------- Predictions ----------
-  function renderPredictions() {
+  // Fill this in once the Apps Script is deployed (Deploy > Web app > copy
+  // the URL ending in /exec). Leave the placeholder as-is until then —
+  // the UI below detects it and shows a clear "not connected" state
+  // instead of trying (and failing) to reach a fake URL.
+  const APPS_SCRIPT_URL = 'PASTE_YOUR_APPS_SCRIPT_URL_HERE';
+
+  function predictionsLocalKey(week) { return 'shiva_times_vote_week_' + week; }
+
+  function getSavedVote(week) {
+    try {
+      const raw = localStorage.getItem(predictionsLocalKey(week));
+      return raw ? JSON.parse(raw) : null;
+    } catch (e) { return null; }
+  }
+  function saveVoteLocally(week, voter, picks) {
+    try {
+      localStorage.setItem(predictionsLocalKey(week), JSON.stringify({ voter, picks }));
+    } catch (e) { /* private browsing, etc. — voting still works, just won't be remembered on reload */ }
+  }
+
+  async function renderPredictions(data, managerNames) {
     const el = document.getElementById('predictions-body');
-    emptyState(el, 'Voting isn\u2019t connected yet',
-      'This needs a small backend (Google Apps Script) to record public votes — not set up yet. Once it is, you\u2019ll pick a winner for each matchup here, with results hidden until you vote.');
+
+    if (!data || !data.week || !Array.isArray(data.matchups) || data.matchups.length === 0) {
+      emptyState(el, 'No games to predict right now',
+        'This fills in once there\u2019s an active NFL week with matchups synced.');
+      return;
+    }
+
+    if (APPS_SCRIPT_URL.indexOf('PASTE_YOUR') === 0) {
+      emptyState(el, 'Voting isn\u2019t connected yet',
+        'The Apps Script backend needs to be deployed and its URL pasted into the site code — once that\u2019s done, this fills in automatically.');
+      return;
+    }
+
+    const week = data.week;
+    const lockAt = data.lockAt ? new Date(data.lockAt) : null;
+    const isLocked = lockAt ? (new Date() >= lockAt) : false;
+    const saved = getSavedVote(week);
+
+    if (isLocked || saved) {
+      await renderPredictionResults(el, week, data.matchups, isLocked, saved);
+    } else {
+      renderPredictionForm(el, week, data.matchups, managerNames, lockAt);
+    }
+  }
+
+  function renderPredictionForm(el, week, matchups, managerNames, lockAt) {
+    const picks = {}; // matchupId -> picked team name
+
+    const lockNote = lockAt
+      ? '<div class="pred-lock-note">Voting locks ' + lockAt.toLocaleString('en-US', { weekday: 'long', hour: 'numeric', minute: '2-digit', timeZoneName: 'short' }) + '</div>'
+      : '';
+
+    const voterOptions = '<option value="">Who are you?</option>' +
+      managerNames.map(m => '<option value="' + m + '">' + m + '</option>').join('');
+
+    el.innerHTML =
+      lockNote +
+      '<div class="pred-voter-select"><label>Voting as</label><select id="pred-voter-select" class="trade-select">' + voterOptions + '</select></div>' +
+      matchups.map(m =>
+        '<div class="pred-matchup" data-matchup-id="' + m.id + '">' +
+          '<div class="trade-side-team" style="color:var(--text)">Week ' + week + '</div>' +
+          '<div class="pred-matchup-pick-row">' +
+            '<button type="button" class="pred-pick-btn" data-team="' + m.teamA + '">' + m.teamA + '</button>' +
+            '<button type="button" class="pred-pick-btn" data-team="' + m.teamB + '">' + m.teamB + '</button>' +
+          '</div>' +
+        '</div>'
+      ).join('') +
+      '<div class="pred-submit-row"><button type="button" class="pred-submit-btn" id="pred-submit-btn">Submit Picks</button></div>' +
+      '<div class="pred-status" id="pred-status"></div>';
+
+    el.querySelectorAll('.pred-matchup').forEach(row => {
+      const matchupId = row.dataset.matchupId;
+      row.querySelectorAll('.pred-pick-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          picks[matchupId] = btn.dataset.team;
+          row.querySelectorAll('.pred-pick-btn').forEach(b => b.classList.toggle('selected', b === btn));
+        });
+      });
+    });
+
+    document.getElementById('pred-submit-btn').addEventListener('click', async () => {
+      const voter = document.getElementById('pred-voter-select').value;
+      const statusEl = document.getElementById('pred-status');
+      if (!voter) { statusEl.textContent = 'Pick who you are first.'; return; }
+      if (Object.keys(picks).length < matchups.length) { statusEl.textContent = 'Pick a winner for every matchup.'; return; }
+
+      const submitBtn = document.getElementById('pred-submit-btn');
+      submitBtn.disabled = true;
+      statusEl.textContent = 'Submitting…';
+
+      const pickList = Object.keys(picks).map(matchupId => ({ matchup: matchupId, pick: picks[matchupId] }));
+
+      try {
+        await fetch(APPS_SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // avoids a CORS preflight Apps Script can't answer
+          body: JSON.stringify({ week: week, voter: voter, picks: pickList }),
+        });
+        saveVoteLocally(week, voter, picks);
+        await renderPredictionResults(el, week, matchups, false, { voter, picks });
+      } catch (e) {
+        statusEl.textContent = 'Something went wrong submitting — try again.';
+        submitBtn.disabled = false;
+      }
+    });
+  }
+
+  async function renderPredictionResults(el, week, matchups, isLocked, saved) {
+    el.innerHTML = '<div class="pred-status" style="padding:16px 20px 0">Loading results…</div>';
+
+    let votes = [];
+    try {
+      const res = await fetch(APPS_SCRIPT_URL + '?week=' + encodeURIComponent(week));
+      const json = await res.json();
+      votes = Array.isArray(json.votes) ? json.votes : [];
+    } catch (e) { /* show whatever we can below, even with no votes loaded */ }
+
+    const header =
+      (isLocked ? '<div class="pred-lock-note">Voting is closed for Week ' + week + '.</div>' : '') +
+      (saved ? '<div class="pred-lock-note">You voted as ' + saved.voter + '.</div>' : '');
+
+    const body = matchups.map(m => {
+      const votesForMatchup = votes.filter(v => v.matchup === m.id);
+      const sideVoters = team => votesForMatchup.filter(v => v.pick === team).map(v => v.voter);
+      const votersA = sideVoters(m.teamA);
+      const votersB = sideVoters(m.teamB);
+      return '<div class="pred-result-matchup">' +
+        '<div class="rivalry-names" style="font-size:15px">' + m.teamA + ' <span style="color:var(--text-muted);font-weight:400">vs</span> ' + m.teamB + '</div>' +
+        '<div class="pred-result-sides">' +
+          '<div class="pred-result-side"><div class="pred-result-team">' + m.teamA + ' (' + votersA.length + ')</div><div class="pred-result-voters">' + (votersA.join(', ') || '—') + '</div></div>' +
+          '<div class="pred-result-side"><div class="pred-result-team">' + m.teamB + ' (' + votersB.length + ')</div><div class="pred-result-voters">' + (votersB.join(', ') || '—') + '</div></div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+
+    el.innerHTML = header + body;
   }
 
   async function init() {
     const statusEl = document.getElementById('sync-status');
 
-    const [standings, h2h, rivalries, trades, trophies, prizepool] = await Promise.all([
+    const [standings, h2h, rivalries, trades, trophies, prizepool, predictions] = await Promise.all([
       getJSON('./data/standings.json'),
       getJSON('./data/headtohead.json'),
       getJSON('./data/rivalries.json'),
       getJSON('./data/trades.json'),
       getJSON('./data/trophies.json'),
       getJSON('./data/prizepool.json'),
+      getJSON('./data/predictions_matchups.json'),
     ]);
     const home = await getJSON('./data/articles.json');
+
+    const managerNames = [];
+    if (standings && Array.isArray(standings.divisions)) {
+      standings.divisions.forEach(d => d.teams.forEach(t => managerNames.push(t.team)));
+    }
 
     renderHome(home);
     renderStandings(standings);
@@ -688,12 +848,8 @@
     populateTrophySelect(trophies);
     renderChampions(trophies); // after the select is populated, so it has a default trophy to show
     renderTeams(standings, h2h);
-    renderPredictions();
+    renderPredictions(predictions, managerNames);
 
-    const managerNames = [];
-    if (standings && Array.isArray(standings.divisions)) {
-      standings.divisions.forEach(d => d.teams.forEach(t => managerNames.push(t.team)));
-    }
     populateTradeSelects(managerNames);
     populateH2HSelect(managerNames);
     renderH2H(h2h); // after the select is populated, so it has a default manager to show
