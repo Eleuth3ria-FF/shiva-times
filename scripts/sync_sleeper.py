@@ -236,6 +236,7 @@ def sync_trades(season_chain, player_lookup, display_name):
                 adds = t.get("adds") or {}
                 draft_picks = t.get("draft_picks") or []
 
+                sides = []
                 parts = []
                 for roster_id in roster_ids:
                     owner_id = owner_map.get(roster_id, {}).get("owner_id")
@@ -259,8 +260,12 @@ def sync_trades(season_chain, player_lookup, display_name):
                         received_items.append(pick_desc)
 
                     if received_items:
+                        sides.append({"team": name, "items": received_items})
                         parts.append(f"{name} gets {', '.join(received_items)}")
 
+                # "note" kept as a plain-text fallback summary; "sides" is the
+                # structured form the site actually renders (one line per
+                # item, not one wall-of-text paragraph).
                 note = " · ".join(parts) if parts else " / ".join(teams) + " swap picks/players"
 
                 created_ms = t.get("created")
@@ -272,6 +277,7 @@ def sync_trades(season_chain, player_lookup, display_name):
                 trades.append({
                     "date": date_str,
                     "teams": teams,
+                    "sides": sides,
                     "note": note,
                     "_sort_key": created_ms or 0,  # raw epoch ms, stripped before output — formatted date strings don't sort chronologically as text
                 })
