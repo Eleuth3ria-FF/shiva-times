@@ -92,6 +92,17 @@
   .bar-track { flex: 1; height: 8px; background: var(--surface-2); overflow: hidden; }
   .bar-fill { height: 100%; background: linear-gradient(90deg, var(--olive), var(--gold)); }
   .bar-value { flex: 0 0 60px; text-align: right; font-variant-numeric: tabular-nums; font-size: 14px; color: var(--text-muted); }
+
+  .pp-details { border-bottom: 1px solid var(--border); }
+  .pp-details:last-child { border-bottom: none; }
+  .pp-details summary { list-style: none; cursor: pointer; }
+  .pp-details summary::-webkit-details-marker { display: none; }
+  .pp-details summary.bar-row { padding-right: 28px; position: relative; }
+  .pp-chevron { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 11px; transition: transform .15s ease; }
+  .pp-details[open] .pp-chevron { transform: translateY(-50%) rotate(90deg); }
+  .pp-breakdown { padding: 2px 16px 14px 16px; }
+  .pp-item { display: flex; justify-content: space-between; font-size: 13px; padding: 4px 0 4px 20px; color: var(--text-muted); border-left: 1px solid var(--border); margin-left: 4px; }
+  .pp-item-amount { color: var(--text); font-variant-numeric: tabular-nums; }
   .rivalry-row, .trade-row, .champ-row, .article-row { padding: 16px 20px; border-bottom: 1px solid var(--border); }
   .rivalry-row:last-child, .trade-row:last-child, .champ-row:last-child, .article-row:last-child { border-bottom: none; }
   .rivalry-note, .champ-season { font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 0.06em; color: var(--crimson); text-transform: uppercase; margin-bottom: 3px; }
@@ -483,11 +494,24 @@
         ? sorted[0].name + ' is up ' + fmtMoney(sorted[0].total) + '. The other ' + zeros + ' are still sitting at zero.'
         : 'Nobody has earned a dollar yet.';
     }
-    el.innerHTML = sorted.map(m =>
-      '<div class="bar-row"><div class="name">' + m.name + '</div>' +
-      '<div class="bar-track"><div class="bar-fill" style="width:' + Math.max(2,(m.total/max)*100) + '%"></div></div>' +
-      '<div class="bar-value">' + fmtMoney(m.total) + '</div></div>'
-    ).join('');
+    el.innerHTML = sorted.map(m => {
+      const barRow =
+        '<div class="name">' + m.name + '</div>' +
+        '<div class="bar-track"><div class="bar-fill" style="width:' + Math.max(2,(m.total/max)*100) + '%"></div></div>' +
+        '<div class="bar-value">' + fmtMoney(m.total) + '</div>';
+
+      if (Array.isArray(m.breakdown) && m.breakdown.length > 0) {
+        const items = m.breakdown.map(b =>
+          '<div class="pp-item"><span>' + b.label + '</span><span class="pp-item-amount">' + fmtMoney(b.amount) + '</span></div>'
+        ).join('');
+        return '<details class="pp-details">' +
+          '<summary class="bar-row">' + barRow + '<span class="pp-chevron">\u25B8</span></summary>' +
+          '<div class="pp-breakdown">' + items + '</div>' +
+        '</details>';
+      }
+      // No breakdown data (e.g. still at $0) — plain, non-expandable row
+      return '<div class="bar-row">' + barRow + '</div>';
+    }).join('');
     if (data.updated) tag.textContent = 'Last synced ' + data.updated;
   }
 
