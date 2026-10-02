@@ -1,0 +1,221 @@
+{
+  "trophies": [
+    {
+      "key": "shiva",
+      "name": "The Shiva",
+      "description": "League Champion",
+      "history": [
+        {
+          "season": "2025",
+          "winner": "SGB Nation ⚖️"
+        },
+        {
+          "season": "2024",
+          "winner": "SGB Nation ⚖️"
+        },
+        {
+          "season": "2023",
+          "winner": "T-Bone Ray's"
+        },
+        {
+          "season": "2022",
+          "winner": "The Gridiron Sheriffs"
+        },
+        {
+          "season": "2021",
+          "winner": "Lavaltree's Piggy "
+        },
+        {
+          "season": "2020",
+          "winner": "The Gridiron Sheriffs"
+        }
+      ]
+    },
+    {
+      "key": "runner-up",
+      "name": "Runner-Up",
+      "description": "Lost the championship game",
+      "history": [
+        {
+          "season": "2025",
+          "winner": "Montreal Weapon X"
+        },
+        {
+          "season": "2024",
+          "winner": "Scuderia Malo"
+        },
+        {
+          "season": "2023",
+          "winner": "Lavaltree's Piggy "
+        },
+        {
+          "season": "2022",
+          "winner": "Les Pingouins 🐧"
+        },
+        {
+          "season": "2021",
+          "winner": "Tonka26"
+        },
+        {
+          "season": "2020",
+          "winner": "MAGRAUDERS "
+        }
+      ]
+    },
+    {
+      "key": "sacko",
+      "name": "The Sacko",
+      "description": "Last place",
+      "history": [
+        {
+          "season": "2025",
+          "winner": "Tebows before Hoes"
+        },
+        {
+          "season": "2024",
+          "winner": "MAGRAUDERS "
+        },
+        {
+          "season": "2023",
+          "winner": "La Quiche"
+        },
+        {
+          "season": "2022",
+          "winner": "MAGRAUDERS "
+        },
+        {
+          "season": "2021",
+          "winner": "Scuderia Malo"
+        },
+        {
+          "season": "2020",
+          "winner": "Scuderia Malo"
+        }
+      ]
+    },
+    {
+      "key": "regular-season",
+      "name": "Regular Season Champion",
+      "description": "#1 overall seed",
+      "history": [
+        {
+          "season": "2025",
+          "winner": "Montreal Weapon X"
+        },
+        {
+          "season": "2024",
+          "winner": "Mean Machine"
+        },
+        {
+          "season": "2023",
+          "winner": "Lavaltree's Piggy "
+        },
+        {
+          "season": "2022",
+          "winner": "The Gridiron Sheriffs"
+        },
+        {
+          "season": "2021",
+          "winner": "Tonka26"
+        },
+        {
+          "season": "2020",
+          "winner": "The Gridiron Sheriffs"
+        }
+      ]
+    },
+    {
+      "key": "division-the-league---north",
+      "name": "The League - North Champion",
+      "description": "Best division record",
+      "history": [
+        {
+          "season": "2025",
+          "winner": "Scuderia Malo"
+        },
+        {
+          "season": "2024",
+          "winner": "Mean Machine"
+        },
+        {
+          "season": "2023",
+          "winner": "Tebows before Hoes"
+        },
+        {
+          "season": "2022",
+          "winner": "Tebows before Hoes"
+        },
+        {
+          "season": "2021",
+          "winner": "Tonka26"
+        },
+        {
+          "season": "2020",
+          "winner": "Mean Machine"
+        }
+      ]
+    },
+    {
+      "key": "division-the-league---south",
+      "name": "The League - South Champion",
+      "description": "Best division record",
+      "history": [
+        {
+          "season": "2025",
+          "winner": "SGB Nation ⚖️"
+        },
+        {
+          "season": "2024",
+          "winner": "SGB Nation ⚖️"
+        },
+        {
+          "season": "2023",
+          "winner": "Lavaltree's Piggy "
+        },
+        {
+          "season": "2022",
+          "winner": "SGB Nation ⚖️"
+        },
+        {
+          "season": "2021",
+          "winner": "Lavaltree's Piggy "
+        },
+        {
+          "season": "2020",
+          "winner": "MTL New Empire"
+        }
+      ]
+    },
+    {
+      "key": "division-the-league---central",
+      "name": "The League - Central Champion",
+      "description": "Best division record",
+      "history": [
+        {
+          "season": "2025",
+          "winner": "Montreal Weapon X"
+        },
+        {
+          "season": "2024",
+          "winner": "Montreal Weapon X"
+        },
+        {
+          "season": "2023",
+          "winner": "T-Bone Ray's"
+        },
+        {
+          "season": "2022",
+          "winner": "The Gridiron Sheriffs"
+        },
+        {
+          "season": "2021",
+          "winner": "The Gridiron Sheriffs"
+        },
+        {
+          "season": "2020",
+          "winner": "The Gridiron Sheriffs"
+        }
+      ]
+    }
+  ]
+}
