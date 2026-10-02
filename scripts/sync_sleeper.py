@@ -328,17 +328,50 @@ def fetch_prizepool():
     if header_idx is None:
         return {"managers": [], "updated": None}
 
+    header = rows[header_idx]
+
+    # Columns beyond Rank/Manager/Total are the category breakdown (weeks +
+    # awards). "BB 2ND"/"BB 1ST" are relabeled here — they're actually the
+    # Toilet Bowl payout, not "Best Ball" as originally assumed before the
+    # league constitution clarified it.
+    LABEL_OVERRIDES = {
+        "BB 2ND": "Toilet Bowl — 2nd",
+        "BB 1ST": "Toilet Bowl — Winner",
+    }
+    breakdown_cols = []  # list of (column_index, label)
+    for i, col in enumerate(header):
+        if i < 3:
+            continue
+        label = col.strip()
+        if not label:
+            continue
+        breakdown_cols.append((i, LABEL_OVERRIDES.get(label, label)))
+
+    def parse_money(s):
+        s = (s or "").replace("$", "").replace(",", "").strip()
+        if not s:
+            return 0
+        try:
+            return float(s)
+        except ValueError:
+            return 0
+
     managers = []
     for row in rows[header_idx + 1:]:
         if len(row) < 3 or not row[1].strip():
             continue
         name = row[1].strip()
-        total_str = row[2].replace("$", "").replace(",", "").strip()
-        try:
-            total = float(total_str) if total_str else 0
-        except ValueError:
-            total = 0
-        managers.append({"name": name, "total": total})
+        total = parse_money(row[2])
+
+        breakdown = []
+        for col_idx, label in breakdown_cols:
+            if col_idx >= len(row):
+                continue
+            amount = parse_money(row[col_idx])
+            if amount:  # only nonzero entries — most categories are $0 for most managers
+                breakdown.append({"label": label, "amount": amount})
+
+        managers.append({"name": name, "total": total, "breakdown": breakdown})
 
     import datetime
     return {"managers": managers, "updated": datetime.date.today().isoformat()}
