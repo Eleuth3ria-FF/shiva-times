@@ -2,51 +2,85 @@
   "managers": [
     {
       "name": "Xavier Bernet",
-      "total": 30.0
+      "total": 30.0,
+      "breakdown": [
+        {
+          "label": "W1",
+          "amount": 10.0
+        },
+        {
+          "label": "W2",
+          "amount": 10.0
+        },
+        {
+          "label": "W3",
+          "amount": 10.0
+        }
+      ]
     },
     {
       "name": "Sébastien Malo",
-      "total": 0.0
+      "total": 0.0,
+      "breakdown": []
     },
     {
       "name": "Sébastien Gélinas",
-      "total": 0.0
+      "total": 0.0,
+      "breakdown": []
     },
     {
       "name": "Rémi Giguère",
-      "total": 0.0
+      "total": 0.0,
+      "breakdown": []
     },
     {
       "name": "Olivier Dutrisac",
-      "total": 0.0
+      "total": 0.0,
+      "breakdown": []
     },
     {
       "name": "Marc-André Giguère",
-      "total": 0.0
+      "total": 0.0,
+      "breakdown": []
     },
     {
       "name": "Ludovic Harris-Gauthier",
-      "total": 0.0
+      "total": 0.0,
+      "breakdown": []
     },
     {
       "name": "Samuel Tassé",
-      "total": 0.0
+      "total": 0.0,
+      "breakdown": []
     },
     {
       "name": "Guillaume Doucet",
-      "total": 0.0
+      "total": 0.0,
+      "breakdown": []
     },
     {
       "name": "David Légaré",
-      "total": 0.0
+      "total": 0.0,
+      "breakdown": [
+        {
+          "label": "$0",
+          "amount": 30.0
+        },
+        {
+          "label": "$0",
+          "amount": 30.0
+        }
+      ]
     },
     {
       "name": "Alexandre Raymond",
-      "total": 0.0
+      "total": 0.0,
+      "breakdown": []
     },
     {
       "name": "Alexandre Doucet",
-      "total": 0.0
+      "total": 0.0,
+      "breakdown": []
     }
   ],
   "updated": "2026-10-02"
