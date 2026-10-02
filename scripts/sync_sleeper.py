@@ -287,6 +287,153 @@ def sync_trades(season_chain, player_lookup, display_name):
     return {"trades": trades}
 
 
+def get_playoff_results(league_id):
+    """Champion / runner-up (from the winners bracket) and Sacko (from the
+    losers/consolation bracket, if the league ran one) for one season.
+
+    Sleeper marks placement games with a "p" field (p=1 is the championship
+    game in the winners bracket; the losers bracket's placement games work
+    the same way, with the highest "p" value being the true last-place game).
+    Returns roster_ids (None where not determinable — e.g. no losers bracket
+    was run that season, or the season isn't finished).
+    """
+    winners = fetch_json(f"{API_BASE}/league/{league_id}/winners_bracket") or []
+    losers = fetch_json(f"{API_BASE}/league/{league_id}/losers_bracket") or []
+
+    champion_roster = None
+    runner_up_roster = None
+    for m in winners:
+        if m.get("p") == 1 and m.get("w") is not None:
+            champion_roster = m.get("w")
+            runner_up_roster = m.get("l")
+
+    sacko_roster = None
+    if losers:
+        placement_matches = [m for m in losers if m.get("p")]
+        if placement_matches:
+            last_place_match = max(placement_matches, key=lambda m: m["p"])
+            sacko_roster = last_place_match.get("l")
+
+    return champion_roster, runner_up_roster, sacko_roster
+
+
+def get_regular_season_champion(rosters):
+    """Best regular-season record: most wins, points as tiebreak."""
+    if not rosters:
+        return None
+    def sort_key(r):
+        s = r.get("settings", {})
+        pf = (s.get("fpts", 0) or 0) + (s.get("fpts_decimal", 0) or 0) / 100
+        return (s.get("wins", 0) or 0, pf)
+    best = max(rosters, key=sort_key)
+    return best.get("roster_id")
+
+
+def get_worst_regular_season(rosters):
+    """Fallback Sacko determination when no losers bracket exists:
+    worst record, points as tiebreak (fewest wins, then fewest points)."""
+    if not rosters:
+        return None
+    def sort_key(r):
+        s = r.get("settings", {})
+        pf = (s.get("fpts", 0) or 0) + (s.get("fpts_decimal", 0) or 0) / 100
+        return (s.get("wins", 0) or 0, pf)
+    worst = min(rosters, key=sort_key)
+    return worst.get("roster_id")
+
+
+def get_division_champions(league_obj, rosters):
+    """{division_label: roster_id} for whichever divisions Sleeper actually
+    has configured on each roster (roster.settings.division, 1/2/3/...).
+    Division NAMES come from the league's own metadata when the commissioner
+    set them there; falls back to "Division N" when not available. Returns
+    {} for seasons where rosters carry no division field at all — better to
+    show nothing than guess at a division structure that might not have
+    existed that season.
+    """
+    by_division = {}
+    for r in rosters:
+        div_num = (r.get("settings") or {}).get("division")
+        if div_num is None:
+            continue
+        by_division.setdefault(div_num, []).append(r)
+
+    if not by_division:
+        return {}
+
+    metadata = league_obj.get("metadata") or {}
+    results = {}
+    for div_num, div_rosters in by_division.items():
+        label = metadata.get(f"division_{div_num}") or f"Division {div_num}"
+        champ_roster_id = get_regular_season_champion(div_rosters)
+        results[label] = champ_roster_id
+    return results
+
+
+def sync_trophies(season_chain, display_name):
+    """Full historical winner list for The Shiva, The Sacko, each Division
+    Championship, and the Regular Season Champion — one season at a time,
+    computed straight from Sleeper's own results (not the old manual
+    workbook). Excludes the current, still-in-progress season (no playoff
+    results exist yet to crown anything)."""
+    shiva_history = []
+    runner_up_history = []
+    sacko_history = []
+    regular_season_history = []
+    division_histories = {}  # label -> [ {season, winner}, ... ]
+
+    for league in season_chain:
+        league_id = league["league_id"]
+        season_label = league.get("season", league_id)
+        status = league.get("status")
+        if status != "complete":
+            continue  # skip the current/in-progress season — nothing's been decided yet
+
+        owner_map, rosters = build_owner_map(league_id)
+
+        def roster_owner_name(roster_id):
+            if roster_id is None:
+                return None
+            owner_id = owner_map.get(roster_id, {}).get("owner_id")
+            return display_name.get(owner_id) if owner_id else None
+
+        champion_roster, runner_up_roster, sacko_roster = get_playoff_results(league_id)
+        if champion_roster is not None:
+            shiva_history.append({"season": season_label, "winner": roster_owner_name(champion_roster)})
+        if runner_up_roster is not None:
+            runner_up_history.append({"season": season_label, "winner": roster_owner_name(runner_up_roster)})
+
+        if sacko_roster is None:
+            sacko_roster = get_worst_regular_season(rosters)  # fallback: no losers bracket that season
+        if sacko_roster is not None:
+            sacko_history.append({"season": season_label, "winner": roster_owner_name(sacko_roster)})
+
+        reg_champ_roster = get_regular_season_champion(rosters)
+        if reg_champ_roster is not None:
+            regular_season_history.append({"season": season_label, "winner": roster_owner_name(reg_champ_roster)})
+
+        for label, roster_id in get_division_champions(league, rosters).items():
+            division_histories.setdefault(label, []).append(
+                {"season": season_label, "winner": roster_owner_name(roster_id)}
+            )
+
+    trophies = [
+        {"key": "shiva", "name": "The Shiva", "description": "League Champion", "history": shiva_history},
+        {"key": "runner-up", "name": "Runner-Up", "description": "Lost the championship game", "history": runner_up_history},
+        {"key": "sacko", "name": "The Sacko", "description": "Last place", "history": sacko_history},
+        {"key": "regular-season", "name": "Regular Season Champion", "description": "#1 overall seed", "history": regular_season_history},
+    ]
+    for label, history in division_histories.items():
+        trophies.append({
+            "key": "division-" + label.lower().replace(" ", "-"),
+            "name": label + " Champion",
+            "description": "Best division record",
+            "history": history,
+        })
+
+    return {"trophies": trophies}
+
+
 def fetch_player_lookup():
     """id -> 'First Last' for all NFL players. One big cached call."""
     players = fetch_json(f"{API_BASE}/players/nfl") or {}
@@ -410,6 +557,11 @@ def main():
     prizepool = fetch_prizepool()
     with open(os.path.join(DATA_DIR, "prizepool.json"), "w", encoding="utf-8") as f:
         json.dump(prizepool, f, ensure_ascii=False, indent=2)
+
+    print("Syncing trophies (Shiva, Sacko, Division Champs, Regular Season Champ)...")
+    trophies = sync_trophies(season_chain, display_name)
+    with open(os.path.join(DATA_DIR, "trophies.json"), "w", encoding="utf-8") as f:
+        json.dump(trophies, f, ensure_ascii=False, indent=2)
 
     print("Done.")
 
