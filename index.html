@@ -147,11 +147,13 @@
 
   /* small team crests: the only color the stats pages get */
   .mini-logo { width: 24px; height: 24px; object-fit: contain; background: #fff; border: 1px solid var(--hair); flex: 0 0 auto; }
+  .mini-logo--none { background: transparent; border: 1px dashed var(--hair); }
+  .former-tag { flex: 0 0 auto; font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; color: var(--ink-3); border: 1px solid var(--hair); padding: 1px 5px; }
   .with-logo { display: inline-flex; align-items: center; gap: 9px; min-width: 0; vertical-align: middle; }
 
   /* ---------- Bars (prize pool, head-to-head) ---------- */
   .bar-row { display: flex; align-items: center; gap: 12px; padding: 9px 32px 9px 14px; }
-  .bar-row .name { flex: 0 0 216px; font-size: 15px; display: flex; align-items: center; gap: 8px; min-width: 0; }
+  .bar-row .name { flex: 0 0 240px; font-size: 15px; display: flex; align-items: center; gap: 8px; min-width: 0; }
   .bar-row .name .tname { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .bar-track { flex: 1; height: 10px; background: var(--paper-2); border: 1px solid var(--ink); }
   .bar-fill { height: 100%; background: var(--ink); }
@@ -264,6 +266,8 @@
     .mast-dateline span:first-child, .mast-dateline span:last-child { display: none; }
     .mast-dateline { justify-content: center; }
     .bar-row .name { flex-basis: 128px; font-size: 14px; }
+    .mini-logo--none { display: none; }
+    .bar-row .name .with-logo--former { flex-wrap: wrap; row-gap: 3px; }
     .trade-side { min-width: 100%; }
   }
 </style>
@@ -497,7 +501,14 @@
   Object.keys(LOGO_MAP).forEach(k => { LOGO_BY_NORM[normName(k)] = LOGO_MAP[k]; });
   function logoSrcFor(name) { return LOGO_BY_NORM[normName(name)] || null; }
   // Small crest + team name. This is where the color on the stats pages comes from.
+  // Former owners of the La Quiche franchise: SebWaterMALOn (2020), then Tonka26 (2021), then Samuel (2022 on).
+  // They stay SEPARATE owners on purpose; their results are never merged into the current owner's record.
+  // They get no crest, just their account name and a "Former" tag.
+  const FORMER_ACCOUNTS = new Set(['sebwatermalon', 'tonka26']);
   function teamWithLogo(name) {
+    if (FORMER_ACCOUNTS.has(normName(name))) {
+      return '<span class="with-logo with-logo--former"><span class="mini-logo mini-logo--none"></span><span class="tname">' + name + '</span><span class="former-tag">Former</span></span>';
+    }
     const src = logoSrcFor(name);
     const img = src ? '<img class="mini-logo" src="' + src + '" alt="" onerror="this.remove()">' : '';
     return '<span class="with-logo">' + img + '<span class="tname">' + name + '</span></span>';
