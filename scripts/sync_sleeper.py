@@ -439,26 +439,43 @@ def sync_trophies(season_chain, display_name):
     return {"trophies": trophies}
 
 
-def compute_prediction_lock_at():
-    """The next Thursday 8pm ET from right now — this week's lock time if
-    we haven't hit it yet, otherwise next week's. Used to gate the
-    Predictions voting feature (locks before Thursday Night Football)."""
-    if _ET is not None:
-        now = datetime.now(_ET)
-    else:
-        # Fallback if zoneinfo/tzdata isn't available on the runner: fixed
-        # UTC-5 approximation. Good enough as a safety net, not exact
-        # during daylight saving — the zoneinfo path above is the real one.
-        now = datetime.now(timezone.utc) - timedelta(hours=5)
+def compute_prediction_lock_at(state):
+    """Thursday 8pm ET of the SAME NFL week as the matchups being shown.
 
-    days_until_thursday = (3 - now.weekday()) % 7  # Mon=0 ... Thu=3 ... Sun=6
-    candidate = (now + timedelta(days=days_until_thursday)).replace(
-        hour=20, minute=0, second=0, microsecond=0
-    )
-    if candidate <= now:
-        candidate += timedelta(days=7)  # already past this week's Thursday 8pm
+    Tied to Sleeper's week number (not "the next Thursday from right now"),
+    so once Thursday night passes the lock stays in the past for the rest of
+    that week instead of jumping ahead to next week's Thursday while the
+    page is still showing this week's games.
 
-    return candidate.astimezone(timezone.utc).isoformat()
+    Primary method: Sleeper's /state/nfl reports season_start_date. The
+    first Thursday on/after that date is Week 1's Thursday; week N's lock
+    is that Thursday + 7*(N-1) days, at 20:00 Eastern (DST handled by the
+    timezone database, not by hand).
+
+    Fallback (if season_start_date is missing/unparseable): treat each NFL
+    week as running Tuesday -> Monday, matching when Sleeper rolls its week
+    number, and lock on that window's Thursday.
+    """
+    tz = _ET if _ET is not None else timezone(timedelta(hours=-5))  # fixed-offset safety net only
+
+    week = state.get("week")
+    start_str = state.get("season_start_date")
+    if start_str and week:
+        try:
+            start = datetime.strptime(start_str, "%Y-%m-%d")
+            days_to_thursday = (3 - start.weekday()) % 7
+            week1_thursday = start + timedelta(days=days_to_thursday)
+            lock_day = week1_thursday + timedelta(days=7 * (int(week) - 1))
+            lock = datetime(lock_day.year, lock_day.month, lock_day.day, 20, 0, tzinfo=tz)
+            return lock.astimezone(timezone.utc).isoformat()
+        except (ValueError, TypeError):
+            pass  # fall through to the Tuesday-window fallback below
+
+    now = datetime.now(tz)
+    days_since_tuesday = (now.weekday() - 1) % 7  # Tue=0 ... Mon=6
+    week_start = (now - timedelta(days=days_since_tuesday)).replace(hour=0, minute=0, second=0, microsecond=0)
+    lock = (week_start + timedelta(days=2)).replace(hour=20)  # Tuesday + 2 days = Thursday
+    return lock.astimezone(timezone.utc).isoformat()
 
 
 def sync_current_week_predictions(current_league_id):
@@ -490,7 +507,79 @@ def sync_current_week_predictions(current_league_id):
         if name_a and name_b:
             pairs.append({"id": name_a + "__" + name_b, "teamA": name_a, "teamB": name_b})
 
-    return {"week": week, "lockAt": compute_prediction_lock_at(), "matchups": pairs}
+    return {
+        "week": week,
+        "lockAt": compute_prediction_lock_at(state),
+        "syncedAt": datetime.now(timezone.utc).isoformat(),
+        "matchups": pairs,
+    }
+
+
+def sync_prediction_results(current_league_id):
+    """Who actually won every FINAL matchup this season, so the Predictions
+    scoreboard can grade people's picks.
+
+    Only weeks that are completely over are included. Sleeper's week number
+    rolls over after Monday night, so while the season is live, every week
+    before the current one is final. A week where both sides have identical
+    points (a tie, or a game that was never played) gets winner=None and is
+    simply not scored for anyone.
+
+    Matchup ids are the two team names sorted alphabetically and joined with
+    "__", so they match regardless of which side Sleeper happens to list first.
+    """
+    state = fetch_json(f"{API_BASE}/state/nfl") or {}
+    league = fetch_json(f"{API_BASE}/league/{current_league_id}") or {}
+    status = league.get("status")
+    season_type = state.get("season_type")
+
+    try:
+        week = int(state.get("week") or 0)
+    except (TypeError, ValueError):
+        week = 0
+
+    if status == "complete":
+        last_final_week = 18  # whole season is in the books
+    elif status == "in_season" and season_type == "regular":
+        last_final_week = max(week - 1, 0)
+    elif status == "in_season" and season_type == "post":
+        last_final_week = 18
+    else:
+        last_final_week = 0  # pre-draft / drafting / offseason: nothing to grade yet
+
+    owner_map, _ = build_owner_map(current_league_id)
+    results = {}
+    for w in range(1, last_final_week + 1):
+        matchups = fetch_json(f"{API_BASE}/league/{current_league_id}/matchups/{w}") or []
+        by_id = {}
+        for m in matchups:
+            mid = m.get("matchup_id")
+            if mid is None:
+                continue
+            by_id.setdefault(mid, []).append(m)
+
+        week_results = []
+        for pair in by_id.values():
+            if len(pair) != 2:
+                continue
+            a, b = pair
+            name_a = owner_map.get(a["roster_id"], {}).get("name")
+            name_b = owner_map.get(b["roster_id"], {}).get("name")
+            if not name_a or not name_b:
+                continue
+            pts_a = a.get("points") or 0
+            pts_b = b.get("points") or 0
+            if pts_a > pts_b:
+                winner = name_a
+            elif pts_b > pts_a:
+                winner = name_b
+            else:
+                winner = None
+            week_results.append({"id": "__".join(sorted([name_a, name_b])), "winner": winner})
+        if week_results:
+            results[str(w)] = week_results
+
+    return {"season": league.get("season"), "results": results}
 
 
 def fetch_player_lookup():
@@ -626,6 +715,11 @@ def main():
     predictions = sync_current_week_predictions(CURRENT_LEAGUE_ID)
     with open(os.path.join(DATA_DIR, "predictions_matchups.json"), "w", encoding="utf-8") as f:
         json.dump(predictions, f, ensure_ascii=False, indent=2)
+
+    print("Syncing final matchup results for the Predictions scoreboard...")
+    prediction_results = sync_prediction_results(CURRENT_LEAGUE_ID)
+    with open(os.path.join(DATA_DIR, "predictions_results.json"), "w", encoding="utf-8") as f:
+        json.dump(prediction_results, f, ensure_ascii=False, indent=2)
 
     print("Done.")
 
