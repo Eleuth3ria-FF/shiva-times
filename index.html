@@ -542,7 +542,8 @@
         '<div class="bar-track"><div class="bar-fill" style="width:' + Math.max(2,(m.total/max)*100) + '%"></div></div>' +
         '<div class="bar-value">' + fmtMoney(m.total) + '</div>';
 
-      if (Array.isArray(m.breakdown) && m.breakdown.length > 0) {
+      // A $0 manager has nothing to break down, whatever the data says: never show a dropdown for them.
+      if (m.total > 0 && Array.isArray(m.breakdown) && m.breakdown.length > 0) {
         const items = m.breakdown.map(b =>
           '<div class="pp-item"><span>' + b.label + '</span><span class="pp-item-amount">' + fmtMoney(b.amount) + '</span></div>'
         ).join('');
