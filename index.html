@@ -174,6 +174,15 @@
   .pred-result-team { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 13px; color: var(--gold); margin-bottom: 4px; }
   .pred-result-voters { font-size: 13px; color: var(--text-muted); }
   .pred-lock-note { padding: 14px 20px; font-size: 12.5px; color: var(--text-muted); border-bottom: 1px solid var(--border); font-style: italic; }
+  .pred-layout { display: flex; gap: 16px; align-items: flex-start; }
+  .pred-layout-main { flex: 1 1 auto; min-width: 0; }
+  .pred-scoreboard { flex: 0 0 270px; }
+  .pred-scoreboard-note { padding: 10px 16px 14px; font-size: 11.5px; color: var(--text-muted); border-top: 1px solid var(--border); line-height: 1.5; }
+  .pred-scoreboard-empty { padding: 4px 16px 14px; font-size: 13px; color: var(--text-muted); }
+  .rank-pct { font-weight: 700; color: var(--text); margin-right: 8px; font-variant-numeric: tabular-nums; }
+  .rank-row.rank-unqualified { opacity: 0.55; }
+  @media (max-width: 700px) { .pred-layout { flex-direction: column; } .pred-scoreboard { flex-basis: auto; width: 100%; } }
+  .pred-lock-note.pred-notice-error { border-left: 3px solid var(--crimson); color: var(--text); font-style: normal; }
   .team-name { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 16px; }
   .team-meta { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
   .empty-state { padding: 44px 32px; text-align: center; }
@@ -336,7 +345,17 @@
       <h2 class="panel-title">Weekly Matchup Predictions</h2>
       <p class="panel-sub">Public votes. Results stay hidden until you cast yours. Locks Thursday 8pm ET.</p>
     </div>
-    <div class="card" id="predictions-body"></div>
+    <div class="pred-layout">
+      <div class="pred-layout-main">
+        <div class="card" id="predictions-body"></div>
+        <div class="updated-tag" id="predictions-synced"></div>
+      </div>
+      <div class="card pred-scoreboard">
+        <div class="division-label" style="padding-top:16px">Scoreboard</div>
+        <div id="predictions-scoreboard"></div>
+        <div class="pred-scoreboard-note" id="predictions-scoreboard-note"></div>
+      </div>
+    </div>
   </section>
 
 </main>
@@ -721,6 +740,13 @@
     const isLocked = lockAt ? (new Date() >= lockAt) : false;
     const saved = getSavedVote(week);
 
+    const syncedEl = document.getElementById('predictions-synced');
+    if (syncedEl && data.syncedAt) {
+      syncedEl.textContent = 'Week ' + week + ' matchups last synced ' +
+        new Date(data.syncedAt).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }) +
+        '. This page doesn\u2019t update itself \u2014 reload to check for newer data.';
+    }
+
     if (isLocked || saved) {
       await renderPredictionResults(el, week, data.matchups, isLocked, saved);
     } else {
@@ -769,28 +795,64 @@
       if (!voter) { statusEl.textContent = 'Pick who you are first.'; return; }
       if (Object.keys(picks).length < matchups.length) { statusEl.textContent = 'Pick a winner for every matchup.'; return; }
 
+      // The page may have been sitting open since before the deadline —
+      // re-check right now rather than trusting what was true at load time.
+      if (lockAt && new Date() >= lockAt) {
+        await renderPredictionResults(el, week, matchups, true, getSavedVote(week),
+          'Voting for Week ' + week + ' closed ' + lockAt.toLocaleString('en-US', { weekday: 'long', hour: 'numeric', minute: '2-digit', timeZoneName: 'short' }) + '. Your picks were not recorded.');
+        return;
+      }
+
       const submitBtn = document.getElementById('pred-submit-btn');
       submitBtn.disabled = true;
       statusEl.textContent = 'Submitting…';
 
       const pickList = Object.keys(picks).map(matchupId => ({ matchup: matchupId, pick: picks[matchupId] }));
 
+      let json = null;
       try {
-        await fetch(APPS_SCRIPT_URL, {
+        const res = await fetch(APPS_SCRIPT_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // avoids a CORS preflight Apps Script can't answer
-          body: JSON.stringify({ week: week, voter: voter, picks: pickList }),
+          body: JSON.stringify({ week: week, voter: voter, picks: pickList, lockAt: lockAt ? lockAt.toISOString() : null }),
         });
-        saveVoteLocally(week, voter, picks);
-        await renderPredictionResults(el, week, matchups, false, { voter, picks });
+        try { json = await res.json(); } catch (e) { json = null; }
       } catch (e) {
-        statusEl.textContent = 'Something went wrong submitting — try again.';
+        statusEl.textContent = 'Couldn\u2019t reach the voting server. Check your connection and try again.';
         submitBtn.disabled = false;
+        return;
       }
+
+      if (json && json.error === 'LOCKED') {
+        // The server's clock is the authority — it says voting is closed.
+        await renderPredictionResults(el, week, matchups, true, getSavedVote(week), json.message);
+        return;
+      }
+      if (!json || json.error || !json.success) {
+        statusEl.textContent = (json && json.message)
+          ? 'The server rejected your picks: ' + json.message
+          : 'Couldn\u2019t confirm your picks were saved. Reload the page and check before trying again.';
+        submitBtn.disabled = false;
+        return;
+      }
+
+      saveVoteLocally(week, voter, picks);
+      await renderPredictionResults(el, week, matchups, false, { voter, picks });
     });
+
+    // If the tab is left open past the deadline, close the form on its own
+    // instead of leaving a working-looking form that can no longer succeed.
+    if (lockAt) {
+      const msUntilLock = lockAt.getTime() - Date.now();
+      if (msUntilLock > 0 && msUntilLock < 2147000000) {
+        setTimeout(() => {
+          renderPredictionResults(el, week, matchups, true, getSavedVote(week), 'Voting just closed for Week ' + week + '.');
+        }, msUntilLock);
+      }
+    }
   }
 
-  async function renderPredictionResults(el, week, matchups, isLocked, saved) {
+  async function renderPredictionResults(el, week, matchups, isLocked, saved, notice) {
     el.innerHTML = '<div class="pred-status" style="padding:16px 20px 0">Loading results…</div>';
 
     let votes = [];
@@ -801,6 +863,7 @@
     } catch (e) { /* show whatever we can below, even with no votes loaded */ }
 
     const header =
+      (notice ? '<div class="pred-lock-note pred-notice-error">' + notice + '</div>' : '') +
       (isLocked ? '<div class="pred-lock-note">Voting is closed for Week ' + week + '.</div>' : '') +
       (saved ? '<div class="pred-lock-note">You voted as ' + saved.voter + '.</div>' : '');
 
@@ -821,10 +884,99 @@
     el.innerHTML = header + body;
   }
 
+  // ---------- Predictions scoreboard ----------
+  const SCOREBOARD_MIN_PICKS = 3; // need at least this many graded picks to be ranked (avoids a lucky 1-for-1 topping the board)
+
+  // Matchup ids are two team names joined by "__". Sort them so the same game
+  // matches no matter which side was listed first when the vote vs. the result was written.
+  function canonMatchup(id) { return String(id).split('__').sort().join('__'); }
+
+  function computeScoreboard(votes, resultsData) {
+    const winners = {}; // "week|matchup" -> winning team name (null = tie / not scoreable)
+    const resultsByWeek = (resultsData && resultsData.results) || {};
+    Object.keys(resultsByWeek).forEach(week => {
+      resultsByWeek[week].forEach(r => { winners[week + '|' + canonMatchup(r.id)] = r.winner; });
+    });
+
+    const stats = {};
+    votes.forEach(v => {
+      const key = String(v.week) + '|' + canonMatchup(v.matchup);
+      if (!(key in winners)) return;      // that week isn't final yet, or an unknown matchup
+      const winner = winners[key];
+      if (!winner) return;                // tie: nobody gets credit or blame
+      const st = stats[v.voter] || (stats[v.voter] = { voter: v.voter, correct: 0, total: 0 });
+      st.total += 1;
+      if (v.pick === winner) st.correct += 1;
+    });
+
+    const rows = Object.keys(stats).map(k => {
+      const st = stats[k];
+      return { voter: st.voter, correct: st.correct, total: st.total, pct: st.total ? st.correct / st.total : 0, qualified: st.total >= SCOREBOARD_MIN_PICKS };
+    });
+    rows.sort((a, b) =>
+      (Number(b.qualified) - Number(a.qualified)) ||
+      (b.pct - a.pct) || (b.correct - a.correct) || (b.total - a.total) ||
+      String(a.voter).localeCompare(String(b.voter)));
+
+    // Rank only qualified rows; identical stat lines share a rank.
+    let rank = 0, prev = null;
+    rows.forEach((r, i) => {
+      if (!r.qualified) { r.rank = null; return; }
+      const same = prev && prev.pct === r.pct && prev.correct === r.correct && prev.total === r.total;
+      if (!same) rank = i + 1;
+      r.rank = rank;
+      prev = r;
+    });
+    return rows;
+  }
+
+  async function renderScoreboard(resultsData) {
+    const el = document.getElementById('predictions-scoreboard');
+    const noteEl = document.getElementById('predictions-scoreboard-note');
+    if (!el) return;
+    noteEl.textContent = 'Completed weeks only. Ranked by accuracy; you need ' + SCOREBOARD_MIN_PICKS + '+ graded picks to be ranked. Ties aren\u2019t counted.';
+
+    if (APPS_SCRIPT_URL.indexOf('PASTE_YOUR') === 0) {
+      el.innerHTML = '<div class="pred-scoreboard-empty">Voting isn\u2019t connected yet.</div>';
+      return;
+    }
+    if (!resultsData || !resultsData.results) {
+      el.innerHTML = '<div class="pred-scoreboard-empty">Results haven\u2019t synced yet, so there\u2019s nothing to grade.</div>';
+      return;
+    }
+
+    let votes = [];
+    try {
+      const res = await fetch(APPS_SCRIPT_URL); // no ?week= -> every vote ever cast
+      const json = await res.json();
+      votes = Array.isArray(json.votes) ? json.votes : [];
+    } catch (e) {
+      el.innerHTML = '<div class="pred-scoreboard-empty">Couldn\u2019t load votes right now. Reload to try again.</div>';
+      return;
+    }
+
+    const rows = computeScoreboard(votes, resultsData);
+    if (rows.length === 0) {
+      const anyWeeks = Object.keys(resultsData.results).length > 0;
+      el.innerHTML = '<div class="pred-scoreboard-empty">' + (anyWeeks
+        ? 'No graded picks yet. Nobody voted on a week that\u2019s now final.'
+        : 'No graded picks yet. The scoreboard starts once a week is final (after Monday night).') + '</div>';
+      return;
+    }
+
+    el.innerHTML = rows.map(r =>
+      '<div class="rank-row' + (r.rank === 1 ? ' rank-top' : '') + (r.qualified ? '' : ' rank-unqualified') + '">' +
+        '<span class="rank-num">' + (r.rank === null ? '\u2013' : r.rank) + '</span>' +
+        '<span class="rank-team">' + r.voter + '</span>' +
+        '<span class="rank-record"><span class="rank-pct">' + Math.round(r.pct * 100) + '%</span>' + r.correct + '-' + (r.total - r.correct) + '</span>' +
+      '</div>'
+    ).join('');
+  }
+
   async function init() {
     const statusEl = document.getElementById('sync-status');
 
-    const [standings, h2h, rivalries, trades, trophies, prizepool, predictions] = await Promise.all([
+    const [standings, h2h, rivalries, trades, trophies, prizepool, predictions, predictionResults] = await Promise.all([
       getJSON('./data/standings.json'),
       getJSON('./data/headtohead.json'),
       getJSON('./data/rivalries.json'),
@@ -832,6 +984,7 @@
       getJSON('./data/trophies.json'),
       getJSON('./data/prizepool.json'),
       getJSON('./data/predictions_matchups.json'),
+      getJSON('./data/predictions_results.json'),
     ]);
     const home = await getJSON('./data/articles.json');
 
@@ -849,6 +1002,7 @@
     renderChampions(trophies); // after the select is populated, so it has a default trophy to show
     renderTeams(standings, h2h);
     renderPredictions(predictions, managerNames);
+    renderScoreboard(predictionResults);
 
     populateTradeSelects(managerNames);
     populateH2HSelect(managerNames);
