@@ -633,13 +633,16 @@ def fetch_prizepool():
         "BB 2ND": "Toilet Bowl — 2nd",
         "BB 1ST": "Toilet Bowl — Winner",
     }
+    # The categories are one unbroken run of headers right after "Total ($)"
+    # (W1...W14, then the awards). Stop at the first blank header: anything
+    # further right is the sheet's hidden sorting-helper block, not prize
+    # money. (Those helper cells share the header row, so scanning every
+    # non-empty header used to pull them in as fake categories.)
     breakdown_cols = []  # list of (column_index, label)
-    for i, col in enumerate(header):
-        if i < 3:
-            continue
-        label = col.strip()
+    for i in range(3, len(header)):
+        label = header[i].strip()
         if not label:
-            continue
+            break
         breakdown_cols.append((i, LABEL_OVERRIDES.get(label, label)))
 
     def parse_money(s):
@@ -665,6 +668,12 @@ def fetch_prizepool():
             amount = parse_money(row[col_idx])
             if amount:  # only nonzero entries — most categories are $0 for most managers
                 breakdown.append({"label": label, "amount": amount})
+
+        breakdown_sum = sum(b["amount"] for b in breakdown)
+        if abs(breakdown_sum - total) > 0.01:
+            print(f"WARNING: prize pool mismatch for {name}: categories add up to "
+                  f"${breakdown_sum:g} but the sheet's total says ${total:g} "
+                  f"- check the published tab for stray columns or edited headers.")
 
         managers.append({"name": name, "total": total, "breakdown": breakdown})
 
