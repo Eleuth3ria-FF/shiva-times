@@ -1,0 +1,83 @@
+{
+  "season": "2026",
+  "results": {
+    "1": [
+      {
+        "id": "Mean Machine__Scuderia Malo",
+        "winner": "Scuderia Malo"
+      },
+      {
+        "id": "La Quiche__Tebows before Hoes",
+        "winner": "La Quiche"
+      },
+      {
+        "id": "Lavaltree's Piggy __SGB Nation ⚖️",
+        "winner": "Lavaltree's Piggy "
+      },
+      {
+        "id": "MAGRAUDERS __Montreal Weapon X",
+        "winner": "Montreal Weapon X"
+      },
+      {
+        "id": "T-Bone Ray's__The Gridiron Sheriffs",
+        "winner": "The Gridiron Sheriffs"
+      },
+      {
+        "id": "Les Pingouins 🐧__MTL New Empire",
+        "winner": "Les Pingouins 🐧"
+      }
+    ],
+    "2": [
+      {
+        "id": "La Quiche__Scuderia Malo",
+        "winner": "Scuderia Malo"
+      },
+      {
+        "id": "Mean Machine__Tebows before Hoes",
+        "winner": "Mean Machine"
+      },
+      {
+        "id": "Lavaltree's Piggy __Les Pingouins 🐧",
+        "winner": "Lavaltree's Piggy "
+      },
+      {
+        "id": "Montreal Weapon X__The Gridiron Sheriffs",
+        "winner": "Montreal Weapon X"
+      },
+      {
+        "id": "MAGRAUDERS __T-Bone Ray's",
+        "winner": "T-Bone Ray's"
+      },
+      {
+        "id": "MTL New Empire__SGB Nation ⚖️",
+        "winner": "SGB Nation ⚖️"
+      }
+    ],
+    "3": [
+      {
+        "id": "Scuderia Malo__Tebows before Hoes",
+        "winner": "Scuderia Malo"
+      },
+      {
+        "id": "Lavaltree's Piggy __MTL New Empire",
+        "winner": "Lavaltree's Piggy "
+      },
+      {
+        "id": "Montreal Weapon X__T-Bone Ray's",
+        "winner": "Montreal Weapon X"
+      },
+      {
+        "id": "MAGRAUDERS __The Gridiron Sheriffs",
+        "winner": "MAGRAUDERS "
+      },
+      {
+        "id": "Les Pingouins 🐧__SGB Nation ⚖️",
+        "winner": "SGB Nation ⚖️"
+      },
+      {
+        "id": "La Quiche__Mean Machine",
+        "winner": "La Quiche"
+      }
+    ]
+  }
+}

@@ -61,16 +61,7 @@
     {
       "name": "David Légaré",
       "total": 0.0,
-      "breakdown": [
-        {
-          "label": "$0",
-          "amount": 30.0
-        },
-        {
-          "label": "$0",
-          "amount": 30.0
-        }
-      ]
+      "breakdown": []
     },
     {
       "name": "Alexandre Raymond",
