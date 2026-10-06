@@ -1,6 +1,35 @@
 {
   "trades": [
     {
+      "date": "Oct 05, 2026",
+      "teams": [
+        "MAGRAUDERS ",
+        "The Gridiron Sheriffs"
+      ],
+      "sides": [
+        {
+          "team": "MAGRAUDERS ",
+          "items": [
+            "Bucky Irving",
+            "Carnell Tate",
+            "Romeo Doubs",
+            "2029 Round 1 pick (via The Gridiron Sheriffs)"
+          ]
+        },
+        {
+          "team": "The Gridiron Sheriffs",
+          "items": [
+            "Rhamondre Stevenson",
+            "Breece Hall",
+            "Christian Watson",
+            "2029 Round 3 pick (via Scuderia Malo)",
+            "2028 Round 3 pick (via MAGRAUDERS )"
+          ]
+        }
+      ],
+      "note": "MAGRAUDERS  gets Bucky Irving, Carnell Tate, Romeo Doubs, 2029 Round 1 pick (via The Gridiron Sheriffs) · The Gridiron Sheriffs gets Rhamondre Stevenson, Breece Hall, Christian Watson, 2029 Round 3 pick (via Scuderia Malo), 2028 Round 3 pick (via MAGRAUDERS )"
+    },
+    {
       "date": "Sep 30, 2026",
       "teams": [
         "MTL New Empire",

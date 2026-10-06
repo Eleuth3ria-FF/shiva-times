@@ -127,6 +127,48 @@
       "ties": 0
     },
     {
+      "a": "The Gridiron Sheriffs",
+      "b": "Scuderia Malo",
+      "aWins": 4,
+      "bWins": 3,
+      "ties": 0
+    },
+    {
+      "a": "Tebows before Hoes",
+      "b": "MTL New Empire",
+      "aWins": 4,
+      "bWins": 7,
+      "ties": 0
+    },
+    {
+      "a": "Montreal Weapon X",
+      "b": "Lavaltree's Piggy ",
+      "aWins": 5,
+      "bWins": 4,
+      "ties": 0
+    },
+    {
+      "a": "SGB Nation ⚖️",
+      "b": "MAGRAUDERS ",
+      "aWins": 6,
+      "bWins": 2,
+      "ties": 0
+    },
+    {
+      "a": "Mean Machine",
+      "b": "Les Pingouins 🐧",
+      "aWins": 4,
+      "bWins": 4,
+      "ties": 0
+    },
+    {
+      "a": "La Quiche",
+      "b": "T-Bone Ray's",
+      "aWins": 1,
+      "bWins": 6,
+      "ties": 0
+    },
+    {
       "a": "Montreal Weapon X",
       "b": "Scuderia Malo",
       "aWins": 4,
@@ -159,13 +201,6 @@
       "b": "MTL New Empire",
       "aWins": 4,
       "bWins": 2,
-      "ties": 0
-    },
-    {
-      "a": "Mean Machine",
-      "b": "Les Pingouins 🐧",
-      "aWins": 3,
-      "bWins": 4,
       "ties": 0
     },
     {
@@ -208,13 +243,6 @@
       "b": "MTL New Empire",
       "aWins": 5,
       "bWins": 3,
-      "ties": 0
-    },
-    {
-      "a": "The Gridiron Sheriffs",
-      "b": "Scuderia Malo",
-      "aWins": 4,
-      "bWins": 2,
       "ties": 0
     },
     {
@@ -277,13 +305,6 @@
       "a": "Montreal Weapon X",
       "b": "Les Pingouins 🐧",
       "aWins": 4,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
-      "a": "SGB Nation ⚖️",
-      "b": "MAGRAUDERS ",
-      "aWins": 5,
       "bWins": 2,
       "ties": 0
     },
@@ -344,13 +365,6 @@
       "ties": 0
     },
     {
-      "a": "Tebows before Hoes",
-      "b": "MTL New Empire",
-      "aWins": 4,
-      "bWins": 6,
-      "ties": 0
-    },
-    {
       "a": "Montreal Weapon X",
       "b": "Mean Machine",
       "aWins": 5,
@@ -435,13 +449,6 @@
       "ties": 0
     },
     {
-      "a": "Montreal Weapon X",
-      "b": "Lavaltree's Piggy ",
-      "aWins": 4,
-      "bWins": 4,
-      "ties": 0
-    },
-    {
       "a": "MAGRAUDERS ",
       "b": "MTL New Empire",
       "aWins": 5,
@@ -453,13 +460,6 @@
       "b": "Mean Machine",
       "aWins": 4,
       "bWins": 3,
-      "ties": 0
-    },
-    {
-      "a": "La Quiche",
-      "b": "T-Bone Ray's",
-      "aWins": 1,
-      "bWins": 5,
       "ties": 0
     },
     {
