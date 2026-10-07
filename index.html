@@ -256,6 +256,57 @@
     .rv-seg-label { font-size: 12.5px; } .rv-seg-weeks { font-size: 9.5px; letter-spacing: 0.06em; }
   }
 
+  /* ---------- Home (front page) ---------- */
+  .home-grid { display: grid; grid-template-columns: minmax(0, 1fr) 304px; gap: 30px; align-items: start; }
+  @media (max-width: 860px) { .home-grid { grid-template-columns: 1fr; } }
+  .story-kicker { display: block; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; color: var(--ink-2); margin: 0 0 8px; }
+  .story-headline { font-family: var(--font-display); font-weight: 900; line-height: 1.06; letter-spacing: -0.01em; }
+  .story-dek { font-style: italic; color: var(--ink-2); line-height: 1.35; }
+  .story--lead { border-top: 4px solid var(--ink); padding-top: 14px; margin-bottom: 30px; }
+  .story--lead .story-headline { font-size: clamp(30px, 5.6vw, 54px); margin: 0 0 12px; }
+  .story--lead .story-dek { font-size: 19.5px; margin: 0 0 12px; }
+  .story-byline { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; color: var(--ink-3); padding: 8px 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--hair); margin: 0 0 16px; }
+  .story-body p { margin: 0 0 14px; font-size: 17.5px; line-height: 1.62; }
+  .story--lead .story-body p:first-child::first-letter { float: left; font-family: var(--font-display); font-weight: 900; font-size: 3.7em; line-height: 0.82; padding: 6px 10px 0 0; }
+  .story-scores { margin: 6px 0 4px; border: 1px solid var(--ink); }
+  .story-scores summary, .story-archive > summary { list-style: none; cursor: pointer; padding: 9px 14px; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; }
+  .story-scores summary { background: var(--ink); color: var(--paper); }
+  .story-scores summary::-webkit-details-marker, .story-archive > summary::-webkit-details-marker, .story--more > summary::-webkit-details-marker { display: none; }
+  .story-scores summary::after { content: '  +'; } .story-scores[open] summary::after { content: '  \2212'; }
+  .scores { padding: 4px 0; }
+  .sc-row { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 10px; align-items: center; padding: 7px 14px; border-bottom: 1px solid var(--hair); font-size: 14.5px; }
+  .sc-row:last-child { border-bottom: none; }
+  .sc-team--b { display: flex; justify-content: flex-end; text-align: right; }
+  .sc-score { font-variant-numeric: lining-nums tabular-nums; white-space: nowrap; text-align: center; }
+  .sc-row .win { font-weight: 700; }
+  .story--more { border-top: 1px solid var(--ink); padding: 15px 0 4px; }
+  .story--more > summary { list-style: none; cursor: pointer; display: block; }
+  .story--more .story-headline { display: block; font-size: 25px; margin: 0 0 6px; }
+  .story--more .story-dek { display: block; font-size: 16.5px; margin: 0 0 8px; }
+  .story-open { display: inline-block; font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; border-bottom: 1px solid var(--ink); margin-bottom: 12px; }
+  .story--more[open] .story-open { display: none; }
+  .story--more .story-body { padding-top: 8px; }
+  .story-archive { border: 1px solid var(--ink); margin-top: 14px; }
+  .story-archive > summary { background: var(--paper-2); }
+  .story-archive > .story-list { padding: 0 16px 8px; }
+  .home-box { border: 1px solid var(--ink); margin-bottom: 22px; }
+  .home-countdown { padding: 10px 14px; border-bottom: 1px solid var(--hair); font-size: 14.5px; }
+  .home-matchup { padding: 8px 14px; border-bottom: 1px solid var(--hair); font-size: 14px; }
+  .hm-b { display: flex; align-items: center; gap: 8px; margin-top: 5px; }
+  .hm-vs { font-family: var(--font-display); font-style: italic; color: var(--ink-3); flex: 0 0 22px; }
+  .home-link { display: block; width: 100%; text-align: left; background: none; border: none; border-top: 1px solid var(--ink); padding: 10px 14px; font-family: var(--font-text); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; color: var(--ink); cursor: pointer; }
+  .home-link:hover { background: var(--paper-2); }
+  .home-box .rank-row:last-of-type { border-bottom: none; }
+  .wire-row { padding: 10px 14px; border-bottom: 1px solid var(--hair); }
+  .wire-date { font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; color: var(--ink-3); }
+  .wire-teams { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; font-size: 14px; margin: 4px 0; }
+  .wire-swap { color: var(--ink-3); }
+  .cal-row { display: flex; gap: 12px; padding: 10px 14px; border-bottom: 1px solid var(--hair); }
+  .cal-date { flex: 0 0 96px; font-family: var(--font-display); font-weight: 700; font-size: 14.5px; line-height: 1.25; }
+  .cal-label { font-weight: 700; font-size: 14.5px; line-height: 1.3; }
+  .cal-note { font-size: 13px; font-style: italic; color: var(--ink-2); margin-top: 2px; }
+  .cal-foot { padding: 9px 14px; font-size: 12.5px; font-style: italic; color: var(--ink-3); }
+
   /* ---------- Admin ---------- */
   .admin-link { display: block; padding: 18px 20px; border-bottom: 1px solid var(--hair); text-decoration: none; color: var(--ink); transition: background .12s ease; }
   .admin-link:last-child { border-bottom: none; }
@@ -349,12 +400,15 @@
 <main>
 
   <section class="panel active" id="panel-home">
-    <div class="headline-block">
-      <p class="eyebrow">This Week</p>
-      <h2 class="panel-title">The Front Page</h2>
-      <p class="panel-sub">Auto-written recaps and commissioner announcements, newest first.</p>
+    <div class="home-grid">
+      <div class="home-main" id="home-stories"></div>
+      <aside class="home-aside">
+        <div class="home-box" id="home-thisweek"></div>
+        <div class="home-box" id="home-table"></div>
+        <div class="home-box" id="home-wire"></div>
+        <div class="home-box" id="home-calendar"></div>
+      </aside>
     </div>
-    <div class="card" id="home-body"></div>
   </section>
 
   <section class="panel" id="panel-standings">
@@ -582,19 +636,146 @@
     if (volEl) volEl.textContent = 'Vol. ' + toRoman(Math.max(1, now.getFullYear() - 2010)) + ' \u00B7 Est. 2011';
   }
 
-  // ---------- Home ----------
-  function renderHome(articles) {
-    const el = document.getElementById('home-body');
-    if (!articles || !Array.isArray(articles.posts) || articles.posts.length === 0) {
-      emptyState(el, 'The presses are cold',
-        'No articles yet — this fills in once weekly recaps start auto-generating, or the commissioner posts an announcement.');
+  // ---------- Home (the front page) ----------
+  // Everything that comes from the Sheet or the recap writer goes through esc(): text is shown, never run.
+  const esc = v => String(v == null ? '' : v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const fmtScore = v => (Math.round(Number(v) * 100) / 100).toString();
+  const isoOf = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  function addDaysISO(iso, n) { const d = new Date(iso + 'T12:00:00'); d.setDate(d.getDate() + n); return isoOf(d); }
+  function fmtDay(iso, withWeekday) {
+    if (!iso) return '';
+    const d = new Date(iso + 'T12:00:00');
+    if (isNaN(d)) return '';
+    const o = withWeekday ? { weekday: 'short', month: 'short', day: 'numeric' } : { month: 'short', day: 'numeric' };
+    if (d.getFullYear() !== new Date().getFullYear()) o.year = 'numeric';
+    return d.toLocaleDateString('en-US', o);
+  }
+
+  function buildStories(recap, announcements) {
+    const out = [];
+    ((recap && recap.recaps) || []).forEach(r => out.push({
+      kind: 'recap', date: r.date, pinned: false, kicker: 'Week ' + r.week + ' recap', headline: r.headline, dek: r.dek || '',
+      byline: r.byline || 'The Shiva Times Staff', paragraphs: r.paragraphs || [], results: r.results || [] }));
+    ((announcements && announcements.posts) || []).forEach(p => out.push({
+      kind: 'announcement', date: p.date, pinned: !!p.pinned, kicker: 'From the commissioner', headline: p.title, dek: '',
+      byline: 'the Commissioner', paragraphs: p.paragraphs || [], results: [] }));
+    out.sort((a, b) => (Number(b.pinned) - Number(a.pinned)) || String(b.date || '').localeCompare(String(a.date || '')));
+    return out;
+  }
+
+  function scoresTable(results) {
+    return '<div class="scores">' + results.map(g => {
+      const aw = g.aScore > g.bScore, bw = g.bScore > g.aScore;
+      return '<div class="sc-row"><div class="sc-team' + (aw ? ' win' : '') + '">' + teamWithLogo(g.a) + '</div>' +
+        '<div class="sc-score"><span class="' + (aw ? 'win' : '') + '">' + fmtScore(g.aScore) + '</span> \u2013 <span class="' + (bw ? 'win' : '') + '">' + fmtScore(g.bScore) + '</span></div>' +
+        '<div class="sc-team sc-team--b' + (bw ? ' win' : '') + '">' + teamWithLogo(g.b) + '</div></div>';
+    }).join('') + '</div>';
+  }
+
+  function storyHTML(st, lead) {
+    const day = fmtDay(st.date);
+    const kicker = (st.pinned ? 'Pinned \u00b7 ' : '') + st.kicker + (day ? ' \u00b7 ' + day : '');
+    const body = st.paragraphs.map(p => '<p>' + esc(p) + '</p>').join('');
+    const box = st.results.length ? '<details class="story-scores"><summary>Box scores</summary>' + scoresTable(st.results) + '</details>' : '';
+    if (lead) {
+      return '<article class="story story--lead"><p class="story-kicker">' + esc(kicker) + '</p>' +
+        '<h2 class="story-headline">' + esc(st.headline) + '</h2>' + (st.dek ? '<p class="story-dek">' + esc(st.dek) + '</p>' : '') +
+        '<p class="story-byline">By ' + esc(st.byline) + '</p><div class="story-body">' + body + '</div>' + box + '</article>';
+    }
+    return '<details class="story story--more"><summary><span class="story-kicker">' + esc(kicker) + '</span>' +
+      '<span class="story-headline">' + esc(st.headline) + '</span>' + (st.dek ? '<span class="story-dek">' + esc(st.dek) + '</span>' : '') +
+      '<span class="story-open">Read the story</span></summary><div class="story-body">' + body + '</div>' + box + '</details>';
+  }
+
+  function renderStories(stories) {
+    const el = document.getElementById('home-stories');
+    el.classList.remove('card');
+    if (!stories.length) {
+      el.classList.add('card');
+      emptyState(el, 'The presses are cold', 'No stories yet. The first recap prints the Tuesday after Week 1 ends, and commissioner announcements show up here too.');
       return;
     }
-    el.innerHTML = articles.posts.map(p =>
-      '<div class="article-row"><div class="rivalry-note">' + (p.date || '') + (p.type ? ' · ' + p.type : '') + '</div>' +
-      '<div class="article-title">' + p.title + '</div>' +
-      '<p style="color:var(--text-muted);margin:6px 0 0">' + (p.body || '') + '</p></div>'
-    ).join('');
+    const SHOW = 5, rest = stories.slice(1);
+    let html = storyHTML(stories[0], true) + '<div class="story-list">' + rest.slice(0, SHOW - 1).map(st => storyHTML(st, false)).join('') + '</div>';
+    if (rest.length > SHOW - 1) {
+      html += '<details class="story-archive"><summary>' + (rest.length - (SHOW - 1)) + ' older ' + (rest.length - (SHOW - 1) === 1 ? 'story' : 'stories') + '</summary>' +
+        '<div class="story-list">' + rest.slice(SHOW - 1).map(st => storyHTML(st, false)).join('') + '</div></details>';
+    }
+    el.innerHTML = html;
+  }
+
+  let countdownTimer = null;
+  function updateCountdown(pred) {
+    const el = document.getElementById('home-countdown'), link = document.getElementById('home-picks-link');
+    if (!el) return;
+    const lock = pred.lockAt ? new Date(pred.lockAt) : null;
+    if (!lock || isNaN(lock)) { el.textContent = ''; return; }
+    const ms = lock - Date.now();
+    if (ms <= 0) { el.innerHTML = '<strong>Predictions are closed</strong> for Week ' + esc(pred.week) + '.'; if (link) link.textContent = 'See the picks \u2192'; return; }
+    const d = Math.floor(ms / 86400000), h = Math.floor((ms % 86400000) / 3600000), m = Math.floor((ms % 3600000) / 60000);
+    el.innerHTML = 'Predictions lock in <strong>' + (d ? d + 'd ' : '') + h + 'h ' + m + 'm</strong>';
+    if (link) link.textContent = 'Make your picks \u2192';
+  }
+
+  function renderThisWeek(pred, rivalries) {
+    const el = document.getElementById('home-thisweek');
+    if (!pred || !Array.isArray(pred.matchups) || !pred.matchups.length) { el.style.display = 'none'; return; }
+    el.style.display = '';
+    const riv = rivalries && String(rivalries.week) === String(pred.week);
+    el.innerHTML = '<div class="division-label">Week ' + esc(pred.week) + (riv ? ' \u00b7 Rivalry Week' : '') + '</div>' +
+      '<div class="home-countdown" id="home-countdown"></div>' +
+      pred.matchups.map(m => '<div class="home-matchup"><div>' + teamWithLogo(m.teamA) + '</div><div class="hm-b"><span class="hm-vs">vs</span>' + teamWithLogo(m.teamB) + '</div></div>').join('') +
+      '<button type="button" class="home-link" id="home-picks-link" data-go="predictions">Make your picks \u2192</button>';
+    updateCountdown(pred);
+    clearInterval(countdownTimer);
+    countdownTimer = setInterval(() => updateCountdown(pred), 30000);
+  }
+
+  function renderTable(standings) {
+    const el = document.getElementById('home-table');
+    if (!standings || !Array.isArray(standings.divisions) || !standings.divisions.length) { el.style.display = 'none'; return; }
+    el.style.display = '';
+    const all = standings.divisions.flatMap(d => d.teams).slice().sort((a, b) => ((b.wins || 0) - (a.wins || 0)) || ((b.pointsFor || 0) - (a.pointsFor || 0)));
+    el.innerHTML = '<div class="division-label">The Table</div>' + all.slice(0, 5).map((t, i) =>
+      '<div class="rank-row' + (i === 0 ? ' rank-top' : '') + '"><span class="rank-num">' + (i + 1) + '</span><span class="rank-team">' + teamWithLogo(t.team) + '</span>' +
+      '<span class="rank-record">' + (t.wins || 0) + '-' + (t.losses || 0) + (t.ties ? '-' + t.ties : '') + '</span></div>'
+    ).join('') + '<button type="button" class="home-link" data-go="standings">Full standings \u2192</button>';
+  }
+
+  function renderWire(trades) {
+    const el = document.getElementById('home-wire');
+    const list = trades && Array.isArray(trades.trades) ? trades.trades.slice(0, 3) : [];
+    if (!list.length) { el.style.display = 'none'; return; }
+    el.style.display = '';
+    el.innerHTML = '<div class="division-label">On the Wire</div>' + list.map(t => {
+      const sides = Array.isArray(t.sides) ? t.sides : [];
+      const assets = sides.reduce((n, s) => n + ((s.items || []).length), 0);
+      return '<div class="wire-row"><div class="wire-date">' + esc(t.date || '') + '</div>' +
+        '<div class="wire-teams">' + sides.map(s => teamWithLogo(s.team)).join('<span class="wire-swap">\u21c4</span>') + '</div>' +
+        '<div class="wire-date">' + assets + ' asset' + (assets === 1 ? '' : 's') + ' changed hands</div></div>';
+    }).join('') + '<button type="button" class="home-link" data-go="trades">Full trade ledger \u2192</button>';
+  }
+
+  function renderCalendar(cal, ann) {
+    const el = document.getElementById('home-calendar');
+    const today = isoOf(new Date()), items = [];
+    ((cal && cal.events) || []).forEach(e => { if (e.date) items.push({ date: e.date, end: e.edge === 'start' ? addDaysISO(e.date, 4) : e.date, label: e.label, note: e.note }); });
+    ((ann && ann.events) || []).forEach(e => { if (e.date) items.push({ date: e.date, end: e.date, label: e.title, note: e.note }); });
+    const upcoming = items.filter(i => i.end >= today).sort((a, b) => a.date.localeCompare(b.date)).slice(0, 5);
+    if (!upcoming.length) { el.style.display = 'none'; return; }
+    el.style.display = '';
+    el.innerHTML = '<div class="division-label">Mark Your Calendar</div>' + upcoming.map(i =>
+      '<div class="cal-row"><div class="cal-date">' + esc(fmtDay(i.date, true)) + '</div><div class="cal-what"><div class="cal-label">' + esc(i.label) +
+      (i.date <= today ? ' <span class="former-tag">Now</span>' : '') + '</div>' + (i.note ? '<div class="cal-note">' + esc(i.note) + '</div>' : '') + '</div></div>'
+    ).join('') + '<div class="cal-foot">Waivers (FAAB) open Tuesdays.</div>';
+  }
+
+  function renderHome(d) {
+    renderStories(buildStories(d.recap, d.announcements));
+    renderThisWeek(d.predictions, d.rivalries);
+    renderTable(d.standings);
+    renderWire(d.trades);
+    renderCalendar(d.calendar, d.announcements);
   }
 
   // ---------- Standings ----------
@@ -1254,14 +1435,23 @@
       getJSON('./data/predictions_matchups.json'),
       getJSON('./data/predictions_results.json'),
     ]);
-    const home = await getJSON('./data/articles.json');
+    const [recap, announcements, calendar] = await Promise.all([
+      getJSON('./data/recap.json'),
+      getJSON('./data/announcements.json'),
+      getJSON('./data/calendar.json'),
+    ]);
 
     const managerNames = [];
     if (standings && Array.isArray(standings.divisions)) {
       standings.divisions.forEach(d => d.teams.forEach(t => managerNames.push(t.team)));
     }
 
-    renderHome(home);
+    renderHome({ recap, announcements, calendar, standings, trades, predictions, rivalries });
+    document.getElementById('panel-home').addEventListener('click', e => {
+      const go = e.target.closest('[data-go]');
+      const tab = go && document.querySelector('nav.tabs button[data-panel="' + go.dataset.go + '"]');
+      if (tab) { tab.click(); window.scrollTo(0, 0); }
+    });
     renderStandings(standings);
     renderOverallRanking(standings);
     renderRivalries(rivalries);
