@@ -762,30 +762,46 @@ def low_word(n):
 # ---------- the phrase bank (every line is built only from the week's real numbers) ----------
 # Fields: T team, O opponent, S/OS their scores, W/L winner/loser, WS/LS their scores, M margin,
 # MED league median, DIFF score minus median, RANKW "third-highest" etc, N streak length, REC "4-1".
+DUD_MAX = 4.0  # a starter who scored this many points or fewer is worth a mention
+
+# Phrase banks. A bank item is either a plain string, or (needs, text) where `needs` lists the optional
+# fields the text uses (P PP = winner's top starter, Q QP = loser's top starter, D DP = loser's dud,
+# X XP = winner's dud, CARRY = the top starter scored 32+ or 28% of the team's total).
+# A line is only used when everything it needs is known, and lines that use player facts are preferred.
+# Written to read correctly for ANY team name: past tense, no possessives ("MAGRAUDERS's"), no is/has/are after a name.
 RECAP_PHRASES = {
-    # Written to read correctly for ANY team name: past tense, no possessives ("MAGRAUDERS's"), no is/has/are after a name.
     "head_explosion": ["{T} Dropped {S} on the League", "{T} Went Nuclear for {S}", "{S} Points: {T} Played a Different Game"],
     "head_season_high": ["{T} Posted a Season-Best {S}", "A New Season High: {S} From {T}", "{T} Set the Season Bar at {S}"],
     "head_blowout": ["{L} Steamrolled by {W}, {WS}-{LS}", "{W} Over {L} in a {M}-Point Rout", "A {M}-Point Rout: {W} Over {L}"],
     "head_squeaker": ["{W} Survived {L} by {M}", "{W} Edged {L} by {M}", "Separated by {M}: {W} and {L}"],
     "head_tie": ["{W} and {L} Settled for a Tie"],
+
+    # --- the lead story ---
     "lead_blowout": [
+        ("P PP CARRY", "{P} carried {W} to a {WS}-{LS} demolition of {L}, putting up {PP} of the team's {WS}. The {M}-point margin was the widest of the week, and {L} should be embarrassed."),
+        ("P PP CARRY", "{P} did the heavy lifting as {W} flattened {L}, {WS} to {LS}, with {PP} of the team's {WS}. The {M}-point margin was the widest of the week."),
+        ("P PP", "It was never close. {P} ({PP}) led {W} past {L}, {WS} to {LS}, and the {M}-point gap was the biggest anyone managed all week."),
+        ("D DP", "{L} gave {D} a starting spot and got {DP} for it. {W} won {WS} to {LS}, and the {M}-point gap was the widest of the week."),
         "It was less a game than a demolition: {W} {WS}, {L} {LS}. The {M}-point margin was the widest of the week.",
         "It was never close. {W} put up {WS} against {L} ({LS}), and the {M}-point gap was the biggest anyone managed all week.",
         "{L} showed up, which is about the nicest thing that can be said. {W} won {WS} to {LS}, a {M}-point beating that was the week's widest.",
     ],
     "lead_squeaker": [
+        ("P PP", "{P} ({PP}) was the difference in the tightest game of the week: {W} {WS}, {L} {LS}, decided by {M}. On the losing side, someone is replaying every lineup decision."),
+        ("D DP", "The week's closest game came down to {M}: {W} {WS}, {L} {LS}. {L} started {D}, who scored {DP}. Draw your own conclusions."),
         "The week's closest game was decided by {M}: {W} {WS}, {L} {LS}. On the losing side, someone is replaying every lineup decision.",
         "{W} survived {L}, {WS} to {LS}. The {M}-point margin was the tightest of the week, and one side will claim it was never in doubt.",
         "By {M}. That is all that separated {W} ({WS}) from {L} ({LS}), the tightest margin of the week.",
     ],
     "lead_tie": ["{W} and {L} finished in a dead heat at {WS}. Nobody won, everybody is mad."],
     "lead_top_win": [
+        ("P PP", "{T} scored {S}, the highest total in the league, with {P} ({PP}) leading the way. {O} put up {OS} in the loss. The league median was {MED}."),
         "{T} scored {S}, the highest total in the league, and beat {O} ({OS}) with room to spare. The league median this week was {MED}.",
         "Nobody topped {S} this week, and that number belonged to {T}, who beat {O} ({OS}). The league median was {MED}.",
         "{T} put up {S} against {O} ({OS}). The league median was {MED}; {T} cleared it by {DIFF}.",
     ],
     "lead_top_loss": [
+        ("P PP", "{T} led the league with {S}, including {PP} from {P}, and still lost to {O} ({OS}). That is the kind of week that makes people question the hobby."),
         "{T} scored {S}, the highest total in the league, and still lost to {O}, who put up {OS}. That is the kind of week that makes people question the hobby.",
         "{T} led the league with {S} and took a loss anyway; {O} won {OS} to {S}. The schedule is a cruel master.",
     ],
@@ -795,50 +811,125 @@ RECAP_PHRASES = {
     "dek_widest": ["The widest margin of the week: {W} over {L} by {M}."],
     "dek_closest": ["The closest game was decided by {M}: {W} over {L}."],
     "dek_low": ["{T} scored {S}, the lowest total in the league."],
+
+    # --- one write-up per game ---
+    "game_blowout": [
+        ("P PP CARRY", "{P} carried {W} to a {WS}-{LS} demolition of {L}, putting up {PP} of the team's {WS}. The {M}-point margin is the kind of thing that gets screenshotted."),
+        ("P PP CARRY", "{P} powered {W} to a {WS}-{LS} rout of {L}, with {PP} of the team's {WS}. Nobody on the {L} side wants to talk about it."),
+        ("P PP", "{P} ({PP}) led {W} past {L}, {WS} to {LS}. A {M}-point margin is not a game; it is a police report."),
+        ("P PP D DP", "{P} ({PP}) did the damage for {W}, {WS} to {LS}, while {D} ({DP}) quietly sabotaged {L} from the inside."),
+        ("D DP", "{W} beat {L}, {WS}-{LS}, with {D} chipping in a spectacular {DP} for the losing side. Starting {D} was a decision, and it was a bad one."),
+        ("Q QP", "{L} got {QP} from {Q} and still lost to {W} by {M}, {LS} to {WS}. One player cannot fix a lineup."),
+        "{W} hung {WS} on {L} and walked away with a {M}-point win. {L} managed {LS}, which is a lot of effort for very little.",
+        "{W} {WS}, {L} {LS}. The {M}-point gap says everything that needs saying.",
+        "{W} beat {L}, {WS} to {LS}, and the {L} lineup looked like it was set by a raccoon with Wi-Fi.",
+        "{W} beat {L} by {M}, {WS} to {LS}. Nobody on the losing side should be allowed to talk about this one.",
+    ],
+    "game_comfortable": [
+        ("P PP CARRY", "{P} carried {W} past {L}, {WS}-{LS}, accounting for {PP} of the team's {WS}. {L} had {LS} and no answer."),
+        ("P PP CARRY", "{P} dragged {W} past {L}, {WS}-{LS}, with {PP} of the team's {WS}. The rest of the lineup came along for the ride."),
+        ("P PP", "{P} scored {PP} to lead {W} over {L}, {WS}-{LS}. Never in danger, never entertaining."),
+        ("D DP", "{D} gave {L} {DP} points, and {L} lost to {W} by {M}, {LS}-{WS}. The two facts are related. Starting {D} took commitment."),
+        ("Q QP", "{Q} ({QP}) kept {L} within sight of {W}, but {LS} was never going to beat {WS}."),
+        ("X XP", "{W} beat {L}, {WS}-{LS}, despite getting {XP} from {X}. That is how good {W} looked."),
+        "{W} beat {L}, {WS}-{LS}. A {M}-point win nobody will remember by Friday.",
+        "{L} showed up and lost to {W} by {M}, {LS} to {WS}, which is the politest way to put it.",
+        "{L} lost to {W} by {M}, {LS}-{WS}, and there is no good excuse. Several bad ones will be offered.",
+    ],
+    "game_close": [
+        ("P PP CARRY", "{P} carried {W} to a {WS}-{LS} win over {L}, scoring {PP} of the team's {WS}. The {M}-point margin made it uncomfortable for everyone involved."),
+        ("P PP CARRY", "{P} powered {W} to a {WS}-{LS} win over {L}, with {PP} of the team's {WS}. It was closer than it should have been, and not because of {P}."),
+        ("P PP", "{W} edged {L}, {WS}-{LS}, with {P} ({PP}) making the difference. Margin: {M}. Nerves: shredded."),
+        ("Q QP", "{L} got {QP} from {Q} and still fell short against {W}, {LS} to {WS}. Losing by {M} stings in a way blowouts never do."),
+        ("D DP", "{L} lost to {W} by {M}, {LS} to {WS}, after getting {DP} from {D}. Do the math."),
+        "{W} beat {L} by {M}, {WS}-{LS}, in a game close enough to ruin somebody's Sunday.",
+    ],
+    "game_squeaker": [
+        ("P PP", "{P} ({PP}) was the difference as {W} escaped {L}, {WS}-{LS}, by {M}. Somewhere, a manager is auditing every lineup decision."),
+        ("D DP", "{W} survived {L} by {M}, {WS}-{LS}, and {D}, who gave {L} {DP}, is not sleeping tonight."),
+        "{W} survived {L}, {WS}-{LS}. The {M}-point margin will keep one group chat busy for days.",
+    ],
+    "game_tie": ["{W} and {L} tied at {WS}. Nobody won, which is somehow the fairest outcome."],
+
+    # --- the week's performances ---
+    "lead_unlucky": ["For the record, {L} scored the {RANKW} total of the week and still lost."],
+    "lead_lucky": ["For the record, {W} won with the {RANKW} score of the week."],
+    "player_week": [
+        ("P PP", "Player of the week: {P}, who put up {PP} for {T}."),
+        ("P PP", "The best individual performance of the week belonged to {P}: {PP} points for {T}."),
+    ],
+    "dud_week": [
+        ("D DP", "Dud of the week: {D}, who started for {T} and scored {DP}. Somebody pressed \"start\" on that."),
+        ("D DP", "The lineup decision of the week, for all the wrong reasons: {T} started {D}, who scored {DP}."),
+        ("D DP", "{T} started {D} and received {DP} in return. Refunds are not available."),
+    ],
     "top_line": ["{T} led the league with {S}.", "{T} paced all scorers at {S}.", "The week's top score belonged to {T}: {S}."],
     "low_line": [
-        "At the other end, {T} managed {S}, the lowest total in the league.",
-        "{T} brought up the rear with {S}. The bench would like a word.",
-        "Thoughts and prayers to {T}, who scored a league-worst {S}.",
+        "At the other end, {T} scored {S}, the lowest total in the league. That is not a lineup, it is a cry for help.",
+        "{T} brought up the rear with {S}. A handful of random waiver pickups would have scored more.",
+        "{T} scored a league-worst {S}. Thoughts, prayers, and a firm recommendation to check the roster before kickoff.",
     ],
-    "unlucky": [
-        "{T} scored {S}, the {RANKW} total of the week, and still lost to {O} ({OS}). The fantasy gods are cruel.",
-        "Hard-luck award: {T}. {S} points was the {RANKW} score of the week, and it lost to {O} ({OS}).",
-        "{T} put up {S}, the {RANKW} score in the league, and took a loss for it. {O} won with {OS}.",
+    "game_unlucky": [
+        ("P PP CARRY", "{L} scored {LS}, the {RANKW} total of the week, and still lost to {W}, because {P} carried {W} with {PP} of the team's {WS}."),
+        ("Q QP", "{L} scored {LS}, the {RANKW} total of the week, and still lost to {W} ({WS}). {Q} ({QP}) did the job and got nothing for it."),
+        "{L} scored {LS}, the {RANKW} total of the week, and still lost to {W} ({WS}). The fantasy gods are cruel, and this week they were creative.",
+        "Hard-luck award: {L}. {LS} points was the {RANKW} score of the week, and it lost to {W} ({WS}). Some weeks the schedule just wants to watch you suffer.",
     ],
-    "lucky": [
-        "{T} won with {S}, the {RANKW} score of the week. Nobody asked how; the win counts.",
-        "{T} beat {O} with a modest {S}, the {RANKW} total in the league. The standings do not check how you got there.",
-        "Free win of the week: {T}, who scored {S} (the {RANKW} total) and still beat {O} ({OS}).",
+    "game_lucky": [
+        ("P PP CARRY", "{P} carried {W} past {L}, {WS}-{LS}, with {PP} of the team's {WS}. It was the {RANKW} score of the week, which tells you what the rest of the lineup was doing."),
+        ("P PP", "{W} won with a modest {WS}, the {RANKW} score of the week, over {L} ({LS}), with {P} ({PP}) doing the work. The standings do not check how you got there."),
+        "{W} won with {WS}, the {RANKW} score of the week, over {L} ({LS}). Nobody asked how; the win counts, the shame does not.",
+        "Free win of the week: {W}, who scored {WS} (the {RANKW} total) and still beat {L} ({LS}). Take it and do not discuss it.",
     ],
+
+    # --- the standings, only when something changed ---
+    "new_leader": ["New leader overall: {T} ({REC}), taking over from {PREV}.", "{T} took over first place overall at {REC}, knocking {PREV} off the top."],
+    "new_div_leader": ["New leader of the {DIV} Division: {T} ({REC}), taking over from {PREV}.", "The {DIV} Division has a new leader: {T} ({REC}), who passed {PREV}."],
+    "few_up": ["Not many changes in the standings: only {T} moved more than one spot, climbing from {A} to {B}."],
+    "few_down": ["Not many changes in the standings: only {T} moved more than one spot, sliding from {A} to {B}."],
+    "mover_up_top": ["Biggest riser: {T}, up from {A} to {B}.", "{T} made the week's biggest jump, from {A} to {B}."],
+    "mover_up": ["{T} also climbed, from {A} to {B}."],
+    "mover_down_top": ["Biggest faller: {T}, down from {A} to {B}. Gravity is undefeated.", "{T} took the week's biggest tumble, from {A} to {B}."],
+    "mover_down": ["{T} slid from {A} to {B} as well."],
+    "enter_top6": ["{T} moved into the top six.", "{T} cracked the top six."],
+    "leave_top6": ["{T} dropped out of the top six.", "{T} fell out of the top six."],
+    "quiet": ["A quiet week in the standings: no new division leaders, and nobody moved more than {MAX} spots.",
+              "Not much movement in the standings: the division leaders held, and nobody moved more than {MAX} spots."],
+    "quiet_still": ["Nobody changed places in the standings this week, and no division changed hands."],
+    "quiet_one": ["A quiet week in the standings: no new division leaders, and nobody moved more than one spot."],
     "win_streak": ["Longest winning streak: {T}, at {N} straight.", "On a roll: {T}, {N} wins in a row and counting.", "{T} arrived at {N} consecutive wins this week, with no apparent plans to stop."],
     "loss_streak": ["Longest losing streak: {T}, at {N} straight. Send help.", "Cold streak: {T}, {N} losses in a row and still falling.", "{T} sank to {N} straight losses this week."],
-    "leader": ["The league's best record, {REC}, belongs to {T}.", "Atop the standings: {T}, at {REC}.", "Leading the league at {REC}: {T}."],
-    "leader_tied": ["Out front at {REC}: {T}, ahead of {OTHERS} with that record on the points tiebreak.", "{T} headed a crowded top at {REC}, edging {OTHERS} on points."],
-    "last": ["Last place belongs to {T}, at {REC}.", "Holding down last place, technically: {T}, {REC}.", "At the bottom of the standings: {T}, {REC}."],
     "week1": ["Week 1 is in the books, which means every team is either undefeated or winless. Do not get attached to either."],
     "rivalry_intro": ["It was Rivalry Week, and the grudges were settled the only way this league knows how."],
-    "rivalry_win": ["{TITLE} went to {W}, {WS} to {LS}."],
-    "rivalry_tie": ["{TITLE} ended in a tie at {WS}."],
 }
 
-
-def _others(k):
-    words = {1: "one", 2: "two", 3: "three", 4: "four", 5: "five", 6: "six", 7: "seven", 8: "eight", 9: "nine", 10: "ten"}
-    return f"{words.get(k, k)} other team" + ("" if k == 1 else "s")
+OPTIONAL_FIELDS = {"P", "PP", "Q", "QP", "D", "DP", "X", "XP"}
 
 
-def build_recap(week, games_by_week, season, published=None, rivalries=None):
-    """Write one week's recap from its real scores. Pure function: same input, same
-    article, every time (phrase choices are seeded by season + week, not by chance)."""
+def ordinal(n):
+    return f"{n}{_suffix(n)}"
+
+
+def build_recap(week, games_by_week, season, published=None, rivalries=None, divisions=None):
+    """Write one week's recap from its real scores and starters. Pure function: same input, same
+    article, every time (phrase choices are seeded by season + week + game, not by chance)."""
     games = games_by_week.get(week) or []
     played = [g for g in games if g["ascore"] or g["bscore"]]
     if not played:
         return None
 
-    def say(key, **f):
-        options = RECAP_PHRASES[key]
-        return random.Random(f"{season}|{week}|{key}").choice(options).format(**f)
+    def say(key, seed="", **f):
+        f = {k: v for k, v in f.items() if v is not None}
+        have = set(f)
+        pool = []
+        for item in RECAP_PHRASES[key]:
+            needs, text = item if isinstance(item, tuple) else ("", item)
+            if set(needs.split()) <= have:
+                pool.append((needs, text))
+        specific = [p for p in pool if p[0]]
+        carry = [p for p in pool if "CARRY" in p[0].split()]
+        needs, text = random.Random(f"{season}|{week}|{key}|{seed}").choice(carry or specific or pool)
+        return text.format(**f)
 
     def margin(g):
         return abs(g["ascore"] - g["bscore"])
@@ -848,11 +939,45 @@ def build_recap(week, games_by_week, season, published=None, rivalries=None):
             return g["a"], g["b"], g["ascore"], g["bscore"]
         return g["b"], g["a"], g["bscore"], g["ascore"]
 
+    def players_of(g, team):
+        return (g.get("aplayers") if team == g["a"] else g.get("bplayers")) or []
+
+    def top_of(pl):
+        return max(pl, key=lambda p: (p["pts"], p["name"])) if pl else None
+
+    def low_of(pl):
+        return min(pl, key=lambda p: (p["pts"], p["name"])) if pl else None
+
+    def game_fields(g):
+        w, l, ws, ls = wl(g)
+        wpl, lpl = players_of(g, w), players_of(g, l)
+        P, Q, D, X = top_of(wpl), top_of(lpl), low_of(lpl), low_of(wpl)
+        if D and D["pts"] > DUD_MAX:
+            D = None
+        if X and X["pts"] > DUD_MAX:
+            X = None
+        f = dict(W=w, L=l, WS=_num(ws), LS=_num(ls), M=_num(margin(g)))
+        if P:
+            f.update(P=P["name"], PP=_num(P["pts"]))
+            if P["pts"] >= 32 or (ws > 0 and P["pts"] / ws >= 0.28):
+                f["CARRY"] = "yes"
+        if Q:
+            f.update(Q=Q["name"], QP=_num(Q["pts"]))
+        if D:
+            f.update(D=D["name"], DP=_num(D["pts"]))
+        if X:
+            f.update(X=X["name"], XP=_num(X["pts"]))
+        return f
+
+    def game_bank(g):
+        m = margin(g)
+        return "game_tie" if m == 0 else "game_squeaker" if m <= 3 else "game_close" if m < 15 else "game_comfortable" if m < 40 else "game_blowout"
+
     # every team's line for the week
     lines = []
     for g in played:
         for me, opp, ms, os_ in ((g["a"], g["b"], g["ascore"], g["bscore"]), (g["b"], g["a"], g["bscore"], g["ascore"])):
-            lines.append({"team": me, "score": ms, "opp": opp, "opp_score": os_,
+            lines.append({"team": me, "score": ms, "opp": opp, "opp_score": os_, "players": players_of(g, me),
                           "res": "W" if ms > os_ else "L" if ms < os_ else "T"})
     n = len(lines)
     by_score = sorted(lines, key=lambda l: (-l["score"], l["team"]))
@@ -866,35 +991,9 @@ def build_recap(week, games_by_week, season, published=None, rivalries=None):
     cw, cl, cws, cls_ = wl(closest)
     bm, cm = margin(blowout), margin(closest)
 
-    # season context
     prev = [x for w in range(1, week) for g in (games_by_week.get(w) or []) if (g["ascore"] or g["bscore"]) for x in (g["ascore"], g["bscore"])]
     season_high = bool(prev) and top["score"] > max(prev)
     season_low = bool(prev) and bottom["score"] < min(prev)
-
-    rec = {}
-    for w in range(1, week + 1):
-        for g in games_by_week.get(w) or []:
-            if not (g["ascore"] or g["bscore"]):
-                continue
-            for me, ms, os_ in ((g["a"], g["ascore"], g["bscore"]), (g["b"], g["bscore"], g["ascore"])):
-                r = rec.setdefault(me, {"w": 0, "l": 0, "t": 0, "pf": 0.0, "seq": []})
-                r["pf"] += ms
-                key = "w" if ms > os_ else "l" if ms < os_ else "t"
-                r[key] += 1
-                r["seq"].append(key.upper())
-
-    def rec_str(r):
-        return f"{r['w']}-{r['l']}" + (f"-{r['t']}" if r["t"] else "")
-
-    def streak(r):
-        if not r["seq"]:
-            return None, 0
-        last, run = r["seq"][-1], 0
-        for x in reversed(r["seq"]):
-            if x != last:
-                break
-            run += 1
-        return last, run
 
     # which story leads
     if top["score"] >= 150:
@@ -908,27 +1007,46 @@ def build_recap(week, games_by_week, season, published=None, rivalries=None):
     else:
         kind = "blowout"
 
-    med_s = _num(median)
-    top_f = dict(T=top["team"], S=_num(top["score"]), O=top["opp"], OS=_num(top["opp_score"]), MED=med_s, DIFF=_num(top["score"] - median))
+    # rivalry titles for this week
+    riv_title = {}
+    if rivalries and str(rivalries.get("week")) == str(week):
+        for r in rivalries.get("rivalries") or []:
+            try:
+                riv_title[frozenset({_norm(r["a"]["team"]), _norm(r["b"]["team"])})] = r.get("title", "The rivalry")
+            except (KeyError, TypeError):
+                continue
 
-    # headline + lead paragraph
+    def titled(g, text):
+        t = riv_title.get(frozenset({_norm(g["a"]), _norm(g["b"])}))
+        return f"{t}: {text}" if t else text
+
+    top_game = next(g for g in played if top["team"] in (g["a"], g["b"]))
+    med_s = _num(median)
+    tp = top_of(top["players"])
+    top_f = dict(T=top["team"], S=_num(top["score"]), O=top["opp"], OS=_num(top["opp_score"]), MED=med_s, DIFF=_num(top["score"] - median))
+    if tp:
+        top_f.update(P=tp["name"], PP=_num(tp["pts"]))
+
+    # headline + lead paragraph (+ which game the lead already covers)
     if kind in ("explosion", "season_high"):
+        lead_game = top_game
         headline = say("head_explosion" if kind == "explosion" else "head_season_high", **top_f)
-        lead_key = {"W": "lead_top_win", "L": "lead_top_loss", "T": "lead_top_tie"}[top["res"]]
-        lead = say(lead_key, **top_f)
+        lead = say({"W": "lead_top_win", "L": "lead_top_loss", "T": "lead_top_tie"}[top["res"]], **top_f)
         if season_high:
             lead += " " + say("season_best")
     elif kind == "squeaker":
-        f = dict(W=cw, L=cl, WS=_num(cws), LS=_num(cls_), M=_num(cm))
+        lead_game = closest
+        f = game_fields(closest)
         if cm == 0:
             headline, lead = say("head_tie", **f), say("lead_tie", **f)
         else:
-            headline, lead = say("head_squeaker", **f), say("lead_squeaker", **f)
+            headline, lead = say("head_squeaker", **f), say("lead_squeaker", seed="lead", **f)
     else:
-        f = dict(W=bw, L=bl, WS=_num(bws), LS=_num(bls), M=_num(bm))
-        headline, lead = say("head_blowout", **f), say("lead_blowout", **f)
+        lead_game = blowout
+        f = game_fields(blowout)
+        headline, lead = say("head_blowout", **f), say("lead_blowout", seed="lead", **f)
+    lead = titled(lead_game, lead)
 
-    # dek: a different fact from the lead
     if kind != "blowout":
         dek = say("dek_widest", W=bw, L=bl, M=_num(bm))
     elif cm <= 10 and closest is not blowout:
@@ -937,86 +1055,164 @@ def build_recap(week, games_by_week, season, published=None, rivalries=None):
         dek = say("dek_low", T=bottom["team"], S=_num(bottom["score"]))
 
     paragraphs = [lead]
+    if riv_title:
+        paragraphs.append(say("rivalry_intro"))
 
-    # Rivalry Week: results of each named rivalry
-    if rivalries and str(rivalries.get("week")) == str(week):
-        sents = []
-        for r in rivalries.get("rivalries") or []:
-            try:
-                pa, pb = _norm(r["a"]["team"]), _norm(r["b"]["team"])
-            except (KeyError, TypeError):
-                continue
-            for g in played:
-                if {_norm(g["a"]), _norm(g["b"])} == {pa, pb}:
-                    w_, l_, ws_, ls_ = wl(g)
-                    if margin(g) == 0:
-                        sents.append(say("rivalry_tie", TITLE=r.get("title", "The rivalry"), WS=_num(ws_)))
-                    else:
-                        sents.append(say("rivalry_win", TITLE=r.get("title", "The rivalry"), W=w_, WS=_num(ws_), LS=_num(ls_)))
-                    break
-        if sents:
-            paragraphs.append(say("rivalry_intro") + " " + " ".join(sents))
-
-    # extremes
-    ext = []
-    if kind not in ("explosion", "season_high"):
-        ext.append(say("top_line", T=top["team"], S=_num(top["score"])))
-        if season_high:
-            ext.append(say("season_best"))
-    if bottom["team"] != top["team"]:
-        ext.append(say("low_line", T=bottom["team"], S=_num(bottom["score"])))
-        if season_low:
-            ext.append(say("season_worst"))
-    if ext:
-        paragraphs.append(" ".join(ext))
-
-    # luck
-    luck = []
+    # luck: the highest-scoring loser and one of the lowest-scoring winners get their own angle inside their game's write-up
+    luck_for = {}
     third = -(-n // 3)  # ceil(n / 3)
     losers = [l for l in lines if l["res"] == "L"]
     winners = [l for l in lines if l["res"] == "W"]
     if losers:
         u = max(losers, key=lambda l: (l["score"], l["team"]))
-        if rank[u["team"]] <= third and not (kind in ("explosion", "season_high") and u["team"] == top["team"]):
-            luck.append(say("unlucky", T=u["team"], S=_num(u["score"]), RANKW=high_word(rank[u["team"]]), O=u["opp"], OS=_num(u["opp_score"])))
+        ug = next(g for g in played if u["team"] in (g["a"], g["b"]))
+        if rank[u["team"]] <= third and ug is not lead_game:
+            luck_for[id(ug)] = ("game_unlucky", {"RANKW": high_word(rank[u["team"]])})
+        elif rank[u["team"]] <= third and kind not in ("explosion", "season_high"):
+            paragraphs[0] += " " + say("lead_unlucky", L=u["team"], RANKW=high_word(rank[u["team"]]))
     if winners:
         k = min(winners, key=lambda l: (l["score"], l["team"]))
-        if rank[k["team"]] > n - third:
-            luck.append(say("lucky", T=k["team"], S=_num(k["score"]), RANKW=low_word(n - rank[k["team"]] + 1), O=k["opp"], OS=_num(k["opp_score"])))
-    if luck:
-        paragraphs.append(" ".join(luck))
+        kg = next(g for g in played if k["team"] in (g["a"], g["b"]))
+        if rank[k["team"]] > n - third and kg is not lead_game:
+            luck_for[id(kg)] = ("game_lucky", {"RANKW": low_word(n - rank[k["team"]] + 1)})
+        elif rank[k["team"]] > n - third and kind not in ("explosion", "season_high"):
+            paragraphs[0] += " " + say("lead_lucky", W=k["team"], RANKW=low_word(n - rank[k["team"]] + 1))
 
-    # standings, streaks
+    def write_up(g):
+        bank, extra = luck_for.get(id(g), (game_bank(g), {}))
+        return titled(g, say(bank, seed=f"{g['a']}|{g['b']}", **game_fields(g), **extra))
+
+    # every other game gets its own write-up, two to a paragraph
+    stories = [write_up(g) for g in played if g is not lead_game]
+    for i in range(0, len(stories), 2):
+        paragraphs.append(" ".join(stories[i:i + 2]))
+
+    # individual performances
+    perf = []
+    all_starters = [(l["team"], p) for l in lines for p in l["players"]]
+    if all_starters:
+        t_best, p_best = max(all_starters, key=lambda tp_: (tp_[1]["pts"], tp_[1]["name"]))
+        perf.append(say("player_week", T=t_best, P=p_best["name"], PP=_num(p_best["pts"])))
+        t_dud, p_dud = min(all_starters, key=lambda tp_: (tp_[1]["pts"], tp_[1]["name"]))
+        if p_dud["pts"] <= DUD_MAX:
+            perf.append(say("dud_week", T=t_dud, D=p_dud["name"], DP=_num(p_dud["pts"])))
+    if kind not in ("explosion", "season_high"):
+        perf.append(say("top_line", T=top["team"], S=_num(top["score"])) + (" " + say("season_best") if season_high else ""))
+    if bottom["team"] != top["team"]:
+        perf.append(say("low_line", T=bottom["team"], S=_num(bottom["score"])) + (" " + say("season_worst") if season_low else ""))
+    if perf:
+        paragraphs.append(" ".join(perf))
+
+    # standings: only what CHANGED this week, never an automatic first-and-last
+    def table_after(w):
+        rec = {}
+        for ww in range(1, w + 1):
+            for g in games_by_week.get(ww) or []:
+                if not (g["ascore"] or g["bscore"]):
+                    continue
+                for me, ms, os_ in ((g["a"], g["ascore"], g["bscore"]), (g["b"], g["bscore"], g["ascore"])):
+                    r = rec.setdefault(me, {"w": 0, "l": 0, "t": 0, "pf": 0.0, "seq": []})
+                    r["pf"] += ms
+                    key = "w" if ms > os_ else "l" if ms < os_ else "t"
+                    r[key] += 1
+                    r["seq"].append(key.upper())
+        table = sorted(rec.items(), key=lambda kv: (-kv[1]["w"], -kv[1]["pf"], kv[0]))
+        return rec, table, {t: i + 1 for i, (t, _) in enumerate(table)}
+
+    def rec_str(r):
+        return f"{r['w']}-{r['l']}" + (f"-{r['t']}" if r["t"] else "")
+
+    standings_info = {"moves": [], "newLeader": None, "divisionLeaders": []}
     if week == 1:
         paragraphs.append(say("week1"))
-    elif rec:
-        table = sorted(rec.items(), key=lambda kv: (-kv[1]["w"], -kv[1]["pf"], kv[0]))
-        lead_rec = (table[0][1]["w"], table[0][1]["l"], table[0][1]["t"])
-        sharing = sum(1 for _, r in table[1:] if (r["w"], r["l"], r["t"]) == lead_rec)
-        if sharing:
-            tail = [say("leader_tied", T=table[0][0], REC=rec_str(table[0][1]), OTHERS=_others(sharing))]
+    else:
+        rec_b, table_b, rank_b = table_after(week - 1)
+        rec_a, table_a, rank_a = table_after(week)
+        moves = {t: rank_b[t] - rank_a[t] for t in rank_a if t in rank_b}  # positive = climbed
+        changes, told = [], set()
+        if table_a and table_b and table_a[0][0] != table_b[0][0]:
+            changes.append(say("new_leader", T=table_a[0][0], REC=rec_str(table_a[0][1]), PREV=table_b[0][0]))
+            standings_info["newLeader"] = {"team": table_a[0][0], "prev": table_b[0][0]}
+        div_changed = False
+        div_of = {_norm(t): d for d, members in (divisions or {}).items() for t in members}
+        for dname, members in (divisions or {}).items():
+            names = [t for t in rank_a if div_of.get(_norm(t)) == dname]
+            if not names or not all(t in rank_b for t in names):
+                continue
+            lead_a = min(names, key=lambda t: rank_a[t])
+            lead_b = min(names, key=lambda t: rank_b[t])
+            if lead_a != lead_b:
+                div_changed = True
+                changes.append(say("new_div_leader", DIV=dname, T=lead_a, REC=rec_str(rec_a[lead_a]), PREV=lead_b))
+                standings_info["divisionLeaders"].append({"division": dname, "team": lead_a, "prev": lead_b})
+        told_moves = []
+        big = [t for t, d in moves.items() if abs(d) >= 2]
+        overall_changed = bool(changes)  # a new overall leader was already announced above
+        if len(big) == 1 and not div_changed and not overall_changed:
+            t = big[0]
+            changes.append(say("few_up" if moves[t] > 0 else "few_down", seed=t, T=t, A=ordinal(rank_b[t]), B=ordinal(rank_a[t])))
+            told_moves.append(t)
+            risers, fallers = [], []
         else:
-            tail = [say("leader", T=table[0][0], REC=rec_str(table[0][1]))]
-        streaks = [(t, *streak(r)) for t, r in rec.items()]
-        # longest streak wins the mention; ties go to the team with the most points (win streaks) or the fewest (losing streaks)
-        wins = sorted([s for s in streaks if s[1] == "W" and s[2] >= 3], key=lambda s: (-s[2], -rec[s[0]]["pf"], s[0]))
-        loss = sorted([s for s in streaks if s[1] == "L" and s[2] >= 3], key=lambda s: (-s[2], rec[s[0]]["pf"], s[0]))
+            risers = sorted([t for t, d in moves.items() if d >= 3], key=lambda t: (-moves[t], t))[:2]
+            fallers = sorted([t for t, d in moves.items() if d <= -3], key=lambda t: (moves[t], t))[:2]
+            for i, t in enumerate(risers):
+                changes.append(say("mover_up_top" if i == 0 else "mover_up", seed=t, T=t, A=ordinal(rank_b[t]), B=ordinal(rank_a[t])))
+            for i, t in enumerate(fallers):
+                changes.append(say("mover_down_top" if i == 0 else "mover_down", seed=t, T=t, A=ordinal(rank_b[t]), B=ordinal(rank_a[t])))
+            told_moves = risers + fallers
+        for t in told_moves:
+            standings_info["moves"].append({"team": t, "from": rank_b[t], "to": rank_a[t]})
+        for t in sorted(rank_a):
+            if t in told_moves or t not in rank_b:
+                continue
+            if rank_a[t] <= 6 < rank_b[t]:
+                changes.append(say("enter_top6", seed=t, T=t))
+            elif rank_b[t] <= 6 < rank_a[t]:
+                changes.append(say("leave_top6", seed=t, T=t))
+        if not changes:
+            biggest = max((abs(d) for d in moves.values()), default=0)
+            if biggest == 0:
+                changes.append(say("quiet_still"))
+            elif biggest == 1:
+                changes.append(say("quiet_one"))
+            else:
+                changes.append(say("quiet", MAX=biggest))
+        # notable streaks
+        def streak(r):
+            last, run = r["seq"][-1], 0
+            for x in reversed(r["seq"]):
+                if x != last:
+                    break
+                run += 1
+            return last, run
+        streaks = [(t, *streak(r)) for t, r in rec_a.items() if r["seq"]]
+        wins = sorted([s for s in streaks if s[1] == "W" and s[2] >= 3], key=lambda s: (-s[2], -rec_a[s[0]]["pf"], s[0]))
+        loss = sorted([s for s in streaks if s[1] == "L" and s[2] >= 3], key=lambda s: (-s[2], rec_a[s[0]]["pf"], s[0]))
         if wins:
-            tail.append(say("win_streak", T=wins[0][0], N=wins[0][2]))
+            changes.append(say("win_streak", T=wins[0][0], N=wins[0][2]))
         if loss:
-            tail.append(say("loss_streak", T=loss[0][0], N=loss[0][2]))
-        tail.append(say("last", T=table[-1][0], REC=rec_str(table[-1][1])))
-        paragraphs.append(" ".join(tail))
+            changes.append(say("loss_streak", T=loss[0][0], N=loss[0][2]))
+        paragraphs.append(" ".join(changes))
 
     return {
         "id": f"recap-{week}", "type": "recap", "week": week, "date": published, "kind": kind,
         "headline": headline, "dek": dek, "byline": "The Shiva Times Staff",
-        "paragraphs": paragraphs,
+        "paragraphs": paragraphs, "standings": standings_info,
         "results": [{"a": g["a"], "b": g["b"], "aScore": round(g["ascore"], 2), "bScore": round(g["bscore"], 2)} for g in played],
     }
 
 
-def collect_games(league_id, weeks, owner_map):
+def collect_games(league_id, weeks, owner_map, player_lookup=None):
+    """Every game of every requested week, with each side's starters and what they scored."""
+    def starters_of(row):
+        out = []
+        for pid, pts in zip(row.get("starters") or [], row.get("starters_points") or []):
+            name = (player_lookup or {}).get(str(pid)) if pid and str(pid) != "0" else None
+            if name:
+                out.append({"name": name, "pts": float(pts or 0)})
+        return out
+
     games_by_week = {}
     for w in weeks:
         by_id = {}
@@ -1036,7 +1232,8 @@ def collect_games(league_id, weeks, owner_map):
             if not na or not nb:
                 continue
             games.append({"a": clean_name(na), "b": clean_name(nb),
-                          "ascore": float(a.get("points") or 0), "bscore": float(b.get("points") or 0)})
+                          "ascore": float(a.get("points") or 0), "bscore": float(b.get("points") or 0),
+                          "aplayers": starters_of(a), "bplayers": starters_of(b)})
         games_by_week[w] = games
     return games_by_week
 
@@ -1051,7 +1248,7 @@ def week_date(start_str, week, edge="start"):
     return (thursday + timedelta(days=4)).date() if edge == "end" else thursday.date()
 
 
-def sync_recaps(current_league_id):
+def sync_recaps(current_league_id, player_lookup=None):
     state = fetch_json(f"{API_BASE}/state/nfl") or {}
     league = fetch_json(f"{API_BASE}/league/{current_league_id}") or {}
     season = str(league.get("season") or state.get("season") or "")
@@ -1064,7 +1261,7 @@ def sync_recaps(current_league_id):
     if upto < 1:
         return {"season": season, "recaps": []}
     owner_map, _ = build_owner_map(current_league_id)
-    games = collect_games(current_league_id, range(1, upto + 1), owner_map)
+    games = collect_games(current_league_id, range(1, upto + 1), owner_map, player_lookup)
     try:
         rivalries = load_local_json("rivalries.json")
     except Exception:
@@ -1073,7 +1270,7 @@ def sync_recaps(current_league_id):
     for w in range(1, upto + 1):
         d = week_date(state.get("season_start_date"), w)
         published = (d + timedelta(days=5)).isoformat() if d else None  # the Tuesday after the week
-        r = build_recap(w, games, season, published, rivalries)
+        r = build_recap(w, games, season, published, rivalries, DIVISIONS)
         if r:
             recaps.append(r)
     recaps.sort(key=lambda r: -r["week"])
@@ -1222,7 +1419,7 @@ def main():
         json.dump(prediction_results, f, ensure_ascii=False, indent=2)
 
     print("Writing weekly recaps from the scores...")
-    safe_step("weekly recaps", lambda: sync_recaps(CURRENT_LEAGUE_ID), "recap.json")
+    safe_step("weekly recaps", lambda: sync_recaps(CURRENT_LEAGUE_ID, player_lookup), "recap.json")
 
     print("Reading announcements from the Google Sheet...")
     safe_step("announcements", fetch_announcements, "announcements.json")
