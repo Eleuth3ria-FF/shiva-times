@@ -1,10 +1,108 @@
 {
+  "week": 9,
+  "schedule": [
+    {
+      "weeks": "1–3",
+      "label": "Division",
+      "span": 3,
+      "kind": "division"
+    },
+    {
+      "weeks": "4–8",
+      "label": "League",
+      "span": 5,
+      "kind": "league"
+    },
+    {
+      "weeks": "9",
+      "label": "Rivalry",
+      "span": 1,
+      "kind": "rivalry"
+    },
+    {
+      "weeks": "10–11",
+      "label": "League",
+      "span": 2,
+      "kind": "league"
+    },
+    {
+      "weeks": "12–14",
+      "label": "Division",
+      "span": 3,
+      "kind": "division"
+    }
+  ],
+  "explainer": [
+    "Week 9 is Rivalry Week. For one week the schedule sends every team after a designated rival from outside its division: six fixtures, all twelve teams, six feuds with names.",
+    "The rest of the season is simple. Each team plays its three division opponents twice, in Weeks 1–3 and again in Weeks 12–14, and the other eight teams once. One of those eight is your rival, and that game lands in Week 9. It counts in the standings like any other game; what it adds on top is bragging rights.",
+    "Some of these feuds have a history. The rest just have a name."
+  ],
   "rivalries": [
-    { "a": "Lulu (MTL New Empire)", "b": "Sam (La Quiche)", "note": "The Civil War — Week 9" },
-    { "a": "Xavier (Weapon X)", "b": "Seb G", "note": "King Among Kings — Week 9" },
-    { "a": "Rémi (Les Pingouins)", "b": "Raymond", "note": "The Clipboard Classic — Week 9" },
-    { "a": "Dave", "b": "Seb M (Scuderia Malo)", "note": "The Battle of Internal Affairs — Week 9" },
-    { "a": "Oli (Mean Machine)", "b": "Mag", "note": "War in the North — Week 9" },
-    { "a": "Gui", "b": "Alex (Tebows Before Hoes)", "note": "9/11 — The Battle of the Twin Towers — Week 9" }
+    {
+      "title": "The Civil War",
+      "a": {
+        "team": "MTL New Empire",
+        "manager": "Lulu"
+      },
+      "b": {
+        "team": "La Quiche",
+        "manager": "Sam"
+      }
+    },
+    {
+      "title": "King Among Kings",
+      "a": {
+        "team": "Montreal Weapon X",
+        "manager": "Xav"
+      },
+      "b": {
+        "team": "SGB Nation ⚖️",
+        "manager": "Seb G"
+      }
+    },
+    {
+      "title": "The Clipboard Classic",
+      "a": {
+        "team": "Les Pingouins 🐧",
+        "manager": "Rémi"
+      },
+      "b": {
+        "team": "T-Bone Ray's",
+        "manager": "Raymond"
+      }
+    },
+    {
+      "title": "The Battle of Internal Affairs",
+      "a": {
+        "team": "Lavaltree's Piggy",
+        "manager": "Dave"
+      },
+      "b": {
+        "team": "Scuderia Malo",
+        "manager": "Seb M"
+      }
+    },
+    {
+      "title": "War in the North",
+      "a": {
+        "team": "Mean Machine",
+        "manager": "Oli"
+      },
+      "b": {
+        "team": "MAGRAUDERS",
+        "manager": "Mag"
+      }
+    },
+    {
+      "title": "9/11 — The Battle of the Twin Towers",
+      "a": {
+        "team": "The Gridiron Sheriffs",
+        "manager": "Gui"
+      },
+      "b": {
+        "team": "Tebows before Hoes",
+        "manager": "Alex"
+      }
+    }
   ]
 }
