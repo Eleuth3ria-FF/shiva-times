@@ -132,6 +132,8 @@
   .division-block { border-bottom: 1px solid var(--ink); }
   .division-block:last-child { border-bottom: none; }
 
+  .division-logo { width: 28px; height: 28px; object-fit: contain; background: #fff; padding: 2px; flex: 0 0 auto; }
+  .division-label--logo { display: flex; align-items: center; gap: 10px; padding-top: 5px; padding-bottom: 5px; }
   .standings-layout { display: flex; gap: 20px; align-items: flex-start; }
   .standings-layout .card:first-child { flex: 1 1 auto; min-width: 0; }
   .standings-sidebar { flex: 0 0 264px; }
@@ -189,7 +191,7 @@
   .division-section { margin-bottom: 30px; }
   .division-banner {
     display: flex; align-items: center; justify-content: center; gap: 12px;
-    background: var(--ink); color: var(--paper); padding: 9px 16px;
+    background: var(--ink); color: var(--paper); padding: 6px 16px;
     font-weight: 700; font-size: 12px; letter-spacing: 0.26em; text-transform: uppercase;
   }
   .division-banner .shield { font-size: 11px; opacity: 0.8; }
@@ -514,6 +516,13 @@
     return '<span class="with-logo">' + img + '<span class="tname">' + name + '</span></span>';
   }
 
+  // Division crests. The sync names the divisions "North", "Central", "South".
+  const DIVISION_LOGOS = { north: 'LOGOS/division-north.png', central: 'LOGOS/division-central.png', south: 'LOGOS/division-south.png' };
+  function divisionLogoImg(name) {
+    const src = DIVISION_LOGOS[normName(String(name).replace(/division/i, ''))];
+    return src ? '<img class="division-logo" src="' + src + '" alt="" onerror="this.remove()">' : '';
+  }
+
   // ---------- Masthead dateline ----------
   function toRoman(n) {
     let out = '';
@@ -561,7 +570,8 @@
           '<td class="num">' + (t.pointsAgainst != null ? t.pointsAgainst : '—') + '</td>' +
         '</tr>'
       )).join('');
-      return '<div class="division-block"><div class="division-label">' + div.name + '</div>' +
+      const dlogo = divisionLogoImg(div.name);
+      return '<div class="division-block"><div class="division-label' + (dlogo ? ' division-label--logo' : '') + '">' + dlogo + '<span>' + div.name + '</span></div>' +
         '<table class="stat-table"><thead><tr><th>Team</th><th class="num">Record</th><th class="num">PF</th><th class="num">PA</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
     }).join('');
   }
@@ -819,7 +829,7 @@
         '</div>';
       }).join('');
       return '<div class="division-section">' +
-        '<div class="division-banner division-banner--' + (divIdx % 3) + '"><span class="shield">\u25C8</span> ' + div.name + ' Division <span class="shield">\u25C8</span></div>' +
+        '<div class="division-banner division-banner--' + (divIdx % 3) + '">' + (divisionLogoImg(div.name) || '<span class="shield">\u25C8</span>') + '<span>' + div.name + ' Division</span>' + (divisionLogoImg(div.name) || '<span class="shield">\u25C8</span>') + '</div>' +
         '<div class="team-grid">' + cards + '</div>' +
       '</div>';
     }).join('');
