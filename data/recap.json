@@ -1,0 +1,219 @@
+{
+  "season": "2026",
+  "recaps": [
+    {
+      "id": "recap-4",
+      "type": "recap",
+      "week": 4,
+      "date": "2026-10-06",
+      "kind": "explosion",
+      "headline": "Mean Machine Dropped 177.24 on the League",
+      "dek": "The widest margin of the week: Mean Machine over Les Pingouins 🐧 by 63.62.",
+      "byline": "The Shiva Times Staff",
+      "paragraphs": [
+        "Nobody topped 177.24 this week, and that number belonged to Mean Machine, who beat Les Pingouins 🐧 (113.62). The league median was 113.71.",
+        "At the other end, Lavaltree's Piggy managed 73, the lowest total in the league.",
+        "Hard-luck award: La Quiche. 133.98 points was the fourth-highest score of the week, and it lost to T-Bone Ray's (161.98). MTL New Empire won with 93.02, the fourth-lowest score of the week. Nobody asked how; the win counts.",
+        "Out front at 4-0: Montreal Weapon X, ahead of one other team with that record on the points tiebreak. Montreal Weapon X arrived at 4 consecutive wins this week, with no apparent plans to stop. Cold streak: Tebows before Hoes, 4 losses in a row and still falling. Last place belongs to Tebows before Hoes, at 0-4."
+      ],
+      "results": [
+        {
+          "a": "Les Pingouins 🐧",
+          "b": "Mean Machine",
+          "aScore": 113.62,
+          "bScore": 177.24
+        },
+        {
+          "a": "T-Bone Ray's",
+          "b": "La Quiche",
+          "aScore": 161.98,
+          "bScore": 133.98
+        },
+        {
+          "a": "Lavaltree's Piggy",
+          "b": "Montreal Weapon X",
+          "aScore": 73.0,
+          "bScore": 113.8
+        },
+        {
+          "a": "MAGRAUDERS",
+          "b": "SGB Nation ⚖️",
+          "aScore": 83.82,
+          "bScore": 122.3
+        },
+        {
+          "a": "Scuderia Malo",
+          "b": "The Gridiron Sheriffs",
+          "aScore": 161.36,
+          "bScore": 110.86
+        },
+        {
+          "a": "Tebows before Hoes",
+          "b": "MTL New Empire",
+          "aScore": 79.64,
+          "bScore": 93.02
+        }
+      ]
+    },
+    {
+      "id": "recap-3",
+      "type": "recap",
+      "week": 3,
+      "date": "2026-09-29",
+      "kind": "explosion",
+      "headline": "188.48 Points: Montreal Weapon X Played a Different Game",
+      "dek": "The widest margin of the week: Montreal Weapon X over T-Bone Ray's by 93.46.",
+      "byline": "The Shiva Times Staff",
+      "paragraphs": [
+        "Nobody topped 188.48 this week, and that number belonged to Montreal Weapon X, who beat T-Bone Ray's (95.02). The league median was 102.94. It is also the best score of the season so far.",
+        "Tebows before Hoes brought up the rear with 85.42. The bench would like a word.",
+        "Montreal Weapon X headed a crowded top at 3-0, edging two other teams on points. Montreal Weapon X arrived at 3 consecutive wins this week, with no apparent plans to stop. Longest losing streak: Tebows before Hoes, at 3 straight. Send help. Holding down last place, technically: Tebows before Hoes, 0-3."
+      ],
+      "results": [
+        {
+          "a": "MAGRAUDERS",
+          "b": "The Gridiron Sheriffs",
+          "aScore": 108.98,
+          "bScore": 96.9
+        },
+        {
+          "a": "Montreal Weapon X",
+          "b": "T-Bone Ray's",
+          "aScore": 188.48,
+          "bScore": 95.02
+        },
+        {
+          "a": "Mean Machine",
+          "b": "La Quiche",
+          "aScore": 86.04,
+          "bScore": 166.3
+        },
+        {
+          "a": "Scuderia Malo",
+          "b": "Tebows before Hoes",
+          "aScore": 133.52,
+          "bScore": 85.42
+        },
+        {
+          "a": "Lavaltree's Piggy",
+          "b": "MTL New Empire",
+          "aScore": 110.7,
+          "bScore": 91.98
+        },
+        {
+          "a": "SGB Nation ⚖️",
+          "b": "Les Pingouins 🐧",
+          "aScore": 140.54,
+          "bScore": 85.58
+        }
+      ]
+    },
+    {
+      "id": "recap-2",
+      "type": "recap",
+      "week": 2,
+      "date": "2026-09-22",
+      "kind": "explosion",
+      "headline": "Montreal Weapon X Dropped 169.76 on the League",
+      "dek": "The widest margin of the week: Mean Machine over Tebows before Hoes by 74.94.",
+      "byline": "The Shiva Times Staff",
+      "paragraphs": [
+        "Montreal Weapon X scored 169.76, the highest total in the league, and beat The Gridiron Sheriffs (95.94) with room to spare. The league median this week was 116.29. That is the best score of the season so far.",
+        "At the other end, Tebows before Hoes managed 36.8, the lowest total in the league. It is also the lowest score of the season so far.",
+        "Montreal Weapon X headed a crowded top at 2-0, edging two other teams on points. Holding down last place, technically: Tebows before Hoes, 0-2."
+      ],
+      "results": [
+        {
+          "a": "Montreal Weapon X",
+          "b": "The Gridiron Sheriffs",
+          "aScore": 169.76,
+          "bScore": 95.94
+        },
+        {
+          "a": "MAGRAUDERS",
+          "b": "T-Bone Ray's",
+          "aScore": 85.18,
+          "bScore": 120.84
+        },
+        {
+          "a": "Scuderia Malo",
+          "b": "La Quiche",
+          "aScore": 123.5,
+          "bScore": 122.14
+        },
+        {
+          "a": "Tebows before Hoes",
+          "b": "Mean Machine",
+          "aScore": 36.8,
+          "bScore": 111.74
+        },
+        {
+          "a": "Lavaltree's Piggy",
+          "b": "Les Pingouins 🐧",
+          "aScore": 131.72,
+          "bScore": 101.4
+        },
+        {
+          "a": "SGB Nation ⚖️",
+          "b": "MTL New Empire",
+          "aScore": 139.98,
+          "bScore": 91.8
+        }
+      ]
+    },
+    {
+      "id": "recap-1",
+      "type": "recap",
+      "week": 1,
+      "date": "2026-09-15",
+      "kind": "explosion",
+      "headline": "Montreal Weapon X Dropped 167.1 on the League",
+      "dek": "The widest margin of the week: The Gridiron Sheriffs over T-Bone Ray's by 43.5.",
+      "byline": "The Shiva Times Staff",
+      "paragraphs": [
+        "Montreal Weapon X scored 167.1, the highest total in the league, and beat MAGRAUDERS (137.88) with room to spare. The league median this week was 120.34.",
+        "Tebows before Hoes brought up the rear with 80.3. The bench would like a word.",
+        "Hard-luck award: MAGRAUDERS. 137.88 points was the fourth-highest score of the week, and it lost to Montreal Weapon X (167.1). La Quiche won with 93.44, the third-lowest score of the week. Nobody asked how; the win counts.",
+        "Week 1 is in the books, which means every team is either undefeated or winless. Do not get attached to either."
+      ],
+      "results": [
+        {
+          "a": "The Gridiron Sheriffs",
+          "b": "T-Bone Ray's",
+          "aScore": 144.38,
+          "bScore": 100.88
+        },
+        {
+          "a": "Montreal Weapon X",
+          "b": "MAGRAUDERS",
+          "aScore": 167.1,
+          "bScore": 137.88
+        },
+        {
+          "a": "Tebows before Hoes",
+          "b": "La Quiche",
+          "aScore": 80.3,
+          "bScore": 93.44
+        },
+        {
+          "a": "Scuderia Malo",
+          "b": "Mean Machine",
+          "aScore": 118.5,
+          "bScore": 114.18
+        },
+        {
+          "a": "Lavaltree's Piggy",
+          "b": "SGB Nation ⚖️",
+          "aScore": 153.32,
+          "bScore": 124.02
+        },
+        {
+          "a": "Les Pingouins 🐧",
+          "b": "MTL New Empire",
+          "aScore": 122.18,
+          "bScore": 91.6
+        }
+      ]
+    }
+  ]
+}

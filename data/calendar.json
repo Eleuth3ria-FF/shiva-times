@@ -1,0 +1,55 @@
+{
+  "season": "2026",
+  "seasonStart": "2026-09-09",
+  "currentWeek": 5,
+  "events": [
+    {
+      "key": "rivalry",
+      "label": "Rivalry Week",
+      "week": 9,
+      "edge": "start",
+      "date": "2026-11-05",
+      "note": "Every team plays its designated rival"
+    },
+    {
+      "key": "trade_deadline",
+      "label": "Trade deadline",
+      "week": 13,
+      "edge": "end",
+      "date": "2026-12-07",
+      "note": "End of Week 13. Trades reopen the day after the Shiva"
+    },
+    {
+      "key": "regular_season_end",
+      "label": "Regular season ends",
+      "week": 14,
+      "edge": "end",
+      "date": "2026-12-14",
+      "note": "End of Week 14"
+    },
+    {
+      "key": "playoffs",
+      "label": "Playoffs begin",
+      "week": 15,
+      "edge": "start",
+      "date": "2026-12-17",
+      "note": "Top two division winners get a bye"
+    },
+    {
+      "key": "playoffs_round2",
+      "label": "Playoffs, round two",
+      "week": 16,
+      "edge": "start",
+      "date": "2026-12-24",
+      "note": ""
+    },
+    {
+      "key": "shiva",
+      "label": "The Shiva final",
+      "week": 17,
+      "edge": "start",
+      "date": "2026-12-31",
+      "note": ""
+    }
+  ]
+}
