@@ -7,15 +7,39 @@
       "week": 4,
       "date": "2026-10-06",
       "kind": "explosion",
-      "headline": "Mean Machine Dropped 177.24 on the League",
+      "headline": "Mean Machine Went Nuclear for 177.24",
       "dek": "The widest margin of the week: Mean Machine over Les Pingouins 🐧 by 63.62.",
       "byline": "The Shiva Times Staff",
       "paragraphs": [
-        "Nobody topped 177.24 this week, and that number belonged to Mean Machine, who beat Les Pingouins 🐧 (113.62). The league median was 113.71.",
-        "At the other end, Lavaltree's Piggy managed 73, the lowest total in the league.",
-        "Hard-luck award: La Quiche. 133.98 points was the fourth-highest score of the week, and it lost to T-Bone Ray's (161.98). MTL New Empire won with 93.02, the fourth-lowest score of the week. Nobody asked how; the win counts.",
-        "Out front at 4-0: Montreal Weapon X, ahead of one other team with that record on the points tiebreak. Montreal Weapon X arrived at 4 consecutive wins this week, with no apparent plans to stop. Cold streak: Tebows before Hoes, 4 losses in a row and still falling. Last place belongs to Tebows before Hoes, at 0-4."
+        "Mean Machine scored 177.24, the highest total in the league, with Tetairoa McMillan (38.2) leading the way. Les Pingouins 🐧 put up 113.62 in the loss. The league median was 113.71.",
+        "La Quiche scored 133.98, the fourth-highest total of the week, and still lost to T-Bone Ray's, because CeeDee Lamb carried T-Bone Ray's with 32.8 of the team's 161.98. Montreal Weapon X beat Lavaltree's Piggy, 113.8-73, with Rashee Rice chipping in a spectacular 0 for the losing side. Starting Rashee Rice was a decision, and it was a bad one.",
+        "Alvin Kamara (20.3) kept MAGRAUDERS within sight of SGB Nation ⚖️, but 83.82 was never going to beat 122.3. The Gridiron Sheriffs got 24.72 from Joe Burrow and still lost to Scuderia Malo by 50.5, 110.86 to 161.36. One player cannot fix a lineup.",
+        "MTL New Empire won with a modest 93.02, the fourth-lowest score of the week, over Tebows before Hoes (79.64), with Patrick Mahomes (19) doing the work. The standings do not check how you got there.",
+        "The best individual performance of the week belonged to Tetairoa McMillan: 38.2 points for Mean Machine. Dud of the week: Ladd McConkey, who started for The Gridiron Sheriffs and scored 0. Somebody pressed \"start\" on that. At the other end, Lavaltree's Piggy scored 73, the lowest total in the league. That is not a lineup, it is a cry for help.",
+        "The South Division has a new leader: SGB Nation ⚖️ (3-1), who passed Lavaltree's Piggy. Biggest riser: Mean Machine, up from 9th to 6th. Biggest faller: MAGRAUDERS, down from 7th to 10th. Gravity is undefeated. The Gridiron Sheriffs fell out of the top six. Longest winning streak: Montreal Weapon X, at 4 straight. Tebows before Hoes sank to 4 straight losses this week."
       ],
+      "standings": {
+        "moves": [
+          {
+            "team": "Mean Machine",
+            "from": 9,
+            "to": 6
+          },
+          {
+            "team": "MAGRAUDERS",
+            "from": 7,
+            "to": 10
+          }
+        ],
+        "newLeader": null,
+        "divisionLeaders": [
+          {
+            "division": "South",
+            "team": "SGB Nation ⚖️",
+            "prev": "Lavaltree's Piggy"
+          }
+        ]
+      },
       "results": [
         {
           "a": "Les Pingouins 🐧",
@@ -65,10 +89,39 @@
       "dek": "The widest margin of the week: Montreal Weapon X over T-Bone Ray's by 93.46.",
       "byline": "The Shiva Times Staff",
       "paragraphs": [
-        "Nobody topped 188.48 this week, and that number belonged to Montreal Weapon X, who beat T-Bone Ray's (95.02). The league median was 102.94. It is also the best score of the season so far.",
-        "Tebows before Hoes brought up the rear with 85.42. The bench would like a word.",
-        "Montreal Weapon X headed a crowded top at 3-0, edging two other teams on points. Montreal Weapon X arrived at 3 consecutive wins this week, with no apparent plans to stop. Longest losing streak: Tebows before Hoes, at 3 straight. Send help. Holding down last place, technically: Tebows before Hoes, 0-3."
+        "Montreal Weapon X scored 188.48, the highest total in the league, with Jahmyr Gibbs (37.9) leading the way. T-Bone Ray's put up 95.02 in the loss. The league median was 102.94. That is the best score of the season so far.",
+        "The Gridiron Sheriffs lost to MAGRAUDERS by 12.08, 96.9 to 108.98, after getting 2.8 from Dalton Kincaid. Do the math. Bijan Robinson carried La Quiche to a 166.3-86.04 demolition of Mean Machine, putting up 34.3 of the team's 166.3. The 80.26-point margin is the kind of thing that gets screenshotted.",
+        "Scuderia Malo beat Tebows before Hoes, 133.52-85.42, with Chris Brooks chipping in a spectacular 0.9 for the losing side. Starting Chris Brooks was a decision, and it was a bad one. Jadarian Price gave MTL New Empire 0.7 points, and MTL New Empire lost to Lavaltree's Piggy by 18.72, 91.98-110.7. The two facts are related. Starting Jadarian Price took commitment.",
+        "Sam Darnold (31.66) led SGB Nation ⚖️ past Les Pingouins 🐧, 140.54 to 85.58. A 54.96-point margin is not a game; it is a police report.",
+        "The best individual performance of the week belonged to Jahmyr Gibbs: 37.9 points for Montreal Weapon X. Dud of the week: Jadarian Price, who started for MTL New Empire and scored 0.7. Somebody pressed \"start\" on that. At the other end, Tebows before Hoes scored 85.42, the lowest total in the league. That is not a lineup, it is a cry for help.",
+        "La Quiche made the week's biggest jump, from 9th to 5th. MAGRAUDERS also climbed, from 10th to 7th. Les Pingouins 🐧 took the week's biggest tumble, from 7th to 10th. Mean Machine slid from 6th to 9th as well. Longest winning streak: Montreal Weapon X, at 3 straight. Cold streak: Tebows before Hoes, 3 losses in a row and still falling."
       ],
+      "standings": {
+        "moves": [
+          {
+            "team": "La Quiche",
+            "from": 9,
+            "to": 5
+          },
+          {
+            "team": "MAGRAUDERS",
+            "from": 10,
+            "to": 7
+          },
+          {
+            "team": "Les Pingouins 🐧",
+            "from": 7,
+            "to": 10
+          },
+          {
+            "team": "Mean Machine",
+            "from": 6,
+            "to": 9
+          }
+        ],
+        "newLeader": null,
+        "divisionLeaders": []
+      },
       "results": [
         {
           "a": "MAGRAUDERS",
@@ -118,10 +171,39 @@
       "dek": "The widest margin of the week: Mean Machine over Tebows before Hoes by 74.94.",
       "byline": "The Shiva Times Staff",
       "paragraphs": [
-        "Montreal Weapon X scored 169.76, the highest total in the league, and beat The Gridiron Sheriffs (95.94) with room to spare. The league median this week was 116.29. That is the best score of the season so far.",
-        "At the other end, Tebows before Hoes managed 36.8, the lowest total in the league. It is also the lowest score of the season so far.",
-        "Montreal Weapon X headed a crowded top at 2-0, edging two other teams on points. Holding down last place, technically: Tebows before Hoes, 0-2."
+        "Montreal Weapon X scored 169.76, the highest total in the league, with Matthew Stafford (30.98) leading the way. The Gridiron Sheriffs put up 95.94 in the loss. The league median was 116.29. It is also the best score of the season so far.",
+        "DJ Moore gave MAGRAUDERS -0.1 points, and MAGRAUDERS lost to T-Bone Ray's by 35.66, 85.18-120.84. The two facts are related. Starting DJ Moore took commitment. Jaxon Smith-Njigba (38) was the difference as Scuderia Malo escaped La Quiche, 123.5-122.14, by 1.36. Somewhere, a manager is auditing every lineup decision.",
+        "DeVonta Smith (22.7) did the damage for Mean Machine, 111.74 to 36.8, while Mike Gesicki (0) quietly sabotaged Tebows before Hoes from the inside. Josh Allen dragged Lavaltree's Piggy past Les Pingouins 🐧, 131.72-101.4, with 43.82 of the team's 131.72. The rest of the lineup came along for the ride.",
+        "Davante Adams powered SGB Nation ⚖️ to a 139.98-91.8 rout of MTL New Empire, with 35.5 of the team's 139.98. Nobody on the MTL New Empire side wants to talk about it.",
+        "The best individual performance of the week belonged to Josh Allen: 43.82 points for Lavaltree's Piggy. Dud of the week: DJ Moore, who started for MAGRAUDERS and scored -0.1. Somebody pressed \"start\" on that. Tebows before Hoes scored a league-worst 36.8. Thoughts, prayers, and a firm recommendation to check the roster before kickoff. That is the lowest score of the season so far.",
+        "Biggest riser: SGB Nation ⚖️, up from 8th to 4th. Mean Machine also climbed, from 9th to 6th. La Quiche took the week's biggest tumble, from 6th to 9th. Les Pingouins 🐧 slid from 4th to 7th as well."
       ],
+      "standings": {
+        "moves": [
+          {
+            "team": "SGB Nation ⚖️",
+            "from": 8,
+            "to": 4
+          },
+          {
+            "team": "Mean Machine",
+            "from": 9,
+            "to": 6
+          },
+          {
+            "team": "La Quiche",
+            "from": 6,
+            "to": 9
+          },
+          {
+            "team": "Les Pingouins 🐧",
+            "from": 4,
+            "to": 7
+          }
+        ],
+        "newLeader": null,
+        "divisionLeaders": []
+      },
       "results": [
         {
           "a": "Montreal Weapon X",
@@ -167,15 +249,22 @@
       "week": 1,
       "date": "2026-09-15",
       "kind": "explosion",
-      "headline": "Montreal Weapon X Dropped 167.1 on the League",
+      "headline": "167.1 Points: Montreal Weapon X Played a Different Game",
       "dek": "The widest margin of the week: The Gridiron Sheriffs over T-Bone Ray's by 43.5.",
       "byline": "The Shiva Times Staff",
       "paragraphs": [
-        "Montreal Weapon X scored 167.1, the highest total in the league, and beat MAGRAUDERS (137.88) with room to spare. The league median this week was 120.34.",
-        "Tebows before Hoes brought up the rear with 80.3. The bench would like a word.",
-        "Hard-luck award: MAGRAUDERS. 137.88 points was the fourth-highest score of the week, and it lost to Montreal Weapon X (167.1). La Quiche won with 93.44, the third-lowest score of the week. Nobody asked how; the win counts.",
+        "Montreal Weapon X scored 167.1, the highest total in the league, with Kenneth Walker (32.6) leading the way. MAGRAUDERS put up 137.88 in the loss. The league median was 120.34.",
+        "T-Bone Ray's got 19.66 from Jayden Daniels and still lost to The Gridiron Sheriffs by 43.5, 100.88 to 144.38. One player cannot fix a lineup. Bijan Robinson carried La Quiche past Tebows before Hoes, 93.44-80.3, with 27.3 of the team's 93.44. It was the third-lowest score of the week, which tells you what the rest of the lineup was doing.",
+        "Scuderia Malo edged Mean Machine, 118.5-114.18, with Amon-Ra St. Brown (23.7) making the difference. Margin: 4.32. Nerves: shredded. Josh Allen dragged Lavaltree's Piggy past SGB Nation ⚖️, 153.32-124.02, with 37.66 of the team's 153.32. The rest of the lineup came along for the ride.",
+        "Bryce Young carried Les Pingouins 🐧 past MTL New Empire, 122.18-91.6, accounting for 34.44 of the team's 122.18. MTL New Empire had 91.6 and no answer.",
+        "The best individual performance of the week belonged to Caleb Williams: 39.26 points for MTL New Empire. The lineup decision of the week, for all the wrong reasons: T-Bone Ray's started Kyler Murray, who scored -0.38. Tebows before Hoes scored a league-worst 80.3. Thoughts, prayers, and a firm recommendation to check the roster before kickoff.",
         "Week 1 is in the books, which means every team is either undefeated or winless. Do not get attached to either."
       ],
+      "standings": {
+        "moves": [],
+        "newLeader": null,
+        "divisionLeaders": []
+      },
       "results": [
         {
           "a": "The Gridiron Sheriffs",
