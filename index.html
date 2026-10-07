@@ -214,6 +214,41 @@
   .team-card-stat-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); margin-top: 2px; font-weight: 600; }
   .team-card-meta { font-size: 11px; font-style: italic; color: var(--ink-3); margin-top: 10px; }
 
+  /* ---------- Rivalries ---------- */
+  .rv-schedule-caption { font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; color: var(--ink-3); margin: 0 0 6px; }
+  .rv-schedule { display: flex; border: 1px solid var(--ink); margin-bottom: 24px; }
+  .rv-schedule:empty { display: none; }
+  .rv-seg { text-align: center; padding: 8px 4px 8px; border-right: 1px solid var(--hair); min-width: 0; }
+  .rv-seg:last-child { border-right: none; }
+  .rv-seg--league { background: var(--paper-2); }
+  .rv-seg--rivalry { background: var(--ink); color: var(--paper); flex: 2.4 1 0 !important; }
+  .rv-seg-weeks { font-size: 10.5px; letter-spacing: 0.12em; font-weight: 700; color: var(--ink-3); }
+  .rv-seg--rivalry .rv-seg-weeks { color: var(--paper); opacity: 0.75; }
+  .rv-seg-label { font-family: var(--font-display); font-weight: 700; font-size: 16px; margin-top: 1px; }
+  .rv-explainer { margin-bottom: 28px; }
+  .rv-explainer p { margin: 0 0 12px; font-size: 17.5px; max-width: 68ch; }
+  .rv-explainer p:first-child::first-letter { float: left; font-family: var(--font-display); font-weight: 900; font-size: 3.6em; line-height: 0.82; padding: 6px 10px 0 0; }
+  .rv-grid { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--ink); }
+  .rv-card { padding: 16px 16px 20px; border-bottom: 1px solid var(--hair); }
+  .rv-card:nth-child(odd) { border-right: 1px solid var(--hair); }
+  .rv-card:nth-last-child(-n+2) { border-bottom: none; }
+  .rv-title { text-align: center; font-family: var(--font-display); font-weight: 900; font-size: 19px; line-height: 1.15; padding-bottom: 10px; margin-bottom: 16px; border-bottom: 1px solid var(--ink); }
+  .rv-title small { display: block; font-family: var(--font-text); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; color: var(--ink-3); margin-bottom: 4px; }
+  .rv-sides { display: grid; grid-template-columns: 1fr auto 1fr; align-items: start; gap: 8px; }
+  .rv-side { text-align: center; min-width: 0; }
+  .rv-crest { width: 80px; height: 80px; margin: 0 auto 9px; background: #fff; border: 1px solid var(--ink); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .rv-crest img { width: 100%; height: 100%; object-fit: contain; }
+  .rv-crest .initials-fallback { font-family: var(--font-display); font-weight: 900; font-size: 24px; }
+  .rv-team { font-family: var(--font-display); font-weight: 700; font-size: 15.5px; line-height: 1.2; }
+  .rv-mgr { display: inline-block; margin-top: 6px; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; color: var(--paper); background: var(--ink); padding: 2px 9px; }
+  .rv-vs { font-family: var(--font-display); font-style: italic; font-size: 21px; padding-top: 28px; color: var(--ink-2); }
+  @media (max-width: 700px) {
+    .rv-grid { grid-template-columns: 1fr; }
+    .rv-card:nth-child(odd) { border-right: none; }
+    .rv-card:nth-last-child(2) { border-bottom: 1px solid var(--hair); }
+    .rv-seg-label { font-size: 12.5px; } .rv-seg-weeks { font-size: 9.5px; letter-spacing: 0.06em; }
+  }
+
   /* ---------- Admin ---------- */
   .admin-link { display: block; padding: 18px 20px; border-bottom: 1px solid var(--hair); text-decoration: none; color: var(--ink); transition: background .12s ease; }
   .admin-link:last-child { border-bottom: none; }
@@ -345,10 +380,13 @@
 
   <section class="panel" id="panel-rivalries">
     <div class="headline-block">
-      <p class="eyebrow">Rivalry Week — Week 9</p>
+      <p class="eyebrow">Rivalry Week · Week 9</p>
       <h2 class="panel-title">Six Grudges, One Sunday</h2>
       <p class="panel-sub">The matchups nobody circled by accident.</p>
     </div>
+    <p class="rv-schedule-caption" id="rivalries-schedule-caption">The 14-week regular season</p>
+    <div class="rv-schedule" id="rivalries-schedule"></div>
+    <div class="rv-explainer" id="rivalries-explainer"></div>
     <div class="card" id="rivalries-body"></div>
   </section>
 
@@ -649,16 +687,48 @@
   }
 
   // ---------- Rivalries ----------
+  function rivalrySide(side) {
+    const src = logoSrcFor(side.team);
+    const crest = src
+      ? '<img src="' + src + '" alt="" onerror="this.parentElement.innerHTML=\'<span class=&quot;initials-fallback&quot;>' + initials(side.team) + '</span>\'">'
+      : '<span class="initials-fallback">' + initials(side.team) + '</span>';
+    return '<div class="rv-side"><div class="rv-crest">' + crest + '</div>' +
+      '<div class="rv-team">' + side.team + '</div>' +
+      (side.manager ? '<span class="rv-mgr">' + side.manager + '</span>' : '') + '</div>';
+  }
+
   function renderRivalries(data) {
     const el = document.getElementById('rivalries-body');
+    const schedEl = document.getElementById('rivalries-schedule');
+    const capEl = document.getElementById('rivalries-schedule-caption');
+    const exEl = document.getElementById('rivalries-explainer');
+    el.classList.add('card');
+    schedEl.innerHTML = ''; exEl.innerHTML = ''; capEl.style.display = 'none';
     if (!data || !Array.isArray(data.rivalries) || data.rivalries.length === 0) {
       emptyState(el, 'No grudges on file', 'Rivalries get earned, not scheduled.');
       return;
     }
-    el.innerHTML = data.rivalries.map(r =>
-      '<div class="rivalry-row"><div class="rivalry-note">' + (r.note||'') + '</div>' +
-      '<div class="rivalry-names">' + r.a + ' <span style="color:var(--text-muted);font-weight:400">vs</span> ' + r.b + '</div></div>'
-    ).join('');
+    const structured = data.rivalries.every(r => r && r.a && typeof r.a === 'object' && r.b && typeof r.b === 'object');
+    if (!structured) { // older plain-text format: still shown, just without crests
+      el.innerHTML = data.rivalries.map(r =>
+        '<div class="rivalry-row"><div class="rivalry-note">' + (r.note || '') + '</div>' +
+        '<div class="rivalry-names">' + r.a + ' <span style="color:var(--text-muted);font-weight:400">vs</span> ' + r.b + '</div></div>'
+      ).join('');
+      return;
+    }
+    if (Array.isArray(data.schedule) && data.schedule.length) {
+      capEl.style.display = '';
+      schedEl.innerHTML = data.schedule.map(seg =>
+        '<div class="rv-seg rv-seg--' + seg.kind + '" style="flex:' + (seg.span || 1) + ' 1 0">' +
+          '<div class="rv-seg-weeks">' + seg.weeks + '</div><div class="rv-seg-label">' + seg.label + '</div></div>'
+      ).join('');
+    }
+    if (Array.isArray(data.explainer)) exEl.innerHTML = data.explainer.map(t => '<p>' + t + '</p>').join('');
+    el.classList.remove('card');
+    el.innerHTML = '<div class="rv-grid">' + data.rivalries.map(r =>
+      '<div class="rv-card"><div class="rv-title"><small>Week ' + (data.week || 9) + '</small>' + r.title + '</div>' +
+      '<div class="rv-sides">' + rivalrySide(r.a) + '<div class="rv-vs">vs</div>' + rivalrySide(r.b) + '</div></div>'
+    ).join('') + '</div>';
   }
 
   // ---------- Prize Pool ----------
