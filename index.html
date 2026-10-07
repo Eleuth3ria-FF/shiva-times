@@ -989,6 +989,27 @@
     }
   }
 
+  // Read every vote for a week straight from the voting server (also used to double-check a submission).
+  async function readVotesFromServer(week) {
+    const res = await fetch(APPS_SCRIPT_URL + '?week=' + encodeURIComponent(week));
+    const j = await res.json();
+    return Array.isArray(j.votes) ? j.votes : null;
+  }
+  async function canReachServer(week) {
+    try { return (await readVotesFromServer(week)) !== null; } catch (e) { return false; }
+  }
+  // After a submission whose reply we could not read: did the server actually record every pick?
+  async function votesLandedOnServer(week, voter, picks) {
+    for (let attempt = 0; attempt < 2; attempt++) {
+      try {
+        const votes = await readVotesFromServer(week);
+        if (votes && Object.keys(picks).every(mid => votes.some(v => String(v.voter) === voter && v.matchup === mid && v.pick === picks[mid]))) return true;
+      } catch (e) { /* try once more */ }
+      await new Promise(r => setTimeout(r, 900));
+    }
+    return false;
+  }
+
   function renderPredictionForm(el, week, matchups, managerNames, lockAt) {
     const picks = {}; // matchupId -> picked team name
 
@@ -1044,18 +1065,29 @@
 
       const pickList = Object.keys(picks).map(matchupId => ({ matchup: matchupId, pick: picks[matchupId] }));
 
+      const postBody = JSON.stringify({ week: week, voter: voter, picks: pickList, lockAt: lockAt ? lockAt.toISOString() : null });
+      const postHeaders = { 'Content-Type': 'text/plain;charset=utf-8' }; // avoids a CORS preflight Apps Script can't answer
       let json = null;
       try {
-        const res = await fetch(APPS_SCRIPT_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // avoids a CORS preflight Apps Script can't answer
-          body: JSON.stringify({ week: week, voter: voter, picks: pickList, lockAt: lockAt ? lockAt.toISOString() : null }),
-        });
+        const res = await fetch(APPS_SCRIPT_URL, { method: 'POST', headers: postHeaders, body: postBody });
         try { json = await res.json(); } catch (e) { json = null; }
       } catch (e) {
-        statusEl.textContent = 'Couldn\u2019t reach the voting server. Check your connection and try again.';
-        submitBtn.disabled = false;
-        return;
+        // The browser could not complete the request. Work out which of two situations this is.
+        if (!(await canReachServer(week))) {
+          statusEl.textContent = 'Your browser can\u2019t reach the voting server (script.google.com). A work network, a VPN, or an ad/privacy blocker can cause this. Try another network or device.';
+          submitBtn.disabled = false;
+          return;
+        }
+        // Reads work, so only the reply to our submission was blocked. Send it once more in a way that
+        // doesn't need the reply, then read the votes back to confirm. (Safe to repeat: re-voting overwrites.)
+        try { await fetch(APPS_SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: postHeaders, body: postBody }); } catch (e2) { /* confirmed below */ }
+        if (await votesLandedOnServer(week, voter, picks)) {
+          json = { success: true };
+        } else {
+          statusEl.textContent = 'The voting server is reachable, but I couldn\u2019t confirm your picks were saved. If the deadline has passed, voting is closed. Otherwise reload and check before trying again.';
+          submitBtn.disabled = false;
+          return;
+        }
       }
 
       if (json && json.error === 'LOCKED') {
