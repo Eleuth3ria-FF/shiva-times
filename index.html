@@ -1360,6 +1360,24 @@
     } catch (e) { /* private browsing, etc. — voting still works, just won't be remembered on reload */ }
   }
 
+  // Keep only COMPLETE ballots: a voter's picks for a week count only if they cover
+  // every matchup that week. expectedByWeek: { week: number of matchups }.
+  function completeBallots(votes, expectedByWeek) {
+    const seen = {};
+    votes.forEach(v => {
+      const k = String(v.week) + '|' + v.voter;
+      (seen[k] || (seen[k] = {}))[canonMatchup(v.matchup)] = true;
+    });
+    return votes.filter(v => {
+      const need = expectedByWeek[String(v.week)];
+      return need && Object.keys(seen[String(v.week) + '|' + v.voter]).length >= need;
+    });
+  }
+
+  function clearSavedVote(week) {
+    try { localStorage.removeItem(predictionsLocalKey(week)); } catch (e) { /* ignore */ }
+  }
+
   async function renderPredictions(data, managerNames) {
     const el = document.getElementById('predictions-body');
 
@@ -1378,7 +1396,18 @@
     const week = data.week;
     const lockAt = data.lockAt ? new Date(data.lockAt) : null;
     const isLocked = lockAt ? (new Date() >= lockAt) : false;
-    const saved = getSavedVote(week);
+    let saved = getSavedVote(week);
+    // The voting server is the source of truth. If this browser remembers a
+    // vote the server no longer has (the commissioner reset it), forget it.
+    if (saved && !isLocked) {
+      try {
+        const serverVotes = await readVotesFromServer(week);
+        if (serverVotes && completeBallots(serverVotes, { [week]: data.matchups.length }).every(v => String(v.voter) !== String(saved.voter))) {
+          clearSavedVote(week);
+          saved = null;
+        }
+      } catch (e) { /* can't check: keep trusting the local copy */ }
+    }
 
     const syncedEl = document.getElementById('predictions-synced');
     if (syncedEl && data.syncedAt) {
@@ -1470,7 +1499,7 @@
 
       const pickList = Object.keys(picks).map(matchupId => ({ matchup: matchupId, pick: picks[matchupId] }));
 
-      const postBody = JSON.stringify({ week: week, voter: voter, picks: pickList, lockAt: lockAt ? lockAt.toISOString() : null });
+      const postBody = JSON.stringify({ week: week, voter: voter, picks: pickList, expected: matchups.length, lockAt: lockAt ? lockAt.toISOString() : null });
       const postHeaders = { 'Content-Type': 'text/plain;charset=utf-8' }; // avoids a CORS preflight Apps Script can't answer
       let json = null;
       try {
@@ -1498,6 +1527,11 @@
       if (json && json.error === 'LOCKED') {
         // The server's clock is the authority — it says voting is closed.
         await renderPredictionResults(el, week, matchups, true, getSavedVote(week), json.message);
+        return;
+      }
+      if (json && (json.error === 'ALREADY_VOTED' || json.error === 'INCOMPLETE')) {
+        statusEl.textContent = json.message;
+        submitBtn.disabled = false;
         return;
       }
       if (!json || json.error || !json.success) {
@@ -1531,7 +1565,7 @@
     try {
       const res = await fetch(APPS_SCRIPT_URL + '?week=' + encodeURIComponent(week));
       const json = await res.json();
-      votes = Array.isArray(json.votes) ? json.votes : [];
+      votes = Array.isArray(json.votes) ? completeBallots(json.votes, { [week]: matchups.length }) : [];
     } catch (e) { /* show whatever we can below, even with no votes loaded */ }
 
     const header =
@@ -1606,7 +1640,7 @@
     const el = document.getElementById('predictions-scoreboard');
     const noteEl = document.getElementById('predictions-scoreboard-note');
     if (!el) return;
-    noteEl.textContent = 'Completed weeks only. Ranked by accuracy; you need ' + SCOREBOARD_MIN_PICKS + '+ graded picks to be ranked. Ties aren\u2019t counted.';
+    noteEl.textContent = 'Completed weeks and complete ballots only. Ranked by accuracy; you need ' + SCOREBOARD_MIN_PICKS + '+ graded picks to be ranked. Ties aren\u2019t counted.';
 
     if (APPS_SCRIPT_URL.indexOf('PASTE_YOUR') === 0) {
       el.innerHTML = '<div class="pred-scoreboard-empty">Voting isn\u2019t connected yet.</div>';
@@ -1627,6 +1661,9 @@
       return;
     }
 
+    const expectedByWeek = {};
+    Object.keys(resultsData.results).forEach(w => { expectedByWeek[w] = resultsData.results[w].length; });
+    votes = completeBallots(votes, expectedByWeek);
     const rows = computeScoreboard(votes, resultsData);
     if (rows.length === 0) {
       const anyWeeks = Object.keys(resultsData.results).length > 0;
