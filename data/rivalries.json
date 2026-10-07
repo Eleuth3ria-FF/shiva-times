@@ -47,7 +47,9 @@
       "b": {
         "team": "La Quiche",
         "manager": "Sam"
-      }
+      },
+      "art": "LOGOS/rivalry-the-civil-war.jpg",
+      "focus": "50% 100%"
     },
     {
       "title": "King Among Kings",
@@ -91,7 +93,9 @@
       "b": {
         "team": "MAGRAUDERS",
         "manager": "Mag"
-      }
+      },
+      "art": "LOGOS/rivalry-war-in-the-north.jpg",
+      "focus": "50% 62%"
     },
     {
       "title": "9/11 — The Battle of the Twin Towers",
