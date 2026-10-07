@@ -2,14 +2,18 @@ name: Sync Sleeper Data
 
 on:
   schedule:
-    # Every 6 hours. Sleeper's own data doesn't update faster than
-    # this during the week anyway; tighten this during game windows
-    # later if we want closer-to-live standings on Sundays.
-    - cron: '0 */6 * * *'
+    # Every hour, at 7 minutes past: GitHub's scheduler is busiest right at :00,
+    # so an off-peak minute tends to start closer to on time. Free for a public repo.
+    - cron: '7 * * * *'
   workflow_dispatch: {}   # lets you trigger it manually from the Actions tab
 
 permissions:
   contents: write
+
+# Never run two syncs at once (e.g. a manual run during a scheduled one): they would race to save the same files.
+concurrency:
+  group: sync-sleeper
+  cancel-in-progress: false
 
 jobs:
   sync:
@@ -31,5 +35,11 @@ jobs:
           git config user.name "shiva-times-bot"
           git config user.email "actions@users.noreply.github.com"
           git add data/
-          git diff --quiet && git diff --staged --quiet || git commit -m "Auto-sync Sleeper data"
-          git push
+          if git diff --staged --quiet; then
+            echo "No data changes this run."
+          else
+            git commit -m "Auto-sync Sleeper data"
+            # If you uploaded files to the repo while this run was in progress, replay our data commit on top of yours.
+            git pull --rebase origin main
+            git push
+          fi
