@@ -19,6 +19,16 @@
       ]
     },
     {
+      "name": "Olivier Dutrisac",
+      "total": 10.0,
+      "breakdown": [
+        {
+          "label": "W4",
+          "amount": 10.0
+        }
+      ]
+    },
+    {
       "name": "Sébastien Malo",
       "total": 0.0,
       "breakdown": []
@@ -32,16 +42,6 @@
       "name": "Rémi Giguère",
       "total": 0.0,
       "breakdown": []
-    },
-    {
-      "name": "Olivier Dutrisac",
-      "total": 0.0,
-      "breakdown": [
-        {
-          "label": "W4",
-          "amount": 10.0
-        }
-      ]
     },
     {
       "name": "Marc-André Giguère",
