@@ -71,7 +71,9 @@
       "b": {
         "team": "T-Bone Ray's",
         "manager": "Raymond"
-      }
+      },
+      "art": "LOGOS/rivalry-the-clipboard-classic.jpg",
+      "focus": "50% 15%"
     },
     {
       "title": "The Battle of Internal Affairs",
