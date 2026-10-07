@@ -36,7 +36,12 @@
     {
       "name": "Olivier Dutrisac",
       "total": 0.0,
-      "breakdown": []
+      "breakdown": [
+        {
+          "label": "W4",
+          "amount": 10.0
+        }
+      ]
     },
     {
       "name": "Marc-André Giguère",
