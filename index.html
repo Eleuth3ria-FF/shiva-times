@@ -35,7 +35,7 @@
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
-  html { color-scheme: light; scroll-padding-top: calc(56px + env(safe-area-inset-top, 0px)); }
+  html { color-scheme: light; scroll-padding-top: calc(100px + env(safe-area-inset-top, 0px)); }
   body {
     background-color: var(--paper);
     background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27240%27%20height%3D%27240%27%3E%3Cfilter%20id%3D%27n%27%20x%3D%270%27%20y%3D%270%27%20width%3D%27100%25%27%20height%3D%27100%25%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.9%27%20numOctaves%3D%273%27%20seed%3D%2711%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20type%3D%27matrix%27%20values%3D%270%200%200%200%200%20%200%200%200%200%200%20%200%200%200%200%200%20%200%200%200%200.20%20-0.105%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url%28%23n%29%27%2F%3E%3C%2Fsvg%3E");
@@ -83,24 +83,20 @@
   .mast-dateline span:nth-child(2) { text-align: center; }
   .mast-dateline span:last-child { text-align: right; }
 
-  /* ---------- Section nav: one ruled strip, evenly spaced ---------- */
-  nav.tabs {
-    position: sticky; top: 0; z-index: 10; display: flex;
-    width: calc(100% - 48px); max-width: 992px; margin: 0 auto;
-    background: var(--paper); border-bottom: 3px double var(--ink);
-    overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
-    padding-top: env(safe-area-inset-top, 0px);
-  }
-  nav.tabs::-webkit-scrollbar { display: none; }
-  nav.tabs button {
-    flex: 1 0 auto; font-family: var(--font-text); font-weight: 700; font-size: 11px;
-    letter-spacing: 0.12em; text-transform: uppercase; background: none; border: none; border-radius: 0;
-    border-right: 1px solid var(--hair); color: var(--ink); padding: 13px 10px 12px;
-    cursor: pointer; white-space: nowrap; transition: background .12s ease, color .12s ease;
-  }
+  /* ---------- Section nav: five sections; the ones with several pages show a second row ---------- */
+  .navbar { position: sticky; top: 0; z-index: 10; width: calc(100% - 48px); max-width: 992px; margin: 0 auto; background: var(--paper); border-bottom: 3px double var(--ink); padding-top: env(safe-area-inset-top, 0px); }
+  nav.tabs { display: flex; }
+  nav.tabs button { flex: 1 1 0; font-family: var(--font-text); font-weight: 700; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; background: none; border: none; border-radius: 0; border-right: 1px solid var(--hair); color: var(--ink); padding: 13px 4px 12px; cursor: pointer; white-space: nowrap; transition: background .12s ease, color .12s ease; }
   nav.tabs button:last-child { border-right: none; }
   nav.tabs button:hover { background: var(--paper-2); }
-  nav.tabs button[aria-selected="true"] { background: var(--ink); color: var(--paper); }
+  nav.tabs button[aria-current="page"] { background: var(--ink); color: var(--paper); }
+  nav.subtabs { display: flex; border-top: 1px solid var(--ink); overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  nav.subtabs[hidden] { display: none; }
+  nav.subtabs::-webkit-scrollbar { display: none; }
+  nav.subtabs button { flex: 1 1 auto; font-family: var(--font-text); font-weight: 600; font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; background: none; border: none; border-radius: 0; color: var(--ink-2); padding: 11px 8px 10px; cursor: pointer; white-space: nowrap; }
+  nav.subtabs button:hover { background: var(--paper-2); }
+  nav.subtabs button[aria-current="page"] { color: var(--ink); font-weight: 700; box-shadow: inset 0 -3px 0 var(--ink); }
+  @media (max-width: 640px) { nav.subtabs button { font-size: 10px; letter-spacing: 0.05em; padding: 11px 4px 10px; } nav.tabs button { letter-spacing: 0.08em; } }
 
   main { padding-top: 28px; }
   section.panel { display: none; }
@@ -307,6 +303,57 @@
   .cal-note { font-size: 13px; font-style: italic; color: var(--ink-2); margin-top: 2px; }
   .cal-foot { padding: 9px 14px; font-size: 12.5px; font-style: italic; color: var(--ink-3); }
 
+  /* ---------- Team pages ---------- */
+  a.team-link { color: inherit; text-decoration: none; min-width: 0; }
+  a.team-link:hover .tname { text-decoration: underline; }
+  a.team-card-v2 { color: inherit; text-decoration: none; cursor: pointer; transition: background .12s ease; }
+  a.team-card-v2:hover { background: var(--paper-2); }
+  .team-back { margin: 0 0 12px; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; }
+  .team-back a { text-decoration: none; } .team-back a:hover { text-decoration: underline; }
+  .team-head { display: flex; gap: 22px; align-items: center; border-top: 4px solid var(--ink); border-bottom: 1px solid var(--ink); padding: 16px 0 18px; margin-bottom: 20px; }
+  .team-head-crest { flex: 0 0 auto; width: 120px; height: 120px; background: #fff; border: 1px solid var(--ink); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .team-head-crest img { width: 100%; height: 100%; object-fit: contain; }
+  .team-head-crest .initials-fallback { font-family: var(--font-display); font-weight: 900; font-size: 32px; }
+  .team-head-text { flex: 1 1 auto; min-width: 0; }
+  .team-head-text h2 { margin: 0 0 10px; }
+  .team-head-div { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; color: var(--ink-2); vertical-align: middle; margin-left: 6px; }
+  .team-head-div .division-logo { width: 24px; height: 24px; border: 1px solid var(--hair); }
+  .team-switch { flex: 0 0 auto; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; }
+  .team-switch select { display: block; margin-top: 6px; max-width: 210px; }
+  .team-tiles { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--ink); margin-bottom: 22px; }
+  .team-tile { padding: 14px 16px; border-right: 1px solid var(--hair); border-bottom: 1px solid var(--hair); min-width: 0; }
+  .team-tile:nth-child(3n) { border-right: none; }
+  .team-tile:nth-last-child(-n+3) { border-bottom: none; }
+  .team-tile-value { font-family: var(--font-display); font-weight: 900; font-size: 28px; line-height: 1.1; font-variant-numeric: lining-nums tabular-nums; }
+  .team-tile-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; color: var(--ink-3); margin-top: 4px; }
+  .team-tile-sub { font-size: 13px; font-style: italic; color: var(--ink-2); margin-top: 2px; }
+  .team-sections { display: flex; border: 1px solid var(--ink); border-bottom: none; }
+  .team-sections a { flex: 1 1 0; text-align: center; padding: 11px 4px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; text-decoration: none; color: var(--ink); border-right: 1px solid var(--hair); white-space: nowrap; }
+  .team-sections a:last-child { border-right: none; }
+  .team-sections a:hover { background: var(--paper-2); }
+  .team-sections a[aria-current="page"] { background: var(--ink); color: var(--paper); }
+  .team-section-body { border: 1px solid var(--ink); }
+  .team-section-body > .division-label:not(:first-child) { border-top: 1px solid var(--paper); }
+  .hl-row { display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-bottom: 1px solid var(--hair); }
+  .hl-label { flex: 0 0 150px; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; color: var(--ink-3); }
+  .hl-who { flex: 1 1 auto; min-width: 0; font-size: 15px; }
+  .hl-rec { flex: 0 0 auto; font-weight: 700; font-variant-numeric: lining-nums tabular-nums; text-align: right; }
+  .shelf-row { display: flex; gap: 16px; align-items: baseline; padding: 11px 16px; border-bottom: 1px solid var(--hair); }
+  .shelf-name { flex: 0 0 auto; min-width: 200px; font-family: var(--font-display); font-weight: 700; font-size: 16px; }
+  .shelf-years { color: var(--ink-2); font-variant-numeric: lining-nums tabular-nums; }
+  a.team-more { display: block; border-top: 1px solid var(--ink); padding: 10px 16px; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; color: var(--ink); text-decoration: none; }
+  a.team-more:hover { background: var(--paper-2); }
+  .team-filter { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--hair); }
+  .team-filter label { font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; }
+  @media (max-width: 640px) {
+    .team-head { flex-wrap: wrap; gap: 14px; } .team-head-crest { width: 88px; height: 88px; } .team-switch { flex-basis: 100%; } .team-switch select { max-width: none; width: 100%; }
+    .team-tiles { grid-template-columns: 1fr 1fr; }
+    .team-tile:nth-child(3n) { border-right: 1px solid var(--hair); } .team-tile:nth-child(2n) { border-right: none; }
+    .team-tile:nth-last-child(-n+3) { border-bottom: 1px solid var(--hair); } .team-tile:nth-last-child(-n+2) { border-bottom: none; }
+    .hl-row { flex-wrap: wrap; } .hl-label { flex-basis: 100%; } .shelf-row { flex-direction: column; gap: 2px; } .shelf-name { min-width: 0; }
+    .team-sections a { font-size: 10px; letter-spacing: 0.08em; }
+  }
+
   /* ---------- Admin ---------- */
   .admin-link { display: block; padding: 18px 20px; border-bottom: 1px solid var(--hair); text-decoration: none; color: var(--ink); transition: background .12s ease; }
   .admin-link:last-child { border-bottom: none; }
@@ -383,18 +430,7 @@
   </div>
 </header>
 
-<nav class="tabs" role="tablist">
-  <button role="tab" aria-selected="true" data-panel="home">Home</button>
-  <button role="tab" aria-selected="false" data-panel="standings">Standings</button>
-  <button role="tab" aria-selected="false" data-panel="h2h">Head-to-Head</button>
-  <button role="tab" aria-selected="false" data-panel="rivalries">Rivalries</button>
-  <button role="tab" aria-selected="false" data-panel="prizepool">Prize Pool</button>
-  <button role="tab" aria-selected="false" data-panel="trades">Trade Ledger</button>
-  <button role="tab" aria-selected="false" data-panel="champions">Trophies</button>
-  <button role="tab" aria-selected="false" data-panel="teams">Teams</button>
-  <button role="tab" aria-selected="false" data-panel="rules">Admin</button>
-  <button role="tab" aria-selected="false" data-panel="predictions">Predictions</button>
-</nav>
+<div class="navbar" id="navbar"></div>
 
 <div class="wrap">
 <main>
@@ -434,7 +470,7 @@
       <p class="panel-sub">Select a manager to see their all-time record against everyone else, best matchup first.</p>
     </div>
     <div class="card" style="padding:16px 20px;border-bottom:1px solid var(--border)">
-      <select id="h2h-select" class="trade-select" style="width:100%;max-width:320px"></select>
+      <select id="h2h-select" aria-label="Choose a team to see its head-to-head record" class="trade-select" style="width:100%;max-width:320px"></select>
     </div>
     <div class="card" id="h2h-body" style="border-top:none"></div>
   </section>
@@ -468,9 +504,9 @@
       <p class="panel-sub">Pick two managers to see every trade between them. Leave both on "Everyone" for the full ledger.</p>
     </div>
     <div class="card" style="padding:16px 20px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;border-bottom:1px solid var(--border)">
-      <select id="trade-select-a" class="trade-select"></select>
+      <select id="trade-select-a" aria-label="First team in the trade filter" class="trade-select"></select>
       <span style="font-family:'Playfair Display',serif;font-weight:700;color:var(--text-muted)">vs</span>
-      <select id="trade-select-b" class="trade-select"></select>
+      <select id="trade-select-b" aria-label="Second team in the trade filter" class="trade-select"></select>
     </div>
     <div class="card" id="trades-body" style="border-top:none"></div>
   </section>
@@ -482,7 +518,7 @@
       <p class="panel-sub">Pick a trophy to see who's won it, most recent first.</p>
     </div>
     <div class="card" style="padding:16px 20px;border-bottom:1px solid var(--border)">
-      <select id="trophy-select" class="trade-select" style="width:100%;max-width:320px"></select>
+      <select id="trophy-select" aria-label="Choose a trophy" class="trade-select" style="width:100%;max-width:320px"></select>
     </div>
     <div class="card" id="champions-body" style="border-top:none"></div>
   </section>
@@ -491,9 +527,13 @@
     <div class="headline-block">
       <p class="eyebrow">The Franchises</p>
       <h2 class="panel-title">Every Team, By Division</h2>
-      <p class="panel-sub">Each franchise’s record this season and all-time, plus Shivas won, grouped by division. Everything is counted from 2020, the dynasty era.</p>
+      <p class="panel-sub">Each franchise’s record this season and all-time, plus Shivas won, grouped by division. Everything is counted from 2020, the dynasty era. Click a franchise to open its file.</p>
     </div>
     <div id="teams-body"></div>
+  </section>
+
+  <section class="panel" id="panel-team">
+    <div id="team-body"></div>
   </section>
 
   <section class="panel" id="panel-rules">
@@ -548,15 +588,70 @@
 <script>
 (function () {
   const panels = document.querySelectorAll('.panel');
-  const tabs = document.querySelectorAll('nav.tabs button');
-  tabs.forEach(btn => {
-    btn.addEventListener('click', () => {
-      tabs.forEach(b => b.setAttribute('aria-selected', 'false'));
-      panels.forEach(p => p.classList.remove('active'));
-      btn.setAttribute('aria-selected', 'true');
-      document.getElementById('panel-' + btn.dataset.panel).classList.add('active');
+
+  // ---------- Navigation: five sections; Season and Teams open a second row ----------
+  // To move a page to a different section, change this list. Nothing else needs to know.
+  const PANEL_OF = { home: 'home', standings: 'standings', rivalries: 'rivalries', predictions: 'predictions', prizepool: 'prizepool',
+                     teams: 'teams', h2h: 'h2h', trophies: 'champions', trades: 'trades', admin: 'rules' };
+  const NAV = [
+    { id: 'home', label: 'Home', pages: [{ route: 'home', label: 'Home' }] },
+    { id: 'season', label: 'Season', pages: [{ route: 'standings', label: 'Standings' }, { route: 'rivalries', label: 'Rivalries' }, { route: 'predictions', label: 'Predictions' }, { route: 'prizepool', label: 'Prize Pool' }] },
+    { id: 'teams', label: 'Teams', pages: [{ route: 'teams', label: 'All Teams' }, { route: 'h2h', label: 'Head-to-Head' }, { route: 'trophies', label: 'Trophies' }] },
+    { id: 'trades', label: 'Trades', pages: [{ route: 'trades', label: 'Trade Ledger' }] },
+    { id: 'admin', label: 'Admin', pages: [{ route: 'admin', label: 'Admin' }] },
+  ];
+  const DATA = {};              // everything the sync produced, kept so team pages can be built on demand
+  const TEAM_SLUGS = new Set(); // current teams, so names only become links when there is a page behind them
+  const lastRoute = {};         // section -> the page last opened in it
+  let lastHash = null;
+
+  function buildNav() {
+    const bar = document.getElementById('navbar');
+    bar.innerHTML = '<nav class="tabs" aria-label="Main sections">' + NAV.map(g => g.pages.length === 1
+        ? '<button type="button" data-group="' + g.id + '" data-panel="' + PANEL_OF[g.pages[0].route] + '" data-route="' + g.pages[0].route + '">' + g.label + '</button>'
+        : '<button type="button" data-group="' + g.id + '">' + g.label + '</button>').join('') + '</nav>' +
+      NAV.filter(g => g.pages.length > 1).map(g => '<nav class="subtabs" data-sub="' + g.id + '" aria-label="' + g.label + ' pages" hidden>' +
+        g.pages.map(p => '<button type="button" data-panel="' + PANEL_OF[p.route] + '" data-route="' + p.route + '">' + p.label + '</button>').join('') + '</nav>').join('');
+    bar.addEventListener('click', e => {
+      const b = e.target.closest('button');
+      if (!b) return;
+      if (b.dataset.route) navigate(b.dataset.route);
+      else if (b.dataset.group) navigate(lastRoute[b.dataset.group] || NAV.find(g => g.id === b.dataset.group).pages[0].route);
     });
-  });
+  }
+  function parseHash() {
+    let raw = (location.hash || '').replace(/^#\/?/, '');
+    try { raw = decodeURIComponent(raw); } catch (e) { /* keep as typed */ }
+    const parts = raw.split('/');
+    return { name: parts[0] || 'home', rest: parts.slice(1) };
+  }
+  function groupOf(route) { return route === 'team' ? 'teams' : (NAV.find(g => g.pages.some(p => p.route === route)) || NAV[0]).id; }
+  function navigate(route) {
+    const h = '#' + route;
+    if (location.hash !== h) location.hash = h;
+    applyRoute();
+  }
+  function markNav(group, route) {
+    document.querySelectorAll('nav.tabs button').forEach(b => { if (b.dataset.group === group) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
+    document.querySelectorAll('nav.subtabs').forEach(n => { n.hidden = n.dataset.sub !== group; });
+    document.querySelectorAll('nav.subtabs button').forEach(b => { if (b.dataset.route === route) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
+  }
+  function applyRoute(force) {
+    if (!force && location.hash === lastHash) return;
+    lastHash = location.hash;
+    const { name, rest } = parseHash();
+    const route = name === 'team' ? 'team' : (PANEL_OF[name] ? name : 'home');
+    panels.forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-' + (route === 'team' ? 'team' : PANEL_OF[route])).classList.add('active');
+    if (route === 'team') renderTeamPage(rest[0], rest[1]);
+    const navRoute = route === 'team' ? 'teams' : route, group = groupOf(route);
+    lastRoute[group] = navRoute;
+    markNav(group, navRoute);
+    const label = route === 'team' ? ((allTeams().find(t => slugOf(t.team) === rest[0]) || {}).team || 'Franchise file') : (NAV.flatMap(g => g.pages).find(p => p.route === route) || {}).label;
+    document.title = route === 'home' ? 'The Shiva Times \u2014 League Gazette' : label + ' \u2014 The Shiva Times';
+    if (window.scrollY > 0) window.scrollTo(0, 0);
+  }
+  window.addEventListener('hashchange', () => applyRoute());
 
   function fmtMoney(n) { return '$' + (Number(n) || 0).toLocaleString('en-US'); }
 
@@ -606,13 +701,14 @@
   // They stay SEPARATE owners on purpose; their results are never merged into the current owner's record.
   // They get no crest, just their account name and a "Former" tag.
   const FORMER_ACCOUNTS = new Set(['sebwatermalon', 'tonka26']);
-  function teamWithLogo(name) {
+  function teamWithLogo(name, link) {
     if (FORMER_ACCOUNTS.has(normName(name))) {
       return '<span class="with-logo with-logo--former"><span class="mini-logo mini-logo--none"></span><span class="tname">' + name + '</span><span class="former-tag">Former</span></span>';
     }
     const src = logoSrcFor(name);
     const img = src ? '<img class="mini-logo" src="' + src + '" alt="" onerror="this.remove()">' : '';
-    return '<span class="with-logo">' + img + '<span class="tname">' + name + '</span></span>';
+    const inner = '<span class="with-logo">' + img + '<span class="tname">' + name + '</span></span>';
+    return (link && TEAM_SLUGS.has(slugOf(name))) ? '<a class="team-link" href="#team/' + slugOf(name) + '">' + inner + '</a>' : inner;
   }
 
   // Division crests. The sync names the divisions "North", "Central", "South".
@@ -737,7 +833,7 @@
     el.style.display = '';
     const all = standings.divisions.flatMap(d => d.teams).slice().sort((a, b) => ((b.wins || 0) - (a.wins || 0)) || ((b.pointsFor || 0) - (a.pointsFor || 0)));
     el.innerHTML = '<div class="division-label">The Table</div>' + all.slice(0, 5).map((t, i) =>
-      '<div class="rank-row' + (i === 0 ? ' rank-top' : '') + '"><span class="rank-num">' + (i + 1) + '</span><span class="rank-team">' + teamWithLogo(t.team) + '</span>' +
+      '<div class="rank-row' + (i === 0 ? ' rank-top' : '') + '"><span class="rank-num">' + (i + 1) + '</span><span class="rank-team">' + teamWithLogo(t.team, true) + '</span>' +
       '<span class="rank-record">' + (t.wins || 0) + '-' + (t.losses || 0) + (t.ties ? '-' + t.ties : '') + '</span></div>'
     ).join('') + '<button type="button" class="home-link" data-go="standings">Full standings \u2192</button>';
   }
@@ -790,7 +886,7 @@
       const sortedTeams = div.teams.slice().sort((a, b) => ((b.wins || 0) - (a.wins || 0)) || ((b.pointsFor || 0) - (a.pointsFor || 0)));
       const rows = sortedTeams.map((t, i) => (
         '<tr class="' + (i === 0 && t.wins > 0 ? 'rank-1' : '') + '">' +
-          '<td>' + teamWithLogo(t.team) + '</td>' +
+          '<td>' + teamWithLogo(t.team, true) + '</td>' +
           '<td class="num">' + (t.wins||0) + '-' + (t.losses||0) + (t.ties ? '-'+t.ties : '') + '</td>' +
           '<td class="num">' + (t.pointsFor != null ? t.pointsFor : '—') + '</td>' +
           '<td class="num">' + (t.pointsAgainst != null ? t.pointsAgainst : '—') + '</td>' +
@@ -816,7 +912,7 @@
     el.innerHTML = ranked.map((t, i) =>
       '<div class="rank-row' + (i === 0 ? ' rank-top' : '') + '">' +
         '<span class="rank-num">' + (i+1) + '</span>' +
-        '<span class="rank-team">' + teamWithLogo(t.team) + '</span>' +
+        '<span class="rank-team">' + teamWithLogo(t.team, true) + '</span>' +
         '<span class="rank-record">' + (t.wins||0) + '-' + (t.losses||0) + (t.ties ? '-'+t.ties : '') + '</span>' +
       '</div>'
     ).join('');
@@ -844,34 +940,12 @@
       return;
     }
 
-    // Pull every pair involving the selected manager, normalized to
-    // "me vs opponent" regardless of which side of the pair they were on.
-    const rows = [];
-    data.pairs.forEach(p => {
-      let opponent, myWins, oppWins, ties = p.ties || 0;
-      if (p.a === selected) { opponent = p.b; myWins = p.aWins; oppWins = p.bWins; }
-      else if (p.b === selected) { opponent = p.a; myWins = p.bWins; oppWins = p.aWins; }
-      else return;
-      const total = myWins + oppWins + ties;
-      const winPct = total > 0 ? myWins / total : 0;
-      rows.push({ opponent, myWins, oppWins, ties, total, winPct });
-    });
-
+    const rows = h2hRows(data, selected);
     if (rows.length === 0) {
       emptyState(el, 'No games yet', selected + ' hasn\u2019t played anyone yet on record.');
       return;
     }
-
-    rows.sort((a, b) => (b.winPct - a.winPct) || ((b.myWins - b.oppWins) - (a.myWins - a.oppWins)));
-
-    el.innerHTML = rows.map((r, i) => {
-      const pct = Math.round(r.winPct * 100);
-      return '<div class="bar-row">' +
-        '<div class="name">' + teamWithLogo(r.opponent) + '</div>' +
-        '<div class="bar-track"><div class="bar-fill" style="width:' + (pct > 0 ? Math.max(2, pct) : 0) + '%"></div></div>' +
-        '<div class="bar-value">' + r.myWins + '-' + r.oppWins + (r.ties ? '-' + r.ties : '') + '</div>' +
-      '</div>';
-    }).join('');
+    el.innerHTML = h2hRowsHTML(rows, false);
   }
 
   // ---------- Rivalries ----------
@@ -1005,24 +1079,7 @@
       emptyState(el, 'Nothing between these two', (a&&b) ? a+' and '+b+' have never made a deal.' : 'No trades match that filter.');
       return;
     }
-    el.innerHTML = filtered.map(t => {
-      let sidesHtml;
-      if (Array.isArray(t.sides) && t.sides.length > 0) {
-        sidesHtml = '<div class="trade-sides">' + t.sides.map(s =>
-          '<div class="trade-side">' +
-            '<div class="trade-side-team">' + teamWithLogo(s.team) + '</div>' +
-            '<ul class="trade-items">' + (s.items || []).map(item => '<li>' + String(item).replace(/\s+\)/g, ')') + '</li>').join('') + '</ul>' +
-          '</div>'
-        ).join('') + '</div>';
-      } else {
-        // Fallback for any trade record without structured sides
-        sidesHtml = '<div>' + (t.note || '') + '</div>';
-      }
-      return '<div class="trade-row">' +
-        '<div class="rivalry-note" style="color:var(--text-muted)">' + (t.date || '') + '</div>' +
-        sidesHtml +
-      '</div>';
-    }).join('');
+    el.innerHTML = filtered.map(t => tradeRowHTML(t)).join('');
   }
 
   // ---------- Trophies ----------
@@ -1096,7 +1153,7 @@
         const logoHtml = logoSrc
           ? '<img src="' + logoSrc + '" alt="' + t.team + ' logo" onerror="this.parentElement.innerHTML=\'<span class=&quot;initials-fallback&quot;>' + initials(t.team) + '</span>\'">'
           : '<span class="initials-fallback">' + initials(t.team) + '</span>';
-        return '<div class="team-card-v2">' +
+        return '<a class="team-card-v2" href="#team/' + slugOf(t.team) + '">' +
           '<div class="team-card-logo">' + logoHtml + '</div>' +
           '<div class="team-card-name">' + t.team + '</div>' +
           (t.owner ? '<div class="team-card-manager">' + t.owner + '</div>' : '') +
@@ -1105,14 +1162,181 @@
             '<div><div class="team-card-stat-value">' + allTimeStr + '</div><div class="team-card-stat-label">All-Time</div></div>' +
             '<div><div class="team-card-stat-value">' + shivaStr + '</div><div class="team-card-stat-label">Shivas</div></div>' +
           '</div>' +
-          '<div class="team-card-meta">2026 Season</div>' +
-        '</div>';
+          '<div class="team-card-meta">Open franchise file \u2192</div>' +
+        '</a>';
       }).join('');
       return '<div class="division-section">' +
         '<div class="division-banner division-banner--' + (divIdx % 3) + '">' + (divisionLogoImg(div.name) || '<span class="shield">\u25C8</span>') + '<span>' + div.name + ' Division</span>' + (divisionLogoImg(div.name) || '<span class="shield">\u25C8</span>') + '</div>' +
         '<div class="team-grid">' + cards + '</div>' +
       '</div>';
     }).join('');
+  }
+
+  // ---------- Team pages: one "franchise file" per team (overview, head-to-head, trophies, trades) ----------
+  const TEAM_SECTIONS = [['overview', 'Overview'], ['h2h', 'Head-to-Head'], ['trophies', 'Trophies'], ['trades', 'Trades']];
+  function slugOf(name) { return normName(name); }
+  function allTeams() {
+    const st = DATA.standings;
+    return st && Array.isArray(st.divisions) ? st.divisions.flatMap(d => d.teams.map(t => Object.assign({ division: d.name }, t))) : [];
+  }
+  const recStr = (w, l, t) => w + '-' + l + (t ? '-' + t : '');
+  function ordinalN(n) { const s = ['th', 'st', 'nd', 'rd'], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); }
+
+  // Every opponent a team has faced, best record first. Matching ignores spaces/emoji/accents, like the logos do.
+  function h2hRows(h2h, team) {
+    const me = slugOf(team), rows = [];
+    ((h2h && h2h.pairs) || []).forEach(p => {
+      let opponent, w, l;
+      if (slugOf(p.a) === me) { opponent = p.b; w = p.aWins; l = p.bWins; }
+      else if (slugOf(p.b) === me) { opponent = p.a; w = p.bWins; l = p.aWins; }
+      else return;
+      const ties = p.ties || 0, total = w + l + ties;
+      rows.push({ opponent, myWins: w, oppWins: l, ties, total, winPct: total > 0 ? w / total : 0 });
+    });
+    rows.sort((a, b) => (b.winPct - a.winPct) || ((b.myWins - b.oppWins) - (a.myWins - a.oppWins)));
+    return rows;
+  }
+  function h2hRowsHTML(rows, link) {
+    return rows.map(r => {
+      const pct = Math.round(r.winPct * 100);
+      return '<div class="bar-row">' +
+        '<div class="name">' + teamWithLogo(r.opponent, link) + '</div>' +
+        '<div class="bar-track"><div class="bar-fill" style="width:' + (pct > 0 ? Math.max(2, pct) : 0) + '%"></div></div>' +
+        '<div class="bar-value">' + recStr(r.myWins, r.oppWins, r.ties) + '</div>' +
+      '</div>';
+    }).join('');
+  }
+  function teamTrophies(trophies, team) {
+    const me = slugOf(team), out = [];
+    ((trophies && trophies.trophies) || []).forEach(t => {
+      const seasons = (t.history || []).filter(h => h.winner && slugOf(h.winner) === me).map(h => h.season);
+      if (seasons.length) out.push({ key: t.key, name: t.name, seasons });
+    });
+    return out;
+  }
+  function teamTrades(trades, team) {
+    const me = slugOf(team);
+    return ((trades && trades.trades) || []).filter(t => (t.teams || []).some(x => slugOf(x) === me));
+  }
+  function tradeRowHTML(t) {
+    let sidesHtml;
+    if (Array.isArray(t.sides) && t.sides.length > 0) {
+      sidesHtml = '<div class="trade-sides">' + t.sides.map(s =>
+        '<div class="trade-side">' +
+          '<div class="trade-side-team">' + teamWithLogo(s.team) + '</div>' +
+          '<ul class="trade-items">' + (s.items || []).map(item => '<li>' + String(item).replace(/\s+\)/g, ')') + '</li>').join('') + '</ul>' +
+        '</div>'
+      ).join('') + '</div>';
+    } else {
+      sidesHtml = '<div>' + (t.note || '') + '</div>'; // fallback for any trade record without structured sides
+    }
+    return '<div class="trade-row">' +
+      '<div class="rivalry-note" style="color:var(--text-muted)">' + (t.date || '') + '</div>' +
+      sidesHtml +
+    '</div>';
+  }
+
+  function teamFacts(t) {
+    const rows = h2hRows(DATA.h2h, t.team);
+    const w = rows.reduce((a, r) => a + r.myWins, 0), l = rows.reduce((a, r) => a + r.oppWins, 0), ti = rows.reduce((a, r) => a + r.ties, 0), games = w + l + ti;
+    const order = allTeams().slice().sort((a, b) => ((b.wins || 0) - (a.wins || 0)) || ((b.pointsFor || 0) - (a.pointsFor || 0)));
+    const trophies = teamTrophies(DATA.trophies, t.team);
+    return {
+      team: t, rows, allTime: { w, l, t: ti, games, pct: games ? 100 * w / games : null },
+      rank: order.findIndex(x => slugOf(x.team) === slugOf(t.team)) + 1, of: order.length,
+      trophies, trophyCount: trophies.reduce((a, x) => a + x.seasons.length, 0),
+      shivas: (trophies.find(x => x.key === 'shiva') || { seasons: [] }).seasons,
+      trades: teamTrades(DATA.trades, t.team),
+    };
+  }
+  // best / toughest opponent: only count opponents with 3+ games when there are any, so one lucky game isn't "dominance"
+  function pickOpp(rows, best) {
+    const pool = rows.filter(r => r.total >= 3), base = pool.length ? pool : rows;
+    return base.length ? (best ? base[0] : base[base.length - 1]) : null;
+  }
+
+  function tilesHTML(f) {
+    const t = f.team, has = t.wins != null, a = f.allTime;
+    const tile = (value, label, sub) => '<div class="team-tile"><div class="team-tile-value">' + value + '</div><div class="team-tile-label">' + label + '</div>' + (sub ? '<div class="team-tile-sub">' + sub + '</div>' : '') + '</div>';
+    return '<div class="team-tiles">' +
+      tile(has ? recStr(t.wins, t.losses, t.ties) : '\u2014', 'This season', has ? ordinalN(f.rank) + ' of ' + f.of + ' overall' : '') +
+      tile(t.pointsFor != null ? t.pointsFor : '\u2014', 'Points scored', t.pointsAgainst != null ? t.pointsAgainst + ' against' : '') +
+      tile(a.games ? recStr(a.w, a.l, a.t) : '\u2014', 'All-time record', a.pct != null ? a.pct.toFixed(1) + '% \u00b7 since 2020' : '') +
+      tile(f.shivas.length, 'Shivas', f.shivas.length ? f.shivas.join(', ') : 'none yet') +
+      tile(f.trophyCount, 'Trophies, all kinds', f.trophies.length ? f.trophies.length + ' different kind' + (f.trophies.length === 1 ? '' : 's') : 'the case is empty') +
+      tile(f.trades.length, 'Trades', 'since 2020') +
+    '</div>';
+  }
+
+  function moreLink(slug, section, text) { return '<a class="team-more" href="#team/' + slug + '/' + section + '">' + text + ' \u2192</a>'; }
+  function overviewHTML(f, slug) {
+    let html = '';
+    const best = pickOpp(f.rows, true), worst = pickOpp(f.rows, false);
+    const hl = (label, who, rec) => '<div class="hl-row"><div class="hl-label">' + label + '</div><div class="hl-who">' + who + '</div><div class="hl-rec">' + rec + '</div></div>';
+    const riv = DATA.rivalries && Array.isArray(DATA.rivalries.rivalries) ? DATA.rivalries.rivalries.find(r => r && r.a && r.b && (slugOf(r.a.team) === slug || slugOf(r.b.team) === slug)) : null;
+    if (best || riv) {
+      html += '<div class="division-label">Highlights</div>';
+      if (best) html += hl('Best record against', teamWithLogo(best.opponent, true), recStr(best.myWins, best.oppWins, best.ties));
+      if (worst && worst !== best) html += hl('Toughest opponent', teamWithLogo(worst.opponent, true), recStr(worst.myWins, worst.oppWins, worst.ties));
+      if (riv) { const other = slugOf(riv.a.team) === slug ? riv.b : riv.a; html += hl('Rivalry Week', teamWithLogo(other.team, true), esc(riv.title)); }
+      if (best) html += moreLink(slug, 'h2h', 'Full head-to-head');
+    }
+    if (f.trophies.length) {
+      html += '<div class="division-label">Trophy shelf</div>' + f.trophies.map(x => '<div class="shelf-row"><div class="shelf-name">' + esc(x.name) + '</div><div class="shelf-years">' + x.seasons.join(' \u00b7 ') + '</div></div>').join('') + moreLink(slug, 'trophies', 'Trophy detail');
+    }
+    if (f.trades.length) {
+      html += '<div class="division-label">Latest trades</div>' + f.trades.slice(0, 3).map(tradeRowHTML).join('') + moreLink(slug, 'trades', 'All ' + f.trades.length + ' trades');
+    }
+    return html || '<div class="empty-state"><div class="glyph">\u00a7</div><h3>Nothing on file yet</h3><p>This fills in as the league plays on.</p></div>';
+  }
+  function trophiesSectionHTML(f) {
+    if (!f.trophies.length) return '<div class="empty-state"><div class="glyph">\u00a7</div><h3>The trophy case is empty</h3><p>Nothing on record since 2020. The dust is thriving.</p></div>';
+    return f.trophies.map(x => '<div class="shelf-row"><div class="shelf-name">' + esc(x.name) + '</div><div class="shelf-years">' + x.seasons.join(' \u00b7 ') + '</div></div>').join('') +
+      '<div class="cal-foot">Counted from 2020, the dynasty era.</div>';
+  }
+  function tradesSectionHTML(f, slug) {
+    if (!f.trades.length) return '<div class="empty-state"><div class="glyph">\u00a7</div><h3>The wire is quiet</h3><p>No trades on record for this team.</p></div>';
+    const partners = {};
+    f.trades.forEach(tr => (tr.teams || []).forEach(x => { if (slugOf(x) !== slug) { const k = slugOf(x); partners[k] = partners[k] || { name: x, n: 0 }; partners[k].n++; } }));
+    const opts = Object.keys(partners).sort((a, b) => (partners[b].n - partners[a].n) || partners[a].name.localeCompare(partners[b].name))
+      .map(k => '<option value="' + k + '">' + partners[k].name + ' (' + partners[k].n + ')</option>').join('');
+    return '<div class="team-filter"><label for="team-trade-partner">Trades with</label><select id="team-trade-partner" class="trade-select"><option value="">Everyone (' + f.trades.length + ')</option>' + opts + '</select></div>' +
+      '<div id="team-trades-list">' + f.trades.map(tradeRowHTML).join('') + '</div>';
+  }
+
+  function renderTeamPage(slug, section) {
+    const el = document.getElementById('team-body');
+    if (!DATA.standings) { el.innerHTML = '<div class="card"><div class="empty-state"><div class="glyph">\u00a7</div><h3>Pulling the franchise file\u2026</h3></div></div>'; return; }
+    const teams = allTeams(), t = teams.find(x => slugOf(x.team) === slug);
+    if (!t) {
+      el.innerHTML = '<p class="team-back"><a href="#teams">\u2190 All teams</a></p><div class="card"><div class="empty-state"><div class="glyph">\u00a7</div><h3>No such franchise</h3><p>That address doesn\u2019t match a current team. Pick one:</p></div>' +
+        teams.map(x => '<a class="admin-link" href="#team/' + slugOf(x.team) + '"><div class="admin-link-title">' + x.team + '</div></a>').join('') + '</div>';
+      return;
+    }
+    section = TEAM_SECTIONS.some(s => s[0] === section) ? section : 'overview';
+    const f = teamFacts(t), logo = logoSrcFor(t.team);
+    const crest = logo ? '<img src="' + logo + '" alt="' + t.team + ' logo" onerror="this.parentElement.innerHTML=\'<span class=&quot;initials-fallback&quot;>' + initials(t.team) + '</span>\'">' : '<span class="initials-fallback">' + initials(t.team) + '</span>';
+    const switcher = '<div class="team-switch"><label for="team-switch">Switch team</label><select id="team-switch" class="trade-select">' +
+      teams.slice().sort((a, b) => a.team.localeCompare(b.team)).map(x => '<option value="' + slugOf(x.team) + '"' + (slugOf(x.team) === slug ? ' selected' : '') + '>' + x.team + '</option>').join('') + '</select></div>';
+    const tabs = '<nav class="team-sections" aria-label="Franchise file sections">' + TEAM_SECTIONS.map(s =>
+      '<a href="#team/' + slug + (s[0] === 'overview' ? '' : '/' + s[0]) + '"' + (s[0] === section ? ' aria-current="page"' : '') + '>' + s[1] + '</a>').join('') + '</nav>';
+    let body;
+    if (section === 'h2h') body = f.rows.length ? '<div class="division-label">All-time record against every opponent</div>' + h2hRowsHTML(f.rows, true) + '<div class="cal-foot">Counted from 2020, the dynasty era. Click an opponent to open their file.</div>' : '<div class="empty-state"><h3>No games yet</h3></div>';
+    else if (section === 'trophies') body = trophiesSectionHTML(f);
+    else if (section === 'trades') body = tradesSectionHTML(f, slug);
+    else body = overviewHTML(f, slug);
+    el.innerHTML = '<p class="team-back"><a href="#teams">\u2190 All teams</a></p>' +
+      '<div class="team-head"><div class="team-head-crest">' + crest + '</div><div class="team-head-text">' +
+        '<p class="eyebrow">Franchise file</p><h2 class="panel-title">' + t.team + '</h2>' +
+        (t.owner ? '<span class="team-card-manager">' + t.owner + '</span> ' : '') +
+        '<span class="team-head-div">' + divisionLogoImg(t.division) + esc(t.division) + ' Division</span></div>' + switcher + '</div>' +
+      tilesHTML(f) + tabs + '<div class="team-section-body">' + body + '</div>';
+    document.getElementById('team-switch').addEventListener('change', e => { location.hash = '#team/' + e.target.value + (section === 'overview' ? '' : '/' + section); applyRoute(); });
+    const sel = document.getElementById('team-trade-partner');
+    if (sel) sel.addEventListener('change', () => {
+      const v = sel.value, list = v ? f.trades.filter(tr => (tr.teams || []).some(x => slugOf(x) === v)) : f.trades;
+      document.getElementById('team-trades-list').innerHTML = list.length ? list.map(tradeRowHTML).join('') : '<div class="empty-state"><h3>No trades with them</h3></div>';
+    });
   }
 
   // ---------- Predictions ----------
@@ -1203,7 +1427,7 @@
 
     el.innerHTML =
       lockNote +
-      '<div class="pred-voter-select"><label>Voting as</label><select id="pred-voter-select" class="trade-select">' + voterOptions + '</select></div>' +
+      '<div class="pred-voter-select"><label for="pred-voter-select">Voting as</label><select id="pred-voter-select" class="trade-select">' + voterOptions + '</select></div>' +
       matchups.map(m =>
         '<div class="pred-matchup" data-matchup-id="' + m.id + '">' +
           '<div class="trade-side-team">Week ' + week + '</div>' +
@@ -1446,11 +1670,13 @@
       standings.divisions.forEach(d => d.teams.forEach(t => managerNames.push(t.team)));
     }
 
+    Object.assign(DATA, { standings, h2h, trophies, trades, rivalries, predictions });
+    TEAM_SLUGS.clear();
+    allTeams().forEach(t => TEAM_SLUGS.add(slugOf(t.team)));
     renderHome({ recap, announcements, calendar, standings, trades, predictions, rivalries });
     document.getElementById('panel-home').addEventListener('click', e => {
       const go = e.target.closest('[data-go]');
-      const tab = go && document.querySelector('nav.tabs button[data-panel="' + go.dataset.go + '"]');
-      if (tab) { tab.click(); window.scrollTo(0, 0); }
+      if (go) navigate(go.dataset.go);
     });
     renderStandings(standings);
     renderOverallRanking(standings);
@@ -1468,8 +1694,11 @@
     renderTrades(trades);
 
     statusEl.textContent = standings ? 'Synced via GitHub Action' : 'Data not found — check /data/ folder';
+    applyRoute(true); // team pages need the data, so draw them now that it has arrived
   }
 
+  buildNav();
+  applyRoute(true);
   init();
 })();
 </script>
