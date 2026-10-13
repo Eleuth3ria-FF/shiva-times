@@ -1,6 +1,75 @@
 {
   "trades": [
     {
+      "date": "Oct 13, 2026",
+      "teams": [
+        "MAGRAUDERS ",
+        "La Quiche"
+      ],
+      "sides": [
+        {
+          "team": "MAGRAUDERS ",
+          "items": [
+            "2027 Round 2 pick (via Scuderia Malo)",
+            "2027 Round 3 pick (via Lavaltree's Piggy )"
+          ]
+        },
+        {
+          "team": "La Quiche",
+          "items": [
+            "DJ Moore",
+            "2027 Round 4 pick (via MAGRAUDERS )"
+          ]
+        }
+      ],
+      "note": "MAGRAUDERS  gets 2027 Round 2 pick (via Scuderia Malo), 2027 Round 3 pick (via Lavaltree's Piggy ) · La Quiche gets DJ Moore, 2027 Round 4 pick (via MAGRAUDERS )"
+    },
+    {
+      "date": "Oct 12, 2026",
+      "teams": [
+        "Lavaltree's Piggy ",
+        "Mean Machine"
+      ],
+      "sides": [
+        {
+          "team": "Lavaltree's Piggy ",
+          "items": [
+            "Tyjae Spears"
+          ]
+        },
+        {
+          "team": "Mean Machine",
+          "items": [
+            "Cyrus Allen"
+          ]
+        }
+      ],
+      "note": "Lavaltree's Piggy  gets Tyjae Spears · Mean Machine gets Cyrus Allen"
+    },
+    {
+      "date": "Oct 12, 2026",
+      "teams": [
+        "Lavaltree's Piggy ",
+        "MTL New Empire"
+      ],
+      "sides": [
+        {
+          "team": "Lavaltree's Piggy ",
+          "items": [
+            "Josh Downs"
+          ]
+        },
+        {
+          "team": "MTL New Empire",
+          "items": [
+            "Robert Henry",
+            "2027 Round 3 pick (via Tebows before Hoes)"
+          ]
+        }
+      ],
+      "note": "Lavaltree's Piggy  gets Josh Downs · MTL New Empire gets Robert Henry, 2027 Round 3 pick (via Tebows before Hoes)"
+    },
+    {
       "date": "Oct 05, 2026",
       "teams": [
         "MAGRAUDERS ",

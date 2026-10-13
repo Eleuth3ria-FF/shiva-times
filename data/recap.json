@@ -2,6 +2,67 @@
   "season": "2026",
   "recaps": [
     {
+      "id": "recap-5",
+      "type": "recap",
+      "week": 5,
+      "date": "2026-10-13",
+      "kind": "explosion",
+      "headline": "Montreal Weapon X Went Nuclear for 182.58",
+      "dek": "The widest margin of the week: Montreal Weapon X over MTL New Empire by 114.6.",
+      "byline": "The Shiva Times Staff",
+      "paragraphs": [
+        "Montreal Weapon X scored 182.58, the highest total in the league, with Jahmyr Gibbs (35.2) leading the way. MTL New Empire put up 67.98 in the loss. The league median was 116.65.",
+        "Christian Watson (29.3) led The Gridiron Sheriffs past La Quiche, 153.38 to 100.16. A 53.22-point margin is not a game; it is a police report. Jaylen Warren carried SGB Nation ⚖️ to a 151.34-48.32 demolition of Tebows before Hoes, putting up 33.8 of the team's 151.34. The 103.02-point margin is the kind of thing that gets screenshotted.",
+        "Les Pingouins 🐧 won with a modest 92.82, the fourth-lowest score of the week, over MAGRAUDERS (85.12), with Tyler Warren (17.9) doing the work. The standings do not check how you got there. Isaiah Likely (26.9) was the difference as T-Bone Ray's escaped Scuderia Malo, 134.76-133.14, by 1.62. Somewhere, a manager is auditing every lineup decision.",
+        "Drake Maye powered Mean Machine to a 148.7-99.68 rout of Lavaltree's Piggy, with 43.46 of the team's 148.7. Nobody on the Lavaltree's Piggy side wants to talk about it.",
+        "The best individual performance of the week belonged to Drake Maye: 43.46 points for Mean Machine. The lineup decision of the week, for all the wrong reasons: MAGRAUDERS started Tyler Shough, who scored -0.16. At the other end, Tebows before Hoes scored 48.32, the lowest total in the league. That is not a lineup, it is a cry for help.",
+        "La Quiche fell out of the top six. T-Bone Ray's moved into the top six. On a roll: Montreal Weapon X, 5 wins in a row and counting. Cold streak: Tebows before Hoes, 5 losses in a row and still falling."
+      ],
+      "standings": {
+        "moves": [],
+        "newLeader": null,
+        "divisionLeaders": []
+      },
+      "results": [
+        {
+          "a": "The Gridiron Sheriffs",
+          "b": "La Quiche",
+          "aScore": 153.38,
+          "bScore": 100.16
+        },
+        {
+          "a": "Montreal Weapon X",
+          "b": "MTL New Empire",
+          "aScore": 182.58,
+          "bScore": 67.98
+        },
+        {
+          "a": "Tebows before Hoes",
+          "b": "SGB Nation ⚖️",
+          "aScore": 48.32,
+          "bScore": 151.34
+        },
+        {
+          "a": "MAGRAUDERS",
+          "b": "Les Pingouins 🐧",
+          "aScore": 85.12,
+          "bScore": 92.82
+        },
+        {
+          "a": "Scuderia Malo",
+          "b": "T-Bone Ray's",
+          "aScore": 133.14,
+          "bScore": 134.76
+        },
+        {
+          "a": "Lavaltree's Piggy",
+          "b": "Mean Machine",
+          "aScore": 99.68,
+          "bScore": 148.7
+        }
+      ]
+    },
+    {
       "id": "recap-4",
       "type": "recap",
       "week": 4,

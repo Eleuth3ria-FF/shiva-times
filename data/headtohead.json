@@ -169,6 +169,48 @@
       "ties": 0
     },
     {
+      "a": "Scuderia Malo",
+      "b": "T-Bone Ray's",
+      "aWins": 1,
+      "bWins": 6,
+      "ties": 0
+    },
+    {
+      "a": "SGB Nation ⚖️",
+      "b": "Tebows before Hoes",
+      "aWins": 7,
+      "bWins": 3,
+      "ties": 0
+    },
+    {
+      "a": "Lavaltree's Piggy ",
+      "b": "Mean Machine",
+      "aWins": 2,
+      "bWins": 5,
+      "ties": 0
+    },
+    {
+      "a": "Montreal Weapon X",
+      "b": "MTL New Empire",
+      "aWins": 4,
+      "bWins": 4,
+      "ties": 0
+    },
+    {
+      "a": "Les Pingouins 🐧",
+      "b": "MAGRAUDERS ",
+      "aWins": 5,
+      "bWins": 2,
+      "ties": 0
+    },
+    {
+      "a": "The Gridiron Sheriffs",
+      "b": "La Quiche",
+      "aWins": 4,
+      "bWins": 2,
+      "ties": 0
+    },
+    {
       "a": "Montreal Weapon X",
       "b": "Scuderia Malo",
       "aWins": 4,
@@ -253,13 +295,6 @@
       "ties": 0
     },
     {
-      "a": "Lavaltree's Piggy ",
-      "b": "Mean Machine",
-      "aWins": 2,
-      "bWins": 4,
-      "ties": 0
-    },
-    {
       "a": "Montreal Weapon X",
       "b": "SGB Nation ⚖️",
       "aWins": 4,
@@ -267,24 +302,10 @@
       "ties": 0
     },
     {
-      "a": "Les Pingouins 🐧",
-      "b": "MAGRAUDERS ",
-      "aWins": 4,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
       "a": "La Quiche",
       "b": "MTL New Empire",
       "aWins": 1,
       "bWins": 3,
-      "ties": 0
-    },
-    {
-      "a": "Scuderia Malo",
-      "b": "T-Bone Ray's",
-      "aWins": 1,
-      "bWins": 5,
       "ties": 0
     },
     {
@@ -414,20 +435,6 @@
       "ties": 0
     },
     {
-      "a": "Montreal Weapon X",
-      "b": "MTL New Empire",
-      "aWins": 3,
-      "bWins": 4,
-      "ties": 0
-    },
-    {
-      "a": "The Gridiron Sheriffs",
-      "b": "La Quiche",
-      "aWins": 3,
-      "bWins": 2,
-      "ties": 0
-    },
-    {
       "a": "Mean Machine",
       "b": "T-Bone Ray's",
       "aWins": 5,
@@ -439,13 +446,6 @@
       "b": "Les Pingouins 🐧",
       "aWins": 1,
       "bWins": 6,
-      "ties": 0
-    },
-    {
-      "a": "SGB Nation ⚖️",
-      "b": "Tebows before Hoes",
-      "aWins": 6,
-      "bWins": 3,
       "ties": 0
     },
     {
