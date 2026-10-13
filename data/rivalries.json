@@ -48,8 +48,7 @@
         "team": "La Quiche",
         "manager": "Sam"
       },
-      "art": "LOGOS/rivalry-the-civil-war.jpg",
-      "focus": "50% 100%"
+      "art": "LOGOS/rivalry-the-civil-war.jpg"
     },
     {
       "title": "King Among Kings",
@@ -60,7 +59,8 @@
       "b": {
         "team": "SGB Nation ⚖️",
         "manager": "Seb G"
-      }
+      },
+      "art": "LOGOS/rivalry-king-among-kings.jpg"
     },
     {
       "title": "The Clipboard Classic",
@@ -72,8 +72,7 @@
         "team": "T-Bone Ray's",
         "manager": "Raymond"
       },
-      "art": "LOGOS/rivalry-the-clipboard-classic.jpg",
-      "focus": "50% 15%"
+      "art": "LOGOS/rivalry-the-clipboard-classic.jpg"
     },
     {
       "title": "The Battle of Internal Affairs",
@@ -84,7 +83,8 @@
       "b": {
         "team": "Scuderia Malo",
         "manager": "Seb M"
-      }
+      },
+      "art": "LOGOS/rivalry-the-battle-of-internal-affairs.jpg"
     },
     {
       "title": "War in the North",
@@ -96,8 +96,7 @@
         "team": "MAGRAUDERS",
         "manager": "Mag"
       },
-      "art": "LOGOS/rivalry-war-in-the-north.jpg",
-      "focus": "50% 62%"
+      "art": "LOGOS/rivalry-war-in-the-north.jpg"
     },
     {
       "title": "9/11 — The Battle of the Twin Towers",
@@ -108,7 +107,8 @@
       "b": {
         "team": "Tebows before Hoes",
         "manager": "Alex"
-      }
+      },
+      "art": "LOGOS/rivalry-911-twin-towers.jpg"
     }
   ]
 }
