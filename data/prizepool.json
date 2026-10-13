@@ -2,7 +2,7 @@
   "managers": [
     {
       "name": "Xavier Bernet",
-      "total": 30.0,
+      "total": 40.0,
       "breakdown": [
         {
           "label": "W1",
@@ -14,6 +14,10 @@
         },
         {
           "label": "W3",
+          "amount": 10.0
+        },
+        {
+          "label": "W5",
           "amount": 10.0
         }
       ]
