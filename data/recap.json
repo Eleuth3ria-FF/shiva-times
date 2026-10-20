@@ -11,9 +11,9 @@
       "dek": "The widest margin of the week: T-Bone Ray's over Tebows before Hoes by 82.5.",
       "byline": "The Shiva Times Staff",
       "paragraphs": [
-        "Mean Machine scored 167.18, the highest total in the league, with Drake Maye (26.8) leading the way. SGB Nation ⚖️ put up 116.12 in the loss. The league median was 110.23.",
-        "Caleb Williams (17.5) kept MTL New Empire within sight of Scuderia Malo, but 87.78 was never going to beat 121.24. MAGRAUDERS beat Lavaltree's Piggy, 130.9-83.16, with Cam Skattebo chipping in a spectacular 0 for the losing side. Starting Cam Skattebo was a decision, and it was a bad one.",
-        "The Gridiron Sheriffs won with a modest 83.82, the fourth-lowest score of the week, over Les Pingouins 🐧 (80), with Malik Nabers (22.5) doing the work. The standings do not check how you got there. Kenneth Walker (26.9) was the difference as Montreal Weapon X escaped La Quiche, 111.34-109.12, by 2.22. Somewhere, a manager is auditing every lineup decision.",
+        "Mean Machine scored 167.18, the highest total in the league, with Drake Maye (26.8) leading the way. SGB Nation ⚖️ put up 116.12 in the loss. The league median was 110.43.",
+        "Caleb Williams (17.5) kept MTL New Empire within sight of Scuderia Malo, but 87.78 was never going to beat 121.24. Tyler Shough scored 29.96 to lead MAGRAUDERS over Lavaltree's Piggy, 130.9-92.46. Never in danger, never entertaining.",
+        "The Gridiron Sheriffs won with a modest 83.82, the third-lowest score of the week, over Les Pingouins 🐧 (80), with Malik Nabers (22.5) doing the work. The standings do not check how you got there. Kenneth Walker (26.9) was the difference as Montreal Weapon X escaped La Quiche, 111.34-109.52, by 1.82. Somewhere, a manager is auditing every lineup decision.",
         "T-Bone Ray's beat Tebows before Hoes, 118.7-36.2, with Cody White chipping in a spectacular 0 for the losing side. Starting Cody White was a decision, and it was a bad one.",
         "The best individual performance of the week belonged to Trevor Lawrence: 31.34 points for SGB Nation ⚖️. Lavaltree's Piggy started Cam Skattebo and received 0 in return. Refunds are not available. Tebows before Hoes scored a league-worst 36.2. Thoughts, prayers, and a firm recommendation to check the roster before kickoff. That is the lowest score of the season so far.",
         "Lavaltree's Piggy dropped out of the top six. The Gridiron Sheriffs cracked the top six. Longest winning streak: Montreal Weapon X, at 6 straight. Tebows before Hoes sank to 6 straight losses this week."
@@ -39,7 +39,7 @@
         {
           "a": "Lavaltree's Piggy",
           "b": "MAGRAUDERS",
-          "aScore": 83.16,
+          "aScore": 92.46,
           "bScore": 130.9
         },
         {
@@ -52,7 +52,7 @@
           "a": "Montreal Weapon X",
           "b": "La Quiche",
           "aScore": 111.34,
-          "bScore": 109.12
+          "bScore": 109.52
         },
         {
           "a": "Tebows before Hoes",

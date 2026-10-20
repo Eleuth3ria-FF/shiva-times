@@ -1,6 +1,45 @@
 {
   "trades": [
     {
+      "date": "Oct 19, 2026",
+      "teams": [
+        "Lavaltree's Piggy ",
+        "MTL New Empire"
+      ],
+      "sides": [
+        {
+          "team": "MTL New Empire",
+          "items": [
+            "2029 Round 4 pick (via Lavaltree's Piggy )"
+          ]
+        }
+      ],
+      "note": "MTL New Empire gets 2029 Round 4 pick (via Lavaltree's Piggy )"
+    },
+    {
+      "date": "Oct 16, 2026",
+      "teams": [
+        "The Gridiron Sheriffs",
+        "MTL New Empire"
+      ],
+      "sides": [
+        {
+          "team": "The Gridiron Sheriffs",
+          "items": [
+            "Tyler Huntley",
+            "2028 Round 4 pick (via MTL New Empire)"
+          ]
+        },
+        {
+          "team": "MTL New Empire",
+          "items": [
+            "2028 Round 3 pick (via The Gridiron Sheriffs)"
+          ]
+        }
+      ],
+      "note": "The Gridiron Sheriffs gets Tyler Huntley, 2028 Round 4 pick (via MTL New Empire) · MTL New Empire gets 2028 Round 3 pick (via The Gridiron Sheriffs)"
+    },
+    {
       "date": "Oct 13, 2026",
       "teams": [
         "MAGRAUDERS ",

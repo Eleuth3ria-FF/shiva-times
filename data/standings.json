@@ -7,38 +7,38 @@
         {
           "team": "Scuderia Malo",
           "owner": "Eleuth3ria",
-          "wins": 4,
+          "wins": 5,
           "losses": 1,
           "ties": 0,
-          "pointsFor": 670.0,
-          "pointsAgainst": 567.4
+          "pointsFor": 791.3,
+          "pointsAgainst": 655.1
         },
         {
           "team": "Mean Machine",
           "owner": "Duts33",
-          "wins": 3,
+          "wins": 4,
           "losses": 2,
           "ties": 0,
-          "pointsFor": 637.9,
-          "pointsAgainst": 534.9
+          "pointsFor": 805.1,
+          "pointsAgainst": 651.0
         },
         {
           "team": "La Quiche",
           "owner": "LaQuiche",
           "wins": 2,
-          "losses": 3,
+          "losses": 4,
           "ties": 0,
-          "pointsFor": 616.0,
-          "pointsAgainst": 605.2
+          "pointsFor": 725.5,
+          "pointsAgainst": 716.5
         },
         {
           "team": "Tebows before Hoes",
           "owner": "Jumeau26",
           "wins": 0,
-          "losses": 5,
+          "losses": 6,
           "ties": 0,
-          "pointsFor": 330.5,
-          "pointsAgainst": 583.1
+          "pointsFor": 366.7,
+          "pointsAgainst": 701.8
         }
       ]
     },
@@ -48,38 +48,38 @@
         {
           "team": "Montreal Weapon X",
           "owner": "TheWaiverGunslinger",
-          "wins": 5,
+          "wins": 6,
           "losses": 0,
           "ties": 0,
-          "pointsFor": 821.7,
-          "pointsAgainst": 469.8
+          "pointsFor": 933.1,
+          "pointsAgainst": 579.3
         },
         {
           "team": "T-Bone Ray's",
           "owner": "CoachRay44",
-          "wins": 3,
+          "wins": 4,
           "losses": 2,
           "ties": 0,
-          "pointsFor": 613.5,
-          "pointsAgainst": 685.2
+          "pointsFor": 732.2,
+          "pointsAgainst": 721.4
         },
         {
           "team": "The Gridiron Sheriffs",
           "owner": "TheTwin",
-          "wins": 2,
+          "wins": 3,
           "losses": 3,
           "ties": 0,
-          "pointsFor": 601.5,
-          "pointsAgainst": 641.1
+          "pointsFor": 685.3,
+          "pointsAgainst": 721.1
         },
         {
           "team": "MAGRAUDERS ",
           "owner": "Buccs1989",
-          "wins": 1,
+          "wins": 2,
           "losses": 4,
           "ties": 0,
-          "pointsFor": 501.0,
-          "pointsAgainst": 600.0
+          "pointsFor": 631.9,
+          "pointsAgainst": 692.4
         }
       ]
     },
@@ -90,37 +90,37 @@
           "team": "SGB Nation ⚖️",
           "owner": "Bigblue33",
           "wins": 4,
-          "losses": 1,
+          "losses": 2,
           "ties": 0,
-          "pointsFor": 678.2,
-          "pointsAgainst": 462.8
+          "pointsFor": 794.3,
+          "pointsAgainst": 630.0
         },
         {
           "team": "Les Pingouins 🐧",
           "owner": "Remster68",
           "wins": 2,
-          "losses": 3,
+          "losses": 4,
           "ties": 0,
-          "pointsFor": 515.6,
-          "pointsAgainst": 626.2
+          "pointsFor": 595.6,
+          "pointsAgainst": 710.0
         },
         {
           "team": "Lavaltree's Piggy ",
           "owner": "Leggy88",
           "wins": 3,
-          "losses": 2,
+          "losses": 3,
           "ties": 0,
-          "pointsFor": 568.4,
-          "pointsAgainst": 579.9
+          "pointsFor": 660.9,
+          "pointsAgainst": 710.8
         },
         {
           "team": "MTL New Empire",
           "owner": "Lulu15",
           "wins": 1,
-          "losses": 4,
+          "losses": 5,
           "ties": 0,
-          "pointsFor": 436.4,
-          "pointsAgainst": 635.1
+          "pointsFor": 524.2,
+          "pointsAgainst": 756.3
         }
       ]
     }
