@@ -1,37 +1,37 @@
 {
-  "week": 7,
-  "lockAt": "2026-10-23T00:00:00+00:00",
-  "syncedAt": "2026-10-27T01:58:07.873662+00:00",
+  "week": 8,
+  "lockAt": "2026-10-30T00:00:00+00:00",
+  "syncedAt": "2026-10-27T07:39:49.840576+00:00",
   "matchups": [
     {
-      "id": "Scuderia Malo__Montreal Weapon X",
+      "id": "Scuderia Malo__SGB Nation ⚖️",
       "teamA": "Scuderia Malo",
-      "teamB": "Montreal Weapon X"
+      "teamB": "SGB Nation ⚖️"
     },
     {
-      "id": "Tebows before Hoes__Les Pingouins 🐧",
+      "id": "Tebows before Hoes__MAGRAUDERS ",
       "teamA": "Tebows before Hoes",
-      "teamB": "Les Pingouins 🐧"
+      "teamB": "MAGRAUDERS "
     },
     {
-      "id": "Lavaltree's Piggy __T-Bone Ray's",
+      "id": "Lavaltree's Piggy __The Gridiron Sheriffs",
       "teamA": "Lavaltree's Piggy ",
-      "teamB": "T-Bone Ray's"
+      "teamB": "The Gridiron Sheriffs"
     },
     {
-      "id": "MAGRAUDERS __MTL New Empire",
-      "teamA": "MAGRAUDERS ",
-      "teamB": "MTL New Empire"
+      "id": "Montreal Weapon X__Mean Machine",
+      "teamA": "Montreal Weapon X",
+      "teamB": "Mean Machine"
     },
     {
-      "id": "SGB Nation ⚖️__La Quiche",
-      "teamA": "SGB Nation ⚖️",
+      "id": "Les Pingouins 🐧__La Quiche",
+      "teamA": "Les Pingouins 🐧",
       "teamB": "La Quiche"
     },
     {
-      "id": "The Gridiron Sheriffs__Mean Machine",
-      "teamA": "The Gridiron Sheriffs",
-      "teamB": "Mean Machine"
+      "id": "MTL New Empire__T-Bone Ray's",
+      "teamA": "MTL New Empire",
+      "teamB": "T-Bone Ray's"
     }
   ]
 }

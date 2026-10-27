@@ -2,6 +2,73 @@
   "season": "2026",
   "recaps": [
     {
+      "id": "recap-7",
+      "type": "recap",
+      "week": 7,
+      "date": "2026-10-27",
+      "kind": "blowout",
+      "headline": "Tebows before Hoes Steamrolled by Les Pingouins 🐧, 111.3-34.4",
+      "dek": "Tebows before Hoes scored 34.4, the lowest total in the league.",
+      "byline": "The Shiva Times Staff",
+      "paragraphs": [
+        "Tebows before Hoes gave Dare Ogunbowale a starting spot and got 0 for it. Les Pingouins 🐧 won 111.3 to 34.4, and the 76.9-point gap was the widest of the week.",
+        "Joe Burrow carried The Gridiron Sheriffs past Mean Machine, 123.5-108.26, accounting for 32.88 of the team's 123.5. Mean Machine had 108.26 and no answer. Trey McBride (22.1) kept Montreal Weapon X within sight of Scuderia Malo, but 110.82 was never going to beat 149.88.",
+        "T-Bone Ray's won with a modest 100.8, the fourth-lowest score of the week, over Lavaltree's Piggy (88.32), with CeeDee Lamb (21.9) doing the work. The standings do not check how you got there. MAGRAUDERS got 23.5 from Bucky Irving and still fell short against MTL New Empire, 117.18 to 131.62. Losing by 14.44 stings in a way blowouts never do.",
+        "Dak Prescott (26.28) led La Quiche past SGB Nation ⚖️, 138.5 to 88.48. A 50.02-point margin is not a game; it is a police report.",
+        "The best individual performance of the week belonged to Joe Burrow: 32.88 points for The Gridiron Sheriffs. Dud of the week: Cade Otton, who started for The Gridiron Sheriffs and scored 0. Somebody pressed \"start\" on that. Scuderia Malo paced all scorers at 149.88. Tebows before Hoes scored a league-worst 34.4. Thoughts, prayers, and a firm recommendation to check the roster before kickoff. It is also the lowest score of the season so far.",
+        "Not many changes in the standings: only T-Bone Ray's moved more than one spot, climbing from 5th to 3rd. On a roll: T-Bone Ray's, 4 wins in a row and counting. Cold streak: Tebows before Hoes, 7 losses in a row and still falling."
+      ],
+      "standings": {
+        "moves": [
+          {
+            "team": "T-Bone Ray's",
+            "from": 5,
+            "to": 3
+          }
+        ],
+        "newLeader": null,
+        "divisionLeaders": []
+      },
+      "results": [
+        {
+          "a": "The Gridiron Sheriffs",
+          "b": "Mean Machine",
+          "aScore": 123.5,
+          "bScore": 108.26
+        },
+        {
+          "a": "Scuderia Malo",
+          "b": "Montreal Weapon X",
+          "aScore": 149.88,
+          "bScore": 110.82
+        },
+        {
+          "a": "Lavaltree's Piggy",
+          "b": "T-Bone Ray's",
+          "aScore": 88.32,
+          "bScore": 100.8
+        },
+        {
+          "a": "MAGRAUDERS",
+          "b": "MTL New Empire",
+          "aScore": 117.18,
+          "bScore": 131.62
+        },
+        {
+          "a": "SGB Nation ⚖️",
+          "b": "La Quiche",
+          "aScore": 88.48,
+          "bScore": 138.5
+        },
+        {
+          "a": "Tebows before Hoes",
+          "b": "Les Pingouins 🐧",
+          "aScore": 34.4,
+          "bScore": 111.3
+        }
+      ]
+    },
+    {
       "id": "recap-6",
       "type": "recap",
       "week": 6,
