@@ -38,8 +38,13 @@
     },
     {
       "name": "Sébastien Malo",
-      "total": 0.0,
-      "breakdown": []
+      "total": 10.0,
+      "breakdown": [
+        {
+          "label": "W7",
+          "amount": 10.0
+        }
+      ]
     },
     {
       "name": "Sébastien Gélinas",
