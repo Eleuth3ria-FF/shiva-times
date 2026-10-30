@@ -1,27 +1,27 @@
 {
   "week": 8,
   "lockAt": "2026-10-30T00:00:00+00:00",
-  "syncedAt": "2026-10-30T15:46:59.586182+00:00",
+  "syncedAt": "2026-10-30T20:39:07.666648+00:00",
   "matchups": [
     {
-      "id": "Scuderia Malo__SGB Nation ⚖️",
+      "id": "Scuderia Malo__MAGRAUDERS ",
       "teamA": "Scuderia Malo",
-      "teamB": "SGB Nation ⚖️"
-    },
-    {
-      "id": "Tebows before Hoes__MAGRAUDERS ",
-      "teamA": "Tebows before Hoes",
       "teamB": "MAGRAUDERS "
     },
     {
-      "id": "Lavaltree's Piggy __The Gridiron Sheriffs",
-      "teamA": "Lavaltree's Piggy ",
-      "teamB": "The Gridiron Sheriffs"
+      "id": "Tebows before Hoes__Lavaltree's Piggy ",
+      "teamA": "Tebows before Hoes",
+      "teamB": "Lavaltree's Piggy "
     },
     {
       "id": "Montreal Weapon X__Mean Machine",
       "teamA": "Montreal Weapon X",
       "teamB": "Mean Machine"
+    },
+    {
+      "id": "SGB Nation ⚖️__The Gridiron Sheriffs",
+      "teamA": "SGB Nation ⚖️",
+      "teamB": "The Gridiron Sheriffs"
     },
     {
       "id": "Les Pingouins 🐧__La Quiche",
