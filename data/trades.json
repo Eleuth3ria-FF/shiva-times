@@ -1,6 +1,103 @@
 {
   "trades": [
     {
+      "date": "Nov 02, 2026",
+      "teams": [
+        "Scuderia Malo",
+        "Montreal Weapon X"
+      ],
+      "sides": [
+        {
+          "team": "Scuderia Malo",
+          "items": [
+            "Matthew Stafford"
+          ]
+        },
+        {
+          "team": "Montreal Weapon X",
+          "items": [
+            "Justin Herbert",
+            "2028 Round 3 pick (via Lavaltree's Piggy )"
+          ]
+        }
+      ],
+      "note": "Scuderia Malo gets Matthew Stafford · Montreal Weapon X gets Justin Herbert, 2028 Round 3 pick (via Lavaltree's Piggy )"
+    },
+    {
+      "date": "Nov 02, 2026",
+      "teams": [
+        "Lavaltree's Piggy ",
+        "MAGRAUDERS "
+      ],
+      "sides": [
+        {
+          "team": "Lavaltree's Piggy ",
+          "items": [
+            "J.J. McCarthy",
+            "2027 Round 4 pick (via SGB Nation ⚖️)"
+          ]
+        },
+        {
+          "team": "MAGRAUDERS ",
+          "items": [
+            "2027 Round 2 pick (via La Quiche)",
+            "2027 Round 3 pick (via La Quiche)"
+          ]
+        }
+      ],
+      "note": "Lavaltree's Piggy  gets J.J. McCarthy, 2027 Round 4 pick (via SGB Nation ⚖️) · MAGRAUDERS  gets 2027 Round 2 pick (via La Quiche), 2027 Round 3 pick (via La Quiche)"
+    },
+    {
+      "date": "Nov 02, 2026",
+      "teams": [
+        "MAGRAUDERS ",
+        "La Quiche"
+      ],
+      "sides": [
+        {
+          "team": "MAGRAUDERS ",
+          "items": [
+            "Omarion Hampton",
+            "Jordan Addison",
+            "2028 Round 3 pick (via Montreal Weapon X)",
+            "2027 Round 4 pick",
+            "2027 Round 2 pick (via SGB Nation ⚖️)"
+          ]
+        },
+        {
+          "team": "La Quiche",
+          "items": [
+            "Luther Burden III"
+          ]
+        }
+      ],
+      "note": "MAGRAUDERS  gets Omarion Hampton, Jordan Addison, 2028 Round 3 pick (via Montreal Weapon X), 2027 Round 4 pick, 2027 Round 2 pick (via SGB Nation ⚖️) · La Quiche gets Luther Burden III"
+    },
+    {
+      "date": "Oct 31, 2026",
+      "teams": [
+        "Scuderia Malo",
+        "SGB Nation ⚖️"
+      ],
+      "sides": [
+        {
+          "team": "Scuderia Malo",
+          "items": [
+            "Dalton Schultz",
+            "2029 Round 3 pick (via SGB Nation ⚖️)",
+            "2029 Round 4 pick (via SGB Nation ⚖️)"
+          ]
+        },
+        {
+          "team": "SGB Nation ⚖️",
+          "items": [
+            "Hunter Henry"
+          ]
+        }
+      ],
+      "note": "Scuderia Malo gets Dalton Schultz, 2029 Round 3 pick (via SGB Nation ⚖️), 2029 Round 4 pick (via SGB Nation ⚖️) · SGB Nation ⚖️ gets Hunter Henry"
+    },
+    {
       "date": "Oct 19, 2026",
       "teams": [
         "Lavaltree's Piggy ",

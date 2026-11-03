@@ -2,6 +2,70 @@
   "season": "2026",
   "recaps": [
     {
+      "id": "recap-8",
+      "type": "recap",
+      "week": 8,
+      "date": "2026-11-03",
+      "kind": "explosion",
+      "headline": "La Quiche Dropped 162.44 on the League",
+      "dek": "The widest margin of the week: Lavaltree's Piggy over Tebows before Hoes by 52.06.",
+      "byline": "The Shiva Times Staff",
+      "paragraphs": [
+        "La Quiche scored 162.44, the highest total in the league, with Tee Higgins (32.5) leading the way. Les Pingouins 🐧 put up 111.74 in the loss. The league median was 112.23.",
+        "Josh Allen powered Lavaltree's Piggy to a 93.36-41.3 rout of Tebows before Hoes, with 28.56 of the team's 93.36. Nobody on the Tebows before Hoes side wants to talk about it. Kirk Cousins scored 31.18 to lead Scuderia Malo over MAGRAUDERS, 129.26-100.92. Never in danger, never entertaining.",
+        "Parker Washington gave Montreal Weapon X 3.1 points, and Montreal Weapon X lost to Mean Machine by 16.74, 115.42-132.16. The two facts are related. Starting Parker Washington took commitment. MTL New Empire won with a modest 84.58, the third-lowest score of the week, over T-Bone Ray's (82.58), with Braelon Allen (22.3) doing the work. The standings do not check how you got there.",
+        "Joe Burrow powered The Gridiron Sheriffs to a 122.54-112.72 win over SGB Nation ⚖️, with 44.48 of the team's 122.54. It was closer than it should have been, and not because of Joe Burrow.",
+        "Player of the week: Joe Burrow, who put up 44.48 for The Gridiron Sheriffs. Dud of the week: Cody White, who started for Tebows before Hoes and scored 0. Somebody pressed \"start\" on that. At the other end, Tebows before Hoes scored 41.3, the lowest total in the league. That is not a lineup, it is a cry for help.",
+        "Scuderia Malo took over first place overall at 7-1, knocking Montreal Weapon X off the top. La Quiche moved into the top six. SGB Nation ⚖️ dropped out of the top six. On a roll: The Gridiron Sheriffs, 4 wins in a row and counting. Tebows before Hoes sank to 8 straight losses this week."
+      ],
+      "standings": {
+        "moves": [],
+        "newLeader": {
+          "team": "Scuderia Malo",
+          "prev": "Montreal Weapon X"
+        },
+        "divisionLeaders": []
+      },
+      "results": [
+        {
+          "a": "Tebows before Hoes",
+          "b": "Lavaltree's Piggy",
+          "aScore": 41.3,
+          "bScore": 93.36
+        },
+        {
+          "a": "Scuderia Malo",
+          "b": "MAGRAUDERS",
+          "aScore": 129.26,
+          "bScore": 100.92
+        },
+        {
+          "a": "Montreal Weapon X",
+          "b": "Mean Machine",
+          "aScore": 115.42,
+          "bScore": 132.16
+        },
+        {
+          "a": "MTL New Empire",
+          "b": "T-Bone Ray's",
+          "aScore": 84.58,
+          "bScore": 82.58
+        },
+        {
+          "a": "Les Pingouins 🐧",
+          "b": "La Quiche",
+          "aScore": 111.74,
+          "bScore": 162.44
+        },
+        {
+          "a": "SGB Nation ⚖️",
+          "b": "The Gridiron Sheriffs",
+          "aScore": 112.72,
+          "bScore": 122.54
+        }
+      ]
+    },
+    {
       "id": "recap-7",
       "type": "recap",
       "week": 7,
