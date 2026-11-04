@@ -1,6 +1,28 @@
 {
   "trades": [
     {
+      "date": "Nov 03, 2026",
+      "teams": [
+        "Scuderia Malo",
+        "Lavaltree's Piggy "
+      ],
+      "sides": [
+        {
+          "team": "Scuderia Malo",
+          "items": [
+            "Elijah Mitchell"
+          ]
+        },
+        {
+          "team": "Lavaltree's Piggy ",
+          "items": [
+            "2029 Round 4 pick (via SGB Nation ⚖️)"
+          ]
+        }
+      ],
+      "note": "Scuderia Malo gets Elijah Mitchell · Lavaltree's Piggy  gets 2029 Round 4 pick (via SGB Nation ⚖️)"
+    },
+    {
       "date": "Nov 02, 2026",
       "teams": [
         "Scuderia Malo",
