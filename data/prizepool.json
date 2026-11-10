@@ -24,7 +24,7 @@
     },
     {
       "name": "Olivier Dutrisac",
-      "total": 20.0,
+      "total": 30.0,
       "breakdown": [
         {
           "label": "W4",
@@ -32,6 +32,10 @@
         },
         {
           "label": "W6",
+          "amount": 10.0
+        },
+        {
+          "label": "W9",
           "amount": 10.0
         }
       ]
