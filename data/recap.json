@@ -2,6 +2,68 @@
   "season": "2026",
   "recaps": [
     {
+      "id": "recap-9",
+      "type": "recap",
+      "week": 9,
+      "date": "2026-11-10",
+      "kind": "blowout",
+      "headline": "Montreal Weapon X Over SGB Nation ⚖️ in a 56.74-Point Rout",
+      "dek": "Tebows before Hoes scored 63.1, the lowest total in the league.",
+      "byline": "The Shiva Times Staff",
+      "paragraphs": [
+        "King Among Kings: Kenneth Walker III carried Montreal Weapon X to a 134.6-77.86 demolition of SGB Nation ⚖️, putting up 34.3 of the team's 134.6. The 56.74-point margin was the widest of the week, and SGB Nation ⚖️ should be embarrassed.",
+        "It was Rivalry Week, and the grudges were settled the only way this league knows how.",
+        "The Clipboard Classic: T-Bone Ray's beat Les Pingouins 🐧, 111.16-78.82, despite getting 2.9 from Mark Andrews. That is how good T-Bone Ray's looked. War in the North: MAGRAUDERS scored 122.18, the third-highest total of the week, and still lost to Mean Machine, because C.J. Stroud carried Mean Machine with 40.36 of the team's 148.12.",
+        "The Battle of Internal Affairs: Ja'Marr Chase (26.5) kept Lavaltree's Piggy within sight of Scuderia Malo, but 92.84 was never going to beat 120.26. The Civil War: MTL New Empire got 18.48 from Patrick Mahomes and still fell short against La Quiche, 97.94 to 109. Losing by 11.06 stings in a way blowouts never do.",
+        "9/11 — The Battle of the Twin Towers: Joe Burrow carried The Gridiron Sheriffs to a 107.24-63.1 demolition of Tebows before Hoes, putting up 32.54 of the team's 107.24. The 44.14-point margin is the kind of thing that gets screenshotted.",
+        "Player of the week: C.J. Stroud, who put up 40.36 for Mean Machine. The lineup decision of the week, for all the wrong reasons: Scuderia Malo started Mike Washington Jr., who scored -0.3. The week's top score belonged to Mean Machine: 148.12. Tebows before Hoes scored a league-worst 63.1. Thoughts, prayers, and a firm recommendation to check the roster before kickoff.",
+        "Nobody changed places in the standings this week, and no division changed hands. On a roll: The Gridiron Sheriffs, 5 wins in a row and counting. Cold streak: Tebows before Hoes, 9 losses in a row and still falling."
+      ],
+      "standings": {
+        "moves": [],
+        "newLeader": null,
+        "divisionLeaders": []
+      },
+      "results": [
+        {
+          "a": "Montreal Weapon X",
+          "b": "SGB Nation ⚖️",
+          "aScore": 134.6,
+          "bScore": 77.86
+        },
+        {
+          "a": "Les Pingouins 🐧",
+          "b": "T-Bone Ray's",
+          "aScore": 78.82,
+          "bScore": 111.16
+        },
+        {
+          "a": "MAGRAUDERS",
+          "b": "Mean Machine",
+          "aScore": 122.18,
+          "bScore": 148.12
+        },
+        {
+          "a": "Scuderia Malo",
+          "b": "Lavaltree's Piggy",
+          "aScore": 120.26,
+          "bScore": 92.84
+        },
+        {
+          "a": "MTL New Empire",
+          "b": "La Quiche",
+          "aScore": 97.94,
+          "bScore": 109.0
+        },
+        {
+          "a": "Tebows before Hoes",
+          "b": "The Gridiron Sheriffs",
+          "aScore": 63.1,
+          "bScore": 107.24
+        }
+      ]
+    },
+    {
       "id": "recap-8",
       "type": "recap",
       "week": 8,

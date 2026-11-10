@@ -1,6 +1,125 @@
 {
   "trades": [
     {
+      "date": "Nov 10, 2026",
+      "teams": [
+        "MAGRAUDERS ",
+        "SGB Nation ⚖️"
+      ],
+      "sides": [
+        {
+          "team": "MAGRAUDERS ",
+          "items": [
+            "2029 Round 2 pick (via SGB Nation ⚖️)"
+          ]
+        },
+        {
+          "team": "SGB Nation ⚖️",
+          "items": [
+            "Tank Dell",
+            "2027 Round 4 pick (via MAGRAUDERS )"
+          ]
+        }
+      ],
+      "note": "MAGRAUDERS  gets 2029 Round 2 pick (via SGB Nation ⚖️) · SGB Nation ⚖️ gets Tank Dell, 2027 Round 4 pick (via MAGRAUDERS )"
+    },
+    {
+      "date": "Nov 10, 2026",
+      "teams": [
+        "MAGRAUDERS ",
+        "MTL New Empire"
+      ],
+      "sides": [
+        {
+          "team": "MAGRAUDERS ",
+          "items": [
+            "Jonathon Brooks",
+            "Rome Odunze",
+            "2027 Round 3 pick (via Tebows before Hoes)"
+          ]
+        },
+        {
+          "team": "MTL New Empire",
+          "items": [
+            "TreVeyon Henderson",
+            "Jakobi Meyers",
+            "2029 Round 1 pick (via The Gridiron Sheriffs)"
+          ]
+        }
+      ],
+      "note": "MAGRAUDERS  gets Jonathon Brooks, Rome Odunze, 2027 Round 3 pick (via Tebows before Hoes) · MTL New Empire gets TreVeyon Henderson, Jakobi Meyers, 2029 Round 1 pick (via The Gridiron Sheriffs)"
+    },
+    {
+      "date": "Nov 08, 2026",
+      "teams": [
+        "Scuderia Malo",
+        "MAGRAUDERS "
+      ],
+      "sides": [
+        {
+          "team": "Scuderia Malo",
+          "items": [
+            "Gardner Minshew II"
+          ]
+        },
+        {
+          "team": "MAGRAUDERS ",
+          "items": [
+            "2029 Round 3 pick (via SGB Nation ⚖️)"
+          ]
+        }
+      ],
+      "note": "Scuderia Malo gets Gardner Minshew II · MAGRAUDERS  gets 2029 Round 3 pick (via SGB Nation ⚖️)"
+    },
+    {
+      "date": "Nov 07, 2026",
+      "teams": [
+        "Montreal Weapon X",
+        "MAGRAUDERS "
+      ],
+      "sides": [
+        {
+          "team": "Montreal Weapon X",
+          "items": [
+            "Kyle Pitts Sr.",
+            "2029 Round 4 pick (via MAGRAUDERS )"
+          ]
+        },
+        {
+          "team": "MAGRAUDERS ",
+          "items": [
+            "Brian Thomas Jr."
+          ]
+        }
+      ],
+      "note": "Montreal Weapon X gets Kyle Pitts Sr., 2029 Round 4 pick (via MAGRAUDERS ) · MAGRAUDERS  gets Brian Thomas Jr."
+    },
+    {
+      "date": "Nov 04, 2026",
+      "teams": [
+        "Scuderia Malo",
+        "Montreal Weapon X"
+      ],
+      "sides": [
+        {
+          "team": "Scuderia Malo",
+          "items": [
+            "Mike Washington Jr.",
+            "Tanner McKee"
+          ]
+        },
+        {
+          "team": "Montreal Weapon X",
+          "items": [
+            "Brian Thomas Jr.",
+            "Sione Vaki",
+            "2029 Round 4 pick (via Tebows before Hoes)"
+          ]
+        }
+      ],
+      "note": "Scuderia Malo gets Mike Washington Jr., Tanner McKee · Montreal Weapon X gets Brian Thomas Jr., Sione Vaki, 2029 Round 4 pick (via Tebows before Hoes)"
+    },
+    {
       "date": "Nov 03, 2026",
       "teams": [
         "Scuderia Malo",
