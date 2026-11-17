@@ -2,6 +2,73 @@
   "season": "2026",
   "recaps": [
     {
+      "id": "recap-10",
+      "type": "recap",
+      "week": 10,
+      "date": "2026-11-17",
+      "kind": "explosion",
+      "headline": "Montreal Weapon X Went Nuclear for 207.18",
+      "dek": "The widest margin of the week: Montreal Weapon X over Tebows before Hoes by 150.76.",
+      "byline": "The Shiva Times Staff",
+      "paragraphs": [
+        "Montreal Weapon X scored 207.18, the highest total in the league, with Jahmyr Gibbs (40.7) leading the way. Tebows before Hoes put up 56.42 in the loss. The league median was 117.12. That is the best score of the season so far.",
+        "Lavaltree's Piggy beat The Gridiron Sheriffs, 142.16-107.66, despite getting 0.3 from Jalen Coker. That is how good Lavaltree's Piggy looked. SGB Nation ⚖️ scored 142.48, the third-highest total of the week, and still lost to T-Bone Ray's, because Christian McCaffrey carried T-Bone Ray's with 44.3 of the team's 144.96.",
+        "Dak Prescott powered La Quiche to a 131.34-81.38 rout of MAGRAUDERS, with 39.42 of the team's 131.34. Nobody on the MAGRAUDERS side wants to talk about it. Scuderia Malo beat Les Pingouins 🐧, 122.18-102.64, despite getting 2.4 from Devaughn Vele. That is how good Scuderia Malo looked.",
+        "Chuba Hubbard carried Mean Machine to a 112.06-98.5 win over MTL New Empire, scoring 31.7 of the team's 112.06. The 13.56-point margin made it uncomfortable for everyone involved.",
+        "The best individual performance of the week belonged to Christian McCaffrey: 44.3 points for T-Bone Ray's. Lavaltree's Piggy started Jalen Coker and received 0.3 in return. Refunds are not available. Tebows before Hoes brought up the rear with 56.42. A handful of random waiver pickups would have scored more.",
+        "New leader of the South Division: Lavaltree's Piggy (5-5), taking over from SGB Nation ⚖️. Scuderia Malo arrived at 5 consecutive wins this week, with no apparent plans to stop. Cold streak: Tebows before Hoes, 10 losses in a row and still falling."
+      ],
+      "standings": {
+        "moves": [],
+        "newLeader": null,
+        "divisionLeaders": [
+          {
+            "division": "South",
+            "team": "Lavaltree's Piggy",
+            "prev": "SGB Nation ⚖️"
+          }
+        ]
+      },
+      "results": [
+        {
+          "a": "Lavaltree's Piggy",
+          "b": "The Gridiron Sheriffs",
+          "aScore": 142.16,
+          "bScore": 107.66
+        },
+        {
+          "a": "SGB Nation ⚖️",
+          "b": "T-Bone Ray's",
+          "aScore": 142.48,
+          "bScore": 144.96
+        },
+        {
+          "a": "MAGRAUDERS",
+          "b": "La Quiche",
+          "aScore": 81.38,
+          "bScore": 131.34
+        },
+        {
+          "a": "Tebows before Hoes",
+          "b": "Montreal Weapon X",
+          "aScore": 56.42,
+          "bScore": 207.18
+        },
+        {
+          "a": "Scuderia Malo",
+          "b": "Les Pingouins 🐧",
+          "aScore": 122.18,
+          "bScore": 102.64
+        },
+        {
+          "a": "Mean Machine",
+          "b": "MTL New Empire",
+          "aScore": 112.06,
+          "bScore": 98.5
+        }
+      ]
+    },
+    {
       "id": "recap-9",
       "type": "recap",
       "week": 9,

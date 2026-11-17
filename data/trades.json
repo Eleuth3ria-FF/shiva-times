@@ -1,6 +1,57 @@
 {
   "trades": [
     {
+      "date": "Nov 17, 2026",
+      "teams": [
+        "MAGRAUDERS ",
+        "Mean Machine"
+      ],
+      "sides": [
+        {
+          "team": "MAGRAUDERS ",
+          "items": [
+            "Drake Maye",
+            "Kenny Gainwell",
+            "2027 Round 3 pick (via Mean Machine)"
+          ]
+        },
+        {
+          "team": "Mean Machine",
+          "items": [
+            "Jordan Love",
+            "2027 Round 2 pick (via Scuderia Malo)"
+          ]
+        }
+      ],
+      "note": "MAGRAUDERS  gets Drake Maye, Kenny Gainwell, 2027 Round 3 pick (via Mean Machine) · Mean Machine gets Jordan Love, 2027 Round 2 pick (via Scuderia Malo)"
+    },
+    {
+      "date": "Nov 12, 2026",
+      "teams": [
+        "Montreal Weapon X",
+        "MTL New Empire"
+      ],
+      "sides": [
+        {
+          "team": "Montreal Weapon X",
+          "items": [
+            "Patrick Mahomes",
+            "2029 Round 2 pick (via MTL New Empire)",
+            "2027 Round 4 pick"
+          ]
+        },
+        {
+          "team": "MTL New Empire",
+          "items": [
+            "Chris Bell",
+            "Justin Herbert",
+            "2029 Round 1 pick (via Montreal Weapon X)"
+          ]
+        }
+      ],
+      "note": "Montreal Weapon X gets Patrick Mahomes, 2029 Round 2 pick (via MTL New Empire), 2027 Round 4 pick · MTL New Empire gets Chris Bell, Justin Herbert, 2029 Round 1 pick (via Montreal Weapon X)"
+    },
+    {
       "date": "Nov 10, 2026",
       "teams": [
         "MAGRAUDERS ",
