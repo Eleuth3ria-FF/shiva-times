@@ -2,6 +2,76 @@
   "season": "2026",
   "recaps": [
     {
+      "id": "recap-11",
+      "type": "recap",
+      "week": 11,
+      "date": "2026-11-24",
+      "kind": "explosion",
+      "headline": "176.86 Points: Montreal Weapon X Played a Different Game",
+      "dek": "The widest margin of the week: Montreal Weapon X over Les Pingouins 🐧 by 62.6.",
+      "byline": "The Shiva Times Staff",
+      "paragraphs": [
+        "Montreal Weapon X scored 176.86, the highest total in the league, with Jonah Coleman (32.9) leading the way. Les Pingouins 🐧 put up 114.26 in the loss. The league median was 99.35.",
+        "The Gridiron Sheriffs beat MTL New Empire, 124.14-95.76, despite getting 1.3 from Cade Otton. That is how good The Gridiron Sheriffs looked. SGB Nation ⚖️ beat Scuderia Malo, 97.94-71.28, despite getting 3.9 from Jaylen Warren. That is how good SGB Nation ⚖️ looked.",
+        "MAGRAUDERS won with a modest 90.92, the fourth-lowest score of the week, over Tebows before Hoes (53.68), with Geno Smith (22.44) doing the work. The standings do not check how you got there. Dak Prescott carried La Quiche to a 134.16-86.68 demolition of Lavaltree's Piggy, putting up 39.9 of the team's 134.16. The 47.48-point margin is the kind of thing that gets screenshotted.",
+        "CeeDee Lamb (24.7) kept T-Bone Ray's within sight of Mean Machine, but 100.76 was never going to beat 123.16.",
+        "Player of the week: Dak Prescott, who put up 39.9 for La Quiche. Tebows before Hoes started Andrei Iosivas and received 0 in return. Refunds are not available. Tebows before Hoes scored a league-worst 53.68. Thoughts, prayers, and a firm recommendation to check the roster before kickoff.",
+        "Montreal Weapon X took over first place overall at 9-2, knocking Scuderia Malo off the top. New leader of the South Division: SGB Nation ⚖️ (5-6), taking over from Lavaltree's Piggy. Longest winning streak: La Quiche, at 5 straight. Tebows before Hoes sank to 11 straight losses this week."
+      ],
+      "standings": {
+        "moves": [],
+        "newLeader": {
+          "team": "Montreal Weapon X",
+          "prev": "Scuderia Malo"
+        },
+        "divisionLeaders": [
+          {
+            "division": "South",
+            "team": "SGB Nation ⚖️",
+            "prev": "Lavaltree's Piggy"
+          }
+        ]
+      },
+      "results": [
+        {
+          "a": "The Gridiron Sheriffs",
+          "b": "MTL New Empire",
+          "aScore": 124.14,
+          "bScore": 95.76
+        },
+        {
+          "a": "Scuderia Malo",
+          "b": "SGB Nation ⚖️",
+          "aScore": 71.28,
+          "bScore": 97.94
+        },
+        {
+          "a": "Tebows before Hoes",
+          "b": "MAGRAUDERS",
+          "aScore": 53.68,
+          "bScore": 90.92
+        },
+        {
+          "a": "Lavaltree's Piggy",
+          "b": "La Quiche",
+          "aScore": 86.68,
+          "bScore": 134.16
+        },
+        {
+          "a": "Montreal Weapon X",
+          "b": "Les Pingouins 🐧",
+          "aScore": 176.86,
+          "bScore": 114.26
+        },
+        {
+          "a": "Mean Machine",
+          "b": "T-Bone Ray's",
+          "aScore": 123.16,
+          "bScore": 100.76
+        }
+      ]
+    },
+    {
       "id": "recap-10",
       "type": "recap",
       "week": 10,
